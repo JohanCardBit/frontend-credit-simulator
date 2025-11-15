@@ -1,1 +1,144 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  font-family: "Play", sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* PALETA PRINCIPAL (AZULES) */
+  --primary-900: #020b26;
+  /* Azul casi negro (sidebar/main background) */
+  --primary-800: #031840;
+  /* Azul profundo */
+  --primary-700: #082b7a;
+  /* Azul corporativo */
+  --primary-600: #0b3eab;
+  /* Azul saturado */
+  --primary-500: #1c58e7;
+  /* Azul brillante (botones, acentos) */
+  --primary-300: #4a7cff;
+  /* Azul claro para hover / highlights */
+
+  /* BRILLO / GLOW (NEÓN AZUL) */
+  --glow-400: #5d7cff;
+  --glow-200: #afc5ff;
+  --glow-50: #e8efff;
+
+  /* ESTADOS (SUCCESS) */
+  --success-500: #00cc66;
+  /* Verde positivo */
+  --success-600: #00994d;
+  /* Verde más oscuro */
+  --success-100: #ccffeb;
+  /* Fondo suave */
+
+  /* NEUTROS (UI) */
+  --neutral-900: #1a1a1a;
+  /* Gris carbón */
+  --neutral-700: #2e2e2e;
+  /* Gris oscuro */
+  --neutral-300: #c9c9c9;
+  /* Texto tenue */
+  --neutral-50: #f1f1f1;
+  /* Fondos claros */
+
+  /* OTROS */
+  --radius: 16px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.35s ease;
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* FONDOS */
+    --background-main: var(--neutral-900);
+    --background-card: #0f0f0f;
+    --background-soft: #151515;
+
+    /* TEXTOS */
+    --text-main: var(--neutral-50);
+    --text-secondary: #cfcfcf;
+
+    /* HEADER & FOOTER */
+    --header-bg: var(--primary-900);
+    --footer-bg: var(--primary-900);
+
+    /* BORDES */
+    --border-color: rgba(255, 255, 255, 0.08);
+
+    /* ELEMENTOS DE INTERFAZ */
+    --input-bg: #111;
+    --input-border: rgba(255, 255, 255, 0.12);
+    --input-text: var(--neutral-50);
+    --input-placeholder: rgba(255, 255, 255, 0.35);
+
+    /* BOTONES PRINCIPALES */
+    --btn-primary-bg: var(--primary-700);
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: var(--primary-600);
+
+    /* BOTONES SECUNDARIOS */
+    --btn-secondary-bg: #1d1d1d;
+    --btn-secondary-text: var(--neutral-50);
+    --btn-secondary-hover: #242424;
+
+    /* SOMBRAS MÁS PROFUNDAS */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.65);
+    --shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.75);
+  }
+
+  .logo {
+    filter: brightness(0) invert(1);
+  }
+}
+
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+
+    --background-main: #ffffff;
+    --background-card: #ffffff;
+    --background-soft: #f4f4f4;
+
+
+
+    --text-main: var(--neutral-900);
+    --text-secondary: var(--neutral-700);
+
+    --header-bg: radial-gradient(circle,
+        #bdbdc0,
+        #bdbdc0,
+        rgba(252, 253, 253, 0.921) 100%);
+    ;
+    --footer-bg: radial-gradient(circle,
+        #bdbdc0,
+        #bdbdc0,
+        rgba(252, 253, 253, 0.921) 100%);
+    ;
+
+    --border-color: rgba(0, 0, 0, 0.08);
+
+    --input-bg: #ffffff;
+    --input-border: var(--neutral-300);
+    --input-text: var(--neutral-900);
+    --input-placeholder: rgba(0, 0, 0, 0.35);
+
+    --btn-primary-bg: var(--primary-500);
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: var(--primary-600);
+
+    --btn-secondary-bg: var(--neutral-50);
+    --btn-secondary-text: var(--neutral-900);
+    --btn-secondary-hover: #e6e6e6;
+
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.25);
+    --shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.35);
+  }
+
+
+}
