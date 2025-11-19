@@ -4,6 +4,7 @@ import { PasosSimulador } from './components/dashboard/dashboard';
 import { Login } from './components/public/login/login';
 import { Administracion } from './components/dashboard/administracion/administracion';
 import { Perfil } from './components/dashboard/administracion/perfil/perfil';
+import { Tasas } from './components/dashboard/administracion/tasas/tasas';
 
 
 const titulosRutas = {
@@ -11,7 +12,8 @@ const titulosRutas = {
   simulador: 'CrediTest | Simula tu credito',
   cuantoDineroNecesitas: 'CrediTest | ¿Cuánto dinero necesitas?',
   administacion: 'CrediTest | Administración',
-  PerfilAdmin: 'CrediTest | Perfil Administracion'
+  PerfilAdmin: 'CrediTest | Perfil Administracion',
+  tasas: 'CrediTest | Tasas de interés'
 }
 
 const rutasPubilcas: Routes = [
@@ -24,7 +26,8 @@ const rutasPubilcas: Routes = [
       { path: 'simulador', component: CuantoDinero, title: titulosRutas.cuantoDineroNecesitas },
       {
         path: 'admin', component: Administracion, title: titulosRutas.administacion, children: [
-          { path: 'perfil', component: Perfil, title: titulosRutas.PerfilAdmin }
+          { path: 'perfil', component: Perfil, title: titulosRutas.PerfilAdmin },
+          { path: 'tasas', component: Tasas, title: titulosRutas.tasas }
         ]
       }
     ]

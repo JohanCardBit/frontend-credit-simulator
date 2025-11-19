@@ -1,39 +1,90 @@
 <div class="perfil-container">
-  <div class="perfil-card">
 
-    <div class="perfil-header">
-      <img
-        src="https://i.pravatar.cc/150?img=12"
-        alt="Foto del usuario"
-        class="perfil-avatar"
-      />
-      <h2 class="perfil-nombre">Andres Cardenas</h2>
-      <p class="perfil-rol">Administrador</p>
-    </div>
+  <!-- TARJETA 1 — Nombre / Apellido / Rol -->
+  <div class="card glass">
+    <h3>Información Personal</h3>
 
-    <form class="perfil-form">
-      <div class="input-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" value="Andres">
-      </div>
+    <p><strong>Nombre:</strong> Andres</p>
+    <p><strong>Apellido:</strong> Cardenas</p>
+    <p><strong>Rol:</strong> Administrador</p>
 
-      <div class="input-group">
-        <label for="apellido">Apellido</label>
-        <input type="text" id="apellido" value="Cardenas">
-      </div>
+    <button class="btn" onclick="openModal('modal-personal')">Modificar</button>
+  </div>
 
-      <div class="input-group">
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" value="andres@gmail.com">
-      </div>
+  <!-- TARJETA 2 — Email -->
+  <div class="card glass">
+    <h3>Email</h3>
 
-      <div class="input-group">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" value="123456">
-      </div>
+    <p><strong>Email:</strong> andres@gmail.com</p>
 
-      <button class="btn-guardar">Guardar cambios</button>
-    </form>
+    <button class="btn" onclick="openModal('modal-email')">Modificar</button>
+  </div>
 
+  <!-- TARJETA 3 — Password -->
+  <div class="card glass">
+    <h3>Contraseña</h3>
+
+    <p>Cambia tu contraseña de forma segura.</p>
+
+    <button class="btn" onclick="openModal('modal-password')">Modificar</button>
+  </div>
+
+</div>
+
+
+
+<!-- ========== MODAL 1: Datos personales ========== -->
+<div id="modal-personal" class="modal">
+  <div class="modal-content glass">
+    <h3>Modificar Información Personal</h3>
+
+    <label>Nombre</label>
+    <input type="text" placeholder="Nuevo nombre">
+
+    <label>Apellido</label>
+    <input type="text" placeholder="Nuevo apellido">
+
+    <label>Rol</label>
+    <input type="text" placeholder="Nuevo rol">
+
+    <button class="btn full">Guardar Cambios</button>
+    <button class="close-btn" onclick="closeModal('modal-personal')">Cerrar</button>
   </div>
 </div>
+
+
+
+<!-- ========== MODAL 2: Email ========== -->
+<div id="modal-email" class="modal">
+  <div class="modal-content glass">
+    <h3>Modificar Email</h3>
+
+    <label>Email</label>
+    <input type="email" placeholder="Nuevo email">
+
+    <button class="btn full">Guardar Cambios</button>
+    <button class="close-btn" onclick="closeModal('modal-email')">Cerrar</button>
+  </div>
+</div>
+
+
+
+<!-- ========== MODAL 3: Password ========== -->
+<div id="modal-password" class="modal">
+  <div class="modal-content glass">
+    <h3>Cambiar Contraseña</h3>
+
+    <label>Contraseña Actual</label>
+    <input type="password" placeholder="Contraseña actual">
+
+    <label>Nueva Contraseña</label>
+    <input type="password" placeholder="Nueva contraseña">
+
+    <label>Confirmar Contraseña</label>
+    <input type="password" placeholder="Confirmar nueva contraseña">
+
+    <button class="btn full">Guardar Cambios</button>
+    <button class="close-btn" onclick="closeModal('modal-password')">Cerrar</button>
+  </div>
+</div>
+
