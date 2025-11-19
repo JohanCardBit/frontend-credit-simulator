@@ -1,24 +1,9 @@
-/* LAYOUT BASE  */
-html,
-body {
-  height: 100%;
+.body {
   margin: 0;
-background: var(--background-main);
-background-size: cover;
-background-attachment: fixed;
-background-repeat: no-repeat;
-
-  background-repeat: no-repeat;
-  color: var(--text-main);
-}
-
-
-body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* ocupa toda la pantalla */
 }
-
 
 /* HEADER */
 .app-header {
@@ -60,10 +45,10 @@ body {
 .app-main {
   flex: 1;
   width: 100%;
-  max-width: 1300px;
+  /* max-width: 1300px; */
   margin: 0 auto;
   padding: clamp(1.5rem, 3vw, 3rem) 1rem;
-  border: 1px solid rgb(75, 91, 238);
+  /* border: 5px solid rgb(75, 91, 238); */
 
  .btn-prev-exit {
   display: flex;

@@ -1,0 +1,33 @@
+
+<body>
+
+    <div class="container">
+
+        <!-- Checkbox que controla la animación -->
+        <input type="checkbox" id="toggle" hidden>
+
+        <!-- Login -->
+        <div [formGroup]="formLogin" class="form form-login">
+            <h2>Iniciar Sesión</h2>
+            <input formControlName="email" type="email" placeholder="Correo">
+            <input formControlName="password" type="password" placeholder="Contraseña">
+            <button (click)="iniciarSesion()">Entrar</button>
+            <label for="toggle" class="switch">Crear cuenta</label>
+        </div>
+
+        <!-- Register -->
+        <div class="form form-register">
+            <h2>Crear Cuenta</h2>
+            <input type="text" placeholder="Nombre">
+            <input type="email" placeholder="Correo">
+            <input type="password" placeholder="Contraseña">
+            <button>Registrar</button>
+            <label for="toggle" class="switch">Ya tengo cuenta</label>
+        </div>
+
+        <!-- Panel animado -->
+        <div class="panel"></div>
+
+    </div>
+
+</body>

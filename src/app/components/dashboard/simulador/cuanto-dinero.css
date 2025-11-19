@@ -1,3 +1,8 @@
+/* .container-simulador{
+  height: 65dvh;
+  border: 1px solid red;
+} */
+
 .simulador-container {
   max-width: 700px;
   margin: 40px auto;
