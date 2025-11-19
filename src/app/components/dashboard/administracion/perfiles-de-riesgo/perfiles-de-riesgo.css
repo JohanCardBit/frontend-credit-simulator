@@ -5,21 +5,19 @@ body {
   color: white;
 }
 
-/* Contenedor principal */
-.tasas-container {
+.riesgo-container {
   width: 100%;
-  margin: 0 auto;
 }
 
-/* Header */
-.header-tasas {
+/* Encabezado */
+.header-riesgo {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
 }
 
-.header-tasas h2 {
+.header-riesgo h2 {
   font-size: 28px;
   font-weight: 700;
 }
@@ -41,14 +39,13 @@ body {
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* Contenedor de tarjetas */
-.cards-tasas {
+/* Tarjetas */
+.cards-riesgo {
   display: grid;
   gap: 25px;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 }
 
-/* Tarjetas estilo vidrio */
 .glass {
   background: rgba(255, 255, 255, 0.12);
   border-radius: 18px;
@@ -58,21 +55,33 @@ body {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
-.card-tasa {
+.card-riesgo {
   display: flex;
   flex-direction: column;
 }
 
-/* Header de tarjeta */
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.tipo {
+/* Categorías con colores */
+.categoria {
   font-size: 20px;
   font-weight: bold;
+}
+
+.categoria-a {
+  color: #99ffcc;
+}
+
+.categoria-b {
+  color: #ffe680;
+}
+
+.categoria-c {
+  color: #ff8080;
 }
 
 /* Iconos */
@@ -100,8 +109,9 @@ body {
   background: rgba(255, 60, 60, 0.6);
 }
 
-/* Cuerpo de tarjeta */
-.card-body p {
-  margin: 6px 0;
+/* Descripción */
+.desc {
+  margin-top: 10px;
   opacity: 0.9;
+  line-height: 1.4;
 }

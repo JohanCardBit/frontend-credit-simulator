@@ -1,0 +1,85 @@
+<div class="rules-container">
+
+  <!-- Encabezado -->
+  <div class="rules-header">
+    <h2>Reglas de negocio</h2>
+    <button class="btn-crear-regla">+ Crear regla</button>
+  </div>
+
+  <!-- Listado de tarjetas -->
+  <div class="rules-grid">
+
+    <!-- REGLA 1 -->
+    <div class="rule-card glass">
+      <div class="rule-header">
+        <h3 class="rule-name">EMPLEO_DESEMPLEADO</h3>
+
+        <div class="rule-actions">
+          <button class="icon-btn">✏️</button>
+          <button class="icon-btn eliminar">🗑️</button>
+        </div>
+      </div>
+
+      <p class="rule-description">
+        Cliente desempleado se rechaza automáticamente.
+      </p>
+
+      <div class="rule-info">
+        <p><strong>Tipo:</strong> approval</p>
+        <p><strong>Condición:</strong> employmentType != 'desempleado'</p>
+        <p><strong>Categoría riesgo:</strong> C</p>
+        <p><strong>Ajuste tasa:</strong> 0%</p>
+        <p><strong>Estado:</strong> <span class="estado activo">Activa</span></p>
+      </div>
+    </div>
+
+    <!-- REGLA 2 -->
+    <div class="rule-card glass">
+      <div class="rule-header">
+        <h3 class="rule-name">PUNTAJE_CREDITICIO_ALTO</h3>
+
+        <div class="rule-actions">
+          <button class="icon-btn">✏️</button>
+          <button class="icon-btn eliminar">🗑️</button>
+        </div>
+      </div>
+
+      <p class="rule-description">
+        Cliente con puntaje >= 750 tiene riesgo bajo, ajusta tasa -2%.
+      </p>
+
+      <div class="rule-info">
+        <p><strong>Tipo:</strong> creditScore</p>
+        <p><strong>Condición:</strong> creditScore >= minScore</p>
+        <p><strong>Categoría riesgo:</strong> A</p>
+        <p><strong>Ajuste tasa:</strong> -2%</p>
+        <p><strong>Estado:</strong> <span class="estado activo">Activa</span></p>
+      </div>
+    </div>
+
+    <!-- REGLA 3 -->
+    <div class="rule-card glass">
+      <div class="rule-header">
+        <h3 class="rule-name">PUNTAJE_CREDITICIO_MEDIO</h3>
+
+        <div class="rule-actions">
+          <button class="icon-btn">✏️</button>
+          <button class="icon-btn eliminar">🗑️</button>
+        </div>
+      </div>
+
+      <p class="rule-description">
+        Cliente con puntaje entre 600 y 749 tiene riesgo medio, sin ajuste.
+      </p>
+
+      <div class="rule-info">
+        <p><strong>Tipo:</strong> creditScore</p>
+        <p><strong>Condición:</strong> creditScore >= minScore && creditScore <= maxScore</p>
+        <p><strong>Categoría riesgo:</strong> B</p>
+        <p><strong>Ajuste tasa:</strong> 0%</p>
+        <p><strong>Estado:</strong> <span class="estado activo">Activa</span></p>
+      </div>
+    </div>
+
+  </div>
+</div>
