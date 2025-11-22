@@ -11,4 +11,25 @@ import { RouterOutlet } from '@angular/router';
 export class PasosSimulador {
   currentYear = new Date().getFullYear();
 
+  mostrarResultados = false;
+
+  childInstance: any = null;
+
+  onChildEventFromChild(component: any) {
+    this.childInstance = component;
+
+    if (component.mostrarResultadosChange) {
+      component.mostrarResultadosChange.subscribe((value: boolean) => {
+        this.mostrarResultados = value;
+      });
+    }
+  }
+
+  volver() {
+    if (this.childInstance && this.childInstance.volverAlFormulario) {
+      this.childInstance.volverAlFormulario();
+    }
+
+    this.mostrarResultados = false;
+  }
 }

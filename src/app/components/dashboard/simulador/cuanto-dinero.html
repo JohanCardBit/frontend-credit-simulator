@@ -1,40 +1,222 @@
-<section class="container-simulador">
+@if (!mostrarResultados) {
+<section class="container-simulador" [formGroup]="form">
+
   <div class="simulador-container">
-    <h1>¿Cuanto dinero necesitas?</h1>
+    <h1>¿Cuánto dinero necesitas?</h1>
+
     <!-- Monto -->
     <div class="monto-input-wrapper">
       <span class="currency">$</span>
-      <input type="number" class="monto-input" placeholder="0" min="1000000" max="500000000" />
+
+      <input type="number" class="monto-input" placeholder="0" formControlName="amount" min="1000000" max="500000000" />
     </div>
-    <!-- <hr> -->
 
     <p class="monto-info">
       Monto Mínimo: 1.000.000 - Monto Máximo: 500.000.000
     </p>
 
-    <!-- Form-->
-    <div class="form-grid">
+    <!-- Errores de monto -->
+    @if (form.get('amount')?.touched && form.get('amount')?.invalid) {
+    <div class="error">
+      @if (form.get('amount')?.errors?.['required']) {
+      <span>El monto es obligatorio.</span>
+      }
+      @else {
+      @if (form.get('amount')?.errors?.['min']) {
+      <span>Monto mínimo permitido: 1.000.000</span>
+      }
+      @if (form.get('amount')?.errors?.['max']) {
+      <span>Monto máximo permitido: 500.000.000</span>
+      }
+      }
+    </div>
+    }
+
+    <!-- Form -->
+    <div class="formm">
 
       <!-- Meses -->
       <div class="form-item">
         <label>¿A cuántos meses?</label>
-        <input type="number" min="48" max="84" value="48" placeholder="48" />
-        <small>Elige un plazo desde 48 y hasta 84 meses</small>
+
+        <input type="number" formControlName="termMonths" min="48" max="84" placeholder="48" />
+
+        <small>Elige un plazo desde 48 hasta 84 meses</small>
+
+        @if (form.get('termMonths')?.touched && form.get('termMonths')?.invalid) {
+        <div class="error">
+          @if (form.get('termMonths')?.errors?.['min']) {
+          <span>Mínimo 48 meses</span>
+          }
+          @else if (form.get('termMonths')?.errors?.['max']) {
+          <span>Máximo 84 meses</span>
+          }
+        </div>
+        }
       </div>
 
       <!-- Fecha nacimiento -->
       <div class="form-item">
         <label for="fecha-nacimiento">Fecha de nacimiento</label>
-        <input type="date" id="fecha-nacimiento" min="1940-01-01" max="2007-12-31" />
+
+        <input type="date" id="fecha-nacimiento" formControlName="birthDate" />
+
         <small>Debes tener entre 18 y 84 años para solicitar el crédito.</small>
+
+        @if (form.get('birthDate')?.touched && form.get('birthDate')?.invalid) {
+        <div class="error">
+          @if (form.get('birthDate')?.errors?.['required']) {
+          <span>La fecha es obligatoria.</span>
+          }
+          @else if (form.get('birthDate')?.errors?.['underAge']) {
+          <span>Debes ser mayor de 18 años.</span>
+          }
+        </div>
+        }
       </div>
 
     </div>
 
     <!-- Botón -->
-    <button class="btn-simular">
+    <button class="btn-simular" (click)="simular()">
       SIMULAR
     </button>
   </div>
 
+
 </section>
+}
+
+@if (mostrarResultados) {
+<section class="container-opciones">
+
+  <h5 class="text-center">Te ofrecemos estas opciones de Crédito</h5>
+  <div class="tarjetas-credito">
+    <!-- TARJETA 1 -->
+    <div class="tarjeta-credito">
+      <div class="encabezado-tarjeta">
+        <span class="titulo-tarjeta">Tasa fija - Cuota fija</span>
+      </div>
+
+
+      <div class="monto-credito">
+        <p class="label">Por un crédito de:</p>
+        <p class="valor"> ${{ resultados?.fija?.requested?.amount ?? 0 | number:'1.0-0' }} </p>
+
+
+
+      </div>
+
+      <div class="resumen-cuota">
+        <p>Pagarás {{ resultados?.fija?.requested?.termMonths ?? 0 }} cuotas mensuales por un valor aproximado de</p>
+        <p class="cuota-valor">${{ resultados?.fija?.totals?.monthlyPaymentApprox ?? 0 | number:'1.0-0' }}</p>
+      </div>
+
+      <details class="detalle-tasas">
+        <summary>Tasas y tarifas</summary>
+        <div class="lista-tasas">
+          <div class="item-tasa">
+            <span>Tasa mes vencido</span>
+            <span>{{ getPrimerRate(resultados?.fija?.requested?.annualRate) | number:'1.2-2' }}%</span>
+
+          </div>
+          <div class="item-tasa">
+            <span>Seguro de vida</span>
+            <span>${{ (resultados?.fija?.requested.sure ?? 0) | number:'1.0-0' }}</span>
+
+
+          </div>
+        </div>
+        <a class="enlace-plan">Conocer el plan de pagos</a>
+      </details>
+
+      <button class="boton-solicitar">Solicitar crédito</button>
+
+
+    </div>
+
+    <!-- TARJETA 2 -->
+    <div class="tarjeta-credito">
+      <div class="encabezado-tarjeta">
+        <span class="titulo-tarjeta">Tasa variable - Cuota fija</span>
+      </div>
+
+
+      <div class="monto-credito">
+        <p class="label">Por un crédito de:</p>
+        <p class="valor"> ${{ resultados?.variableFija?.requested?.amount ?? 0 | number:'1.0-0' }} </p>
+
+      </div>
+
+      <div class="resumen-cuota">
+        <p>Pagarás {{ resultados?.variableFija?.requested?.termMonths ?? 0 }} cuotas mensuales por un valor aproximado
+          de:</p>
+        <p class="cuota-valor">${{ resultados?.variableFija?.totals?.monthlyPaymentApprox ?? 0 | number:'1.0-0' }}</p>
+      </div>
+
+      <details class="detalle-tasas">
+        <summary>Tasas y tarifas</summary>
+        <div class="lista-tasas">
+          <div class="item-tasa">
+            <span>Tasa mes vencido</span>
+            <span>{{ getPrimerRate(resultados?.variableFija?.requested?.annualRate) | number:'1.2-2' }}%</span>
+
+          </div>
+          <div class="item-tasa">
+            <span>Seguro de vida</span>
+            <span>${{ (resultados?.variableFija?.requested.sure ?? 0) | number:'1.0-0' }}</span>
+
+          </div>
+        </div>
+        <a class="enlace-plan">Conocer el plan de pagos</a>
+      </details>
+
+      <button class="boton-solicitar">Solicitar crédito</button>
+
+
+    </div>
+
+    <!-- TARJETA 3 -->
+
+    <div class="tarjeta-credito">
+      <div class="encabezado-tarjeta">
+        <span class="titulo-tarjeta">Tasa variable - Cuota variable</span>
+      </div>
+
+
+      <div class="monto-credito">
+        <p class="label">Por un crédito de:</p>
+        <p class="valor"> ${{ resultados?.fullVariable?.requested?.amount ?? 0 | number:'1.0-0' }} </p>
+
+      </div>
+
+      <div class="resumen-cuota">
+        <p>Pagarás {{ resultados?.fullVariable?.requested?.termMonths ?? 0 }} cuotas mensuales por un valor aproximado
+          de</p>
+        <p class="cuota-valor">${{ resultados?.fullVariable?.totals?.monthlyPaymentApprox ?? 0 | number:'1.0-0' }}</p>
+      </div>
+
+      <details class="detalle-tasas">
+        <summary>Tasas y tarifas</summary>
+        <div class="lista-tasas">
+          <div class="item-tasa">
+            <span>Tasa mes vencido</span>
+            <span>{{ getPrimerRate(resultados?.fullVariable?.requested?.annualRate) | number:'1.2-2' }}%</span>
+
+          </div>
+          <div class="item-tasa">
+            <span>Seguro de vida</span>
+            <span>${{ (resultados?.fullVariable?.requested.sure ?? 0) | number:'1.0-0' }}</span>
+          </div>
+        </div>
+        <a class="enlace-plan">Conocer el plan de pagos</a>
+      </details>
+
+      <button class="boton-solicitar">Solicitar crédito</button>
+
+
+    </div>
+  </div>
+
+</section>
+}

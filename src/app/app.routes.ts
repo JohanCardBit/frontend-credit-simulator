@@ -28,8 +28,8 @@ const rutasPubilcas: Routes = [
   {
     path: 'dashboard', component: PasosSimulador, title: titulosRutas.simulador, children: [
       { path: 'simulador', component: CuantoDinero, title: titulosRutas.cuantoDineroNecesitas },
-      {
-        path: 'admin', component: Administracion, title: titulosRutas.administacion, children: [
+
+      { path: 'admin', component: Administracion, title: titulosRutas.administacion, children: [
           { path: 'perfil', component: Perfil, title: titulosRutas.PerfilAdmin },
           { path: 'tasas', component: Tasas, title: titulosRutas.tasas },
           { path: 'perfil-riesgo', component: PerfilesDeRiesgo, title: titulosRutas.perfilRiesgo },
