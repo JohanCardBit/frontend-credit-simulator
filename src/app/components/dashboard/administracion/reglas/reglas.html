@@ -2,84 +2,274 @@
 
   <!-- Encabezado -->
   <div class="rules-header">
-    <h2>Reglas de negocio</h2>
-    <button class="btn-crear-regla">+ Crear regla</button>
+    <h2>Reglas de negocio ( {{reglas.length}} )</h2>
+    <label class="btn-crear-regla" for="modalCrearRegla">+ Crear regla</label>
   </div>
 
   <!-- Listado de tarjetas -->
   <div class="rules-grid">
+    @for (item of reglas; track $index) {
 
-    <!-- REGLA 1 -->
     <div class="rule-card glass">
       <div class="rule-header">
-        <h3 class="rule-name">EMPLEO_DESEMPLEADO</h3>
+        <h3 class="rule-name">{{item.name}}</h3>
 
         <div class="rule-actions">
-          <button class="icon-btn">✏️</button>
+          <button class="icon-btn"  for="modalEditarRegla">✏️</button>
           <button class="icon-btn eliminar">🗑️</button>
         </div>
       </div>
 
       <p class="rule-description">
-        Cliente desempleado se rechaza automáticamente.
+        {{item.description}}
       </p>
 
       <div class="rule-info">
-        <p><strong>Tipo:</strong> approval</p>
-        <p><strong>Condición:</strong> employmentType != 'desempleado'</p>
-        <p><strong>Categoría riesgo:</strong> C</p>
-        <p><strong>Ajuste tasa:</strong> 0%</p>
-        <p><strong>Estado:</strong> <span class="estado activo">Activa</span></p>
+        <p><strong>Tipo:</strong> {{item.type}}</p>
+        <p><strong>Condición:</strong> {{item.condition}}</p>
+        <p><strong>Categoría riesgo:</strong>{{item.riskCategory}}</p>
+        <p><strong>Ajuste tasa:</strong> {{item.interestRateAdjustment}} %</p>
+        <p><strong>Estado: </strong> <span class="estado {{item.isActive ? 'activo' : 'inactivo'}}">{{item.isActive ? 'Activo' : 'Inactivo'}}</span></p>
       </div>
     </div>
-
-    <!-- REGLA 2 -->
-    <div class="rule-card glass">
-      <div class="rule-header">
-        <h3 class="rule-name">PUNTAJE_CREDITICIO_ALTO</h3>
-
-        <div class="rule-actions">
-          <button class="icon-btn">✏️</button>
-          <button class="icon-btn eliminar">🗑️</button>
-        </div>
-      </div>
-
-      <p class="rule-description">
-        Cliente con puntaje >= 750 tiene riesgo bajo, ajusta tasa -2%.
-      </p>
-
-      <div class="rule-info">
-        <p><strong>Tipo:</strong> creditScore</p>
-        <p><strong>Condición:</strong> creditScore >= minScore</p>
-        <p><strong>Categoría riesgo:</strong> A</p>
-        <p><strong>Ajuste tasa:</strong> -2%</p>
-        <p><strong>Estado:</strong> <span class="estado activo">Activa</span></p>
-      </div>
-    </div>
-
-    <!-- REGLA 3 -->
-    <div class="rule-card glass">
-      <div class="rule-header">
-        <h3 class="rule-name">PUNTAJE_CREDITICIO_MEDIO</h3>
-
-        <div class="rule-actions">
-          <button class="icon-btn">✏️</button>
-          <button class="icon-btn eliminar">🗑️</button>
-        </div>
-      </div>
-
-      <p class="rule-description">
-        Cliente con puntaje entre 600 y 749 tiene riesgo medio, sin ajuste.
-      </p>
-
-      <div class="rule-info">
-        <p><strong>Tipo:</strong> creditScore</p>
-        <p><strong>Condición:</strong> creditScore >= minScore && creditScore <= maxScore</p>
-        <p><strong>Categoría riesgo:</strong> B</p>
-        <p><strong>Ajuste tasa:</strong> 0%</p>
-        <p><strong>Estado:</strong> <span class="estado activo">Activa</span></p>
-      </div>
-    </div>
-
+  }
   </div>
 </div>
+
+
+
+<!-- ========== MODAL CREAR REGLA ========== -->
+<!-- <input type="checkbox" id="modalCrearRegla" class="modal-toggle" hidden>
+
+<div class="modal">
+  <label for="modalCrearRegla" class="modal-overlay"></label>
+
+  <div class="modal-content glass modal-regla">
+    <h3>Crear regla de negocio</h3>
+
+    <div class="form-regla">
+
+      <label>Nombre de la regla</label>
+      <input type="text" placeholder="Ej: EMPLEO_DESEMPLEADO">
+
+      <label>Descripción</label>
+      <textarea class="textarea"></textarea>
+
+      <label>Tipo de regla</label>
+      <select>
+        <option value="approval">approval</option>
+        <option value="creditScore">creditScore</option>
+        <option value="income">income</option>
+        <option value="custom">custom</option>
+      </select>
+
+      <label>Condición</label>
+      <input type="text" placeholder="Ej: employmentType != 'desempleado'">
+
+      <label>Categoría riesgo</label>
+      <select>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+
+      <label>Ajuste tasa (%)</label>
+      <input type="number" placeholder="Ej: -2">
+
+      <label>Estado</label>
+      <select>
+        <option value="Activa">Activa</option>
+        <option value="Inactiva">Inactiva</option>
+      </select>
+
+    </div>
+
+    <div class="acciones-modal">
+      <button class="btn-guardar">Crear</button>
+      <label for="modalCrearRegla" class="btn-cerrar">Cerrar</label>
+    </div>
+  </div>
+</div> -->
+<!-- ========== MODAL CREAR REGLA ========== -->
+<input type="checkbox" id="modalCrearRegla" class="modal-toggle" hidden>
+
+<div class="modal">
+  <label for="modalCrearRegla" class="modal-overlay"></label>
+
+  <div class="modal-content glass modal-regla">
+    <h3>Crear regla de negocio</h3>
+
+    <div class="form-regla">
+
+      <!-- Nombre -->
+      <label>Nombre de la regla</label>
+      <input type="text" placeholder="Ej: EMPLEO_DESEMPLEADO">
+
+      <!-- Descripción -->
+      <label>Descripción</label>
+      <textarea class="textarea"></textarea>
+
+      <!-- Tipo -->
+      <label>Tipo de regla</label>
+      <select>
+        <option value="approval">approval</option>
+        <option value="creditScore">creditScore</option>
+        <option value="income">income</option>
+        <option value="custom">custom</option>
+      </select>
+
+      <!-- ========== CONDICIONES ========== -->
+      <h4 class="subtitulo">Condiciones</h4>
+
+      <!-- Condición 1 -->
+      <div class="condicion-box glass-mini">
+        <select>
+          <option value="employmentType">employmentType</option>
+          <option value="creditScore">creditScore</option>
+          <option value="age">age</option>
+          <option value="income">income</option>
+        </select>
+
+        <select>
+          <option value="==">==</option>
+          <option value="!=">!=</option>
+          <option value=">">></option>
+          <option value=">=">>=</option>
+          <option value="<"><</option>
+          <option value="<="><=</option>
+        </select>
+
+        <input type="text" placeholder="Valor">
+      </div>
+
+      <!-- Condición 2 -->
+      <div class="condicion-box glass-mini">
+        <select>
+          <option value="employmentType">employmentType</option>
+          <option value="creditScore">creditScore</option>
+          <option value="age">age</option>
+          <option value="income">income</option>
+        </select>
+
+        <select>
+          <option value="==">==</option>
+          <option value="!=">!=</option>
+          <option value=">">></option>
+          <option value=">=">>=</option>
+          <option value="<"><</option>
+          <option value="<="><=</option>
+        </select>
+
+        <input type="text" placeholder="Valor">
+      </div>
+
+      <!-- Condición 3 -->
+      <div class="condicion-box glass-mini">
+        <select>
+          <option value="employmentType">employmentType</option>
+          <option value="creditScore">creditScore</option>
+          <option value="age">age</option>
+          <option value="income">income</option>
+        </select>
+
+        <select>
+          <option value="==">==</option>
+          <option value="!=">!=</option>
+          <option value=">">></option>
+          <option value=">=">>=</option>
+          <option value="<"><</option>
+          <option value="<="><=</option>
+        </select>
+
+        <input type="text" placeholder="Valor">
+      </div>
+
+      <!-- Categoría riesgo -->
+      <label>Categoría riesgo</label>
+      <select>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+
+      <!-- Ajuste tasa -->
+      <label>Ajuste tasa (%)</label>
+      <input type="number" placeholder="Ej: -2">
+
+      <!-- Estado -->
+      <label>Estado</label>
+      <select>
+        <option value="Activa">Activa</option>
+        <option value="Inactiva">Inactiva</option>
+      </select>
+
+    </div>
+
+    <div class="acciones-modal">
+      <button class="btn-guardar">Crear regla</button>
+      <label for="modalCrearRegla" class="btn-cerrar">Cerrar</label>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ========== MODAL EDITAR REGLA ========== -->
+<input type="checkbox" id="modalEditarRegla" class="modal-toggle" hidden>
+
+<div class="modal">
+  <label for="modalEditarRegla" class="modal-overlay"></label>
+
+  <div class="modal-content glass modal-regla">
+    <h3>Editar regla de negocio</h3>
+
+    <div class="form-regla">
+
+      <label>Nombre de la regla</label>
+      <input type="text" value="EMPLEO_DESEMPLEADO">
+
+      <label>Descripción</label>
+      <textarea class="textarea">Cliente desempleado se rechaza automáticamente.</textarea>
+
+      <label>Tipo de regla</label>
+      <select>
+        <option value="approval" selected>approval</option>
+        <option value="creditScore">creditScore</option>
+        <option value="income">income</option>
+        <option value="custom">custom</option>
+      </select>
+
+      <label>Condición</label>
+      <input type="text" value="employmentType != 'desempleado'">
+
+      <label>Categoría riesgo</label>
+      <select>
+        <option>A</option>
+        <option>B</option>
+        <option selected>C</option>
+      </select>
+
+      <label>Ajuste tasa (%)</label>
+      <input type="number" value="0">
+
+      <label>Estado</label>
+      <select>
+        <option selected>Activa</option>
+        <option>Inactiva</option>
+      </select>
+
+    </div>
+
+    <div class="acciones-modal">
+      <button class="btn-guardar">Guardar</button>
+      <label for="modalEditarRegla" class="btn-cerrar">Cerrar</label>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

@@ -3,68 +3,117 @@
   <!-- Encabezado -->
   <div class="header-riesgo">
     <h2>Perfiles de riesgo</h2>
-    <button class="btn-crear">+ Crear perfil</button>
+    <label class="btn-crear" for="modalCrear">+ Crear perfil</label>
   </div>
 
   <!-- Contenedor de tarjetas -->
   <div class="cards-riesgo">
 
-    <!-- Perfil A -->
+    @for (item of perfiles; track $index) {
     <div class="card-riesgo glass">
       <div class="card-header">
-        <span class="categoria categoria-a">Categoría A</span>
+        <span class="categoria categoria-{{item.category}}">Categoría {{item.category}}</span>
         <div class="acciones">
-          <button class="icon-btn">✏️</button>
+          <button class="icon-btn" for="modalEditar">✏️</button>
           <button class="icon-btn eliminar">🗑️</button>
         </div>
       </div>
 
       <div class="card-body">
-        <p><strong>Puntaje:</strong> 750 - 900</p>
-        <p><strong>Tasa interés:</strong> 5%</p>
+        <p><strong>Puntaje:</strong> {{item.maxScore}} - {{item.minScore}}</p>
+        <p><strong>Tasa interés:</strong> {{item.interestRate}} %</p>
         <p class="desc">
-          Riesgo bajo, excelente historial crediticio.
+          {{item.description}}
         </p>
       </div>
     </div>
-
-    <!-- Perfil B -->
-    <div class="card-riesgo glass">
-      <div class="card-header">
-        <span class="categoria categoria-b">Categoría B</span>
-        <div class="acciones">
-          <button class="icon-btn">✏️</button>
-          <button class="icon-btn eliminar">🗑️</button>
-        </div>
-      </div>
-
-      <div class="card-body">
-        <p><strong>Puntaje:</strong> 600 - 749</p>
-        <p><strong>Tasa interés:</strong> 10%</p>
-        <p class="desc">
-          Riesgo medio, comportamiento aceptable.
-        </p>
-      </div>
-    </div>
-
-    <!-- Perfil C -->
-    <div class="card-riesgo glass">
-      <div class="card-header">
-        <span class="categoria categoria-c">Categoría C</span>
-        <div class="acciones">
-          <button class="icon-btn">✏️</button>
-          <button class="icon-btn eliminar">🗑️</button>
-        </div>
-      </div>
-
-      <div class="card-body">
-        <p><strong>Puntaje:</strong> 0 - 599</p>
-        <p><strong>Tasa interés:</strong> 18%</p>
-        <p class="desc">
-          Riesgo alto, historial irregular o escaso.
-        </p>
-      </div>
-    </div>
-
+    }
   </div>
 </div>
+
+
+<!-- ========================= -->
+<!-- MODAL CREAR PERFIL -->
+<!-- ========================= -->
+<input type="checkbox" id="modalCrear" class="modal-toggle" hidden>
+
+<div class="modal">
+  <label for="modalCrear" class="modal-overlay"></label>
+
+  <div class="modal-content glass modal-riesgo">
+    <h3>Crear perfil de riesgo</h3>
+
+    <div class="form-riesgo">
+
+      <div class="col">
+        <label>Categoría</label>
+        <input type="text" placeholder="Ej: A">
+
+        <label>Puntaje mínimo</label>
+        <input type="number" placeholder="Ej: 600">
+
+        <label>Puntaje máximo</label>
+        <input type="number" placeholder="Ej: 749">
+      </div>
+
+      <div class="col">
+        <label>Tasa de interés (%)</label>
+        <input type="number" placeholder="Ej: 10">
+
+        <label>Descripción</label>
+        <textarea rows="5" placeholder="Descripción del perfil..."></textarea>
+      </div>
+
+    </div>
+
+    <div class="acciones-modal">
+      <button class="btn-guardar">Guardar</button>
+      <label for="modalCrear" class="btn-cerrar">Cerrar</label>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================= -->
+<!-- MODAL EDITAR PERFIL -->
+<!-- ========================= -->
+<input type="checkbox" id="modalEditar" class="modal-toggle" hidden>
+
+<div class="modal">
+  <label for="modalEditar" class="modal-overlay"></label>
+
+  <div class="modal-content glass modal-riesgo">
+    <h3>Editar perfil de riesgo</h3>
+
+    <div class="form-riesgo">
+
+      <div class="col">
+        <label>Categoría</label>
+        <input type="text" value="A">
+
+        <label>Puntaje mínimo</label>
+        <input type="number" value="750">
+
+        <label>Puntaje máximo</label>
+        <input type="number" value="900">
+      </div>
+
+      <div class="col">
+        <label>Tasa de interés (%)</label>
+        <input type="number" value="5">
+
+        <label>Descripción</label>
+        <textarea rows="5">Riesgo bajo, excelente historial crediticio.</textarea>
+      </div>
+
+    </div>
+
+    <div class="acciones-modal">
+      <button class="btn-guardar">Guardar cambios</button>
+      <label for="modalEditar" class="btn-cerrar">Cerrar</label>
+    </div>
+  </div>
+</div>
+
+
+

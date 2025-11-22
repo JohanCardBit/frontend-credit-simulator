@@ -105,3 +105,68 @@ body {
   margin: 6px 0;
   opacity: 0.9;
 }
+
+
+
+/* ========= MODALES ========= */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(20px);
+
+
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content.glass {
+  width: 420px;
+  padding: 30px;
+  border-radius: 18px;
+  background: rgba(1, 23, 60, 0.66);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(50px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  color: #fff;
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+  outline: none;
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+
+.close-btn {
+  margin-top: 10px;
+  background: transparent;
+  border: none;
+  color: #eee;
+  cursor: pointer;
+  display: block;
+}
+
+
