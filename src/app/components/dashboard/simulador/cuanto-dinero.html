@@ -17,7 +17,7 @@
 
     <!-- Errores de monto -->
     @if (form.get('amount')?.touched && form.get('amount')?.invalid) {
-    <div class="error" >
+    <div class="error">
       @if (form.get('amount')?.errors?.['required']) {
       <span>El monto es obligatorio.</span>
       }
@@ -89,22 +89,18 @@
 
 @if (mostrarResultados) {
 <section class="container-opciones">
-
   <h5 class="text-center fw-bolder">Te ofrecemos estas opciones de Crédito</h5>
   <div class="tarjetas-credito">
+
     <!-- TARJETA 1 -->
     <div class="tarjeta-credito">
       <div class="encabezado-tarjeta">
         <span class="titulo-tarjeta">Tasa fija - Cuota fija</span>
       </div>
 
-
       <div class="monto-credito">
         <p class="label">Por un crédito de:</p>
         <p class="valor"> ${{ resultados?.fija?.requested?.amount ?? 0 | number:'1.0-0' }} </p>
-
-
-
       </div>
 
       <div class="resumen-cuota">
@@ -123,16 +119,12 @@
           <div class="item-tasa">
             <span>Seguro de vida</span>
             <span>${{ (resultados?.fija?.requested.sure ?? 0) | number:'1.0-0' }}</span>
-
-
           </div>
         </div>
         <a class="enlace-plan">Conocer el plan de pagos</a>
       </details>
 
       <button class="boton-solicitar">Solicitar crédito</button>
-
-
     </div>
 
     <!-- TARJETA 2 -->
@@ -177,7 +169,6 @@
     </div>
 
     <!-- TARJETA 3 -->
-
     <div class="tarjeta-credito">
       <div class="encabezado-tarjeta">
         <span class="titulo-tarjeta">Tasa variable - Cuota variable</span>
@@ -217,6 +208,5 @@
 
     </div>
   </div>
-
 </section>
 }
