@@ -17,7 +17,7 @@
 
     <!-- Errores de monto -->
     @if (form.get('amount')?.touched && form.get('amount')?.invalid) {
-    <div class="error">
+    <div class="error" >
       @if (form.get('amount')?.errors?.['required']) {
       <span>El monto es obligatorio.</span>
       }
