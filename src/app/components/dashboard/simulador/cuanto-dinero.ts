@@ -83,7 +83,6 @@ export class CuantoDinero {
     });
   }
 
-
   getPrimerRate(rate: any): number {
     if (Array.isArray(rate)) {
       return rate[0] / 12;
