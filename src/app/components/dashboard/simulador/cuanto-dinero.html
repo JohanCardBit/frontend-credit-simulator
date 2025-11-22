@@ -1,4 +1,4 @@
-@if (!mostrarResultados) {
+@if (!mostrarResultados && !mostrarWelcome) {
 <section class="container-simulador" [formGroup]="form">
 
   <div class="simulador-container">
@@ -87,7 +87,7 @@
 </section>
 }
 
-@if (mostrarResultados) {
+@if (mostrarResultados && !mostrarWelcome) {
 <section class="container-opciones">
   <h5 class="text-center fw-bolder">Te ofrecemos estas opciones de Crédito</h5>
   <div class="tarjetas-credito">
@@ -124,7 +124,7 @@
         <a class="enlace-plan">Conocer el plan de pagos</a>
       </details>
 
-      <button class="boton-solicitar">Solicitar crédito</button>
+      <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
     </div>
 
     <!-- TARJETA 2 -->
@@ -163,7 +163,8 @@
         <a class="enlace-plan">Conocer el plan de pagos</a>
       </details>
 
-      <button class="boton-solicitar">Solicitar crédito</button>
+      <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
+
 
 
     </div>
@@ -203,10 +204,23 @@
         <a class="enlace-plan">Conocer el plan de pagos</a>
       </details>
 
-      <button class="boton-solicitar">Solicitar crédito</button>
+      <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
+
 
 
     </div>
+  </div>
+</section>
+}
+
+@if (mostrarWelcome) {
+<section class="welcome-container">
+  <div class="welcome-box">
+    <h4>Te damos la bienvenida</h4>
+    <h2>¿Ya tienes cuenta en CrediTest?</h2>
+
+    <button routerLink="/login" class="btn-primary">Tengo cuenta</button>
+    <button class="btn-secondary">Crear cuenta</button>
   </div>
 </section>
 }

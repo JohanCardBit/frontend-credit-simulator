@@ -3,12 +3,13 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { SimuladorService } from '../../../services/simulador/simulador.service';
 import { DecimalPipe } from '@angular/common';
 import { FlashyService } from '../../../services/flashy/flashy.service';
+import { RouterLink } from "@angular/router";
 
 
 @Component({
   selector: 'app-cuanto-dinero',
   standalone: true,
-  imports: [ReactiveFormsModule, DecimalPipe],
+  imports: [ReactiveFormsModule, DecimalPipe, RouterLink],
   templateUrl: './cuanto-dinero.html',
   styleUrl: './cuanto-dinero.css',
 })
@@ -19,6 +20,8 @@ export class CuantoDinero {
   form: FormGroup;
   resultados: any = null;
   mostrarResultados = false;
+  mostrarWelcome = false;
+
 
   private flashyService = inject(FlashyService);
 
@@ -92,6 +95,7 @@ export class CuantoDinero {
 
   volverAlFormulario() {
     this.mostrarResultados = false;
+    this.mostrarWelcome = false;
     this.mostrarResultadosChange.emit(false);
   }
 
