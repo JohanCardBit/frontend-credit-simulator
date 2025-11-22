@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { SimuladorService } from '../../../services/simulador/simulador.service';
 import { DecimalPipe } from '@angular/common';
+import { FlashyService } from '../../../services/flashy/flashy.service';
 
 
 @Component({
@@ -13,12 +14,13 @@ import { DecimalPipe } from '@angular/common';
 })
 export class CuantoDinero {
 
-  @Output() mostrarResultadosChange = new EventEmitter<boolean>();
-
+  @Output() mostrarResultadosChange = new EventEmitter();
 
   form: FormGroup;
   resultados: any = null;
   mostrarResultados = false;
+
+  private flashyService = inject(FlashyService);
 
   constructor(private fb: FormBuilder, private simuladorService: SimuladorService) {
     this.form = this.fb.group({
@@ -42,6 +44,7 @@ export class CuantoDinero {
   simular() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      this.flashyService.warning('Por favor completa todos los campos correctamente.');
       return;
     }
 
@@ -50,15 +53,25 @@ export class CuantoDinero {
     // VALIDAR MAYOR DE EDAD
     if (this.calcularEdad(birthDate) < 18) {
       this.form.get('birthDate')?.setErrors({ underAge: true });
+      this.flashyService.error('Debes ser mayor de 18 años para continuar.');
       return;
     }
 
     // LLAMADAS A LAS 3 SIMULACIONES
-    this.simuladorService.simular(amount, termMonths).subscribe((data) => {
-      this.resultados = data;
-      this.mostrarResultados = true;
-      this.mostrarResultadosChange.emit(true);
-      console.log('3 simulaciones:', data);
+    this.simuladorService.simular(amount, termMonths).subscribe({
+      next: (data) => {
+
+        this.resultados = data;
+        this.mostrarResultados = true;
+        this.mostrarResultadosChange.emit(true);
+        this.flashyService.success('Simulación realizada con éxito.');
+        console.log('3 simulaciones:', data);
+      },
+      error: (err) => {
+
+        console.error('Error al realizar la simulación:', err);
+        this.flashyService.error('Ocurrió un error al realizar la simulación.');
+      }
     });
   }
 
@@ -73,7 +86,5 @@ export class CuantoDinero {
     this.mostrarResultados = false;
     this.mostrarResultadosChange.emit(false);
   }
-
-
 
 }
