@@ -57,23 +57,32 @@ export class CuantoDinero {
       return;
     }
 
-    // LLAMADAS A LAS 3 SIMULACIONES
-    this.simuladorService.simular(amount, termMonths).subscribe({
-      next: (data) => {
-
-        this.resultados = data;
-        this.mostrarResultados = true;
-        this.mostrarResultadosChange.emit(true);
-        this.flashyService.success('Simulación realizada con éxito.');
-        console.log('3 simulaciones:', data);
+    // PREGUNTAR CONFIRMACIÓN ANTES DE SIMULAR
+    this.flashyService.confirm('¿Deseas realizar la simulación?', {
+      position: 'top-center',
+      animation: 'bounce',
+      onConfirm: () => {
+        // LLAMADAS A LAS 3 SIMULACIONES
+        this.simuladorService.simular(amount, termMonths).subscribe({
+          next: (data) => {
+            this.resultados = data;
+            this.mostrarResultados = true;
+            this.mostrarResultadosChange.emit(true);
+            this.flashyService.success('Simulación realizada con éxito.');
+            console.log('3 simulaciones:', data);
+          },
+          error: (err) => {
+            console.error('Error al realizar la simulación:', err);
+            this.flashyService.error('Ocurrió un error al realizar la simulación.');
+          }
+        });
       },
-      error: (err) => {
-
-        console.error('Error al realizar la simulación:', err);
-        this.flashyService.error('Ocurrió un error al realizar la simulación.');
+      onCancel: () => {
+        this.flashyService.info('Simulación cancelada.');
       }
     });
   }
+
 
   getPrimerRate(rate: any): number {
     if (Array.isArray(rate)) {
