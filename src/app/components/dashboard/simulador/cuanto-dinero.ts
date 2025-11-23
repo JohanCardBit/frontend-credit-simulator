@@ -146,13 +146,13 @@ export class CuantoDinero {
 
 
 
-  // Volver al simulador desde tarjetas de crédito
+  // Volver al simulador desde  opciones de  crédito
   volverAlSimulador() {
     this.mostrarResultados = false;
     this.mostrarWelcome = false;
   }
 
-  // Volver a opciones de tarjetas de crédito desde Welcome
+  // Volver a opciones de  crédito desde Welcome
   volverAOpciones() {
     this.mostrarWelcome = false;
     this.mostrarResultados = true;
