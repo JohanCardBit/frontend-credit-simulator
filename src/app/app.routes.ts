@@ -23,7 +23,7 @@ const titulosRutas = {
 }
 
 const rutasPubilcas: Routes = [
-  { path: '', redirectTo: 'dashboard/simulador', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: Home, title: titulosRutas.home },
 
 
