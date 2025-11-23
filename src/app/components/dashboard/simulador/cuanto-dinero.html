@@ -316,7 +316,20 @@
 
 
 <section class="detalle-pagos-contenedor">
-  <h2 class="titulo-detalle">Detalle de pagos</h2>
+  <h3 class="titulo-detalle fw-semibold text-center ">
+    Plan de pagos para el crédito por un monto de
+    <span class="fw-bold text-primary">
+      ${{ resultados?.fija?.requested?.amount ?? 0 | number:'1.0-0' }}
+    </span>
+    pagando a
+    <span class="fw-bold text-primary">
+      {{ resultados?.fija?.requested?.termMonths ?? 0 }}
+    </span>
+    cuotas mensuales.
+  </h3>
+
+  <p class=" text-center my-4">Resultados aproximados y sujetos a estudio de crédito y políticas de la entidad.</p>
+
 
   <div class="layout-dos-columnas">
 
