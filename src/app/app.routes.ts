@@ -7,9 +7,11 @@ import { Perfil } from './components/dashboard/administracion/perfil/perfil';
 import { Tasas } from './components/dashboard/administracion/tasas/tasas';
 import { PerfilesDeRiesgo } from './components/dashboard/administracion/perfiles-de-riesgo/perfiles-de-riesgo';
 import { Reglas } from './components/dashboard/administracion/reglas/reglas';
+import { Home } from './components/public/home/home';
 
 
 const titulosRutas = {
+  home: 'CrediTest',
   login: 'CrediTest | Login',
   simulador: 'CrediTest | Simula tu credito',
   cuantoDineroNecesitas: 'CrediTest | ¿Cuánto dinero necesitas?',
@@ -22,6 +24,7 @@ const titulosRutas = {
 
 const rutasPubilcas: Routes = [
   { path: '', redirectTo: 'dashboard/simulador', pathMatch: 'full' },
+  { path: 'home', component: Home, title: titulosRutas.home },
 
 
   { path: 'login', component: Login, title: titulosRutas.login },
