@@ -2,7 +2,8 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* ocupa toda la pantalla */
+  min-height: 100vh;
+  /* ocupa toda la pantalla */
 }
 
 .navbar {
@@ -82,7 +83,7 @@
 
   @media (min-width: 1280px) {
     .ms {
-      margin-left: 200px ;
+      margin-left: 200px;
     }
   }
 
@@ -90,12 +91,11 @@
 }
 
 
-.w{width: 150px;}
+.w {
+  width: 150px;
+}
 
 
-
-
-/* MAIN — */
 .app-main {
   flex: 1;
   width: 100%;
@@ -104,67 +104,9 @@
   padding: clamp(1.5rem, 3vw, 3rem) 1rem;
   background: var(--background-main);
   /* border: 5px solid rgb(75, 91, 238); */
-
- .btn-prev-exit {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: clamp(0.5rem, 1vw, 1rem) 0;
-  gap: 1rem;
-
-  .prev,
-  .exit {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-
-    background: var(--background-soft);
-    padding: 0.55rem 1rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--border-color);
-
-    color: var(--text-main);
-    font-weight: 600;
-    font-size: clamp(0.85rem, 1.4vw, 1rem);
-
-    cursor: pointer;
-    user-select: none;
-    transition: all var(--transition-normal);
-
-    svg {
-      width: 20px;
-      height: 20px;
-      transition: transform var(--transition-fast), color var(--transition-fast);
-    }
-
-    /* --- HOVER general --- */
-    &:hover {
-      background: var(--primary-700);
-      color: #fff;
-      border-color: var(--primary-500);
-      box-shadow: 0 0 12px var(--glow-200);
-
-      svg {
-        color: #5258f6;
-      }
-    }
-  }
-
-  .prev:hover svg {
-    transform: translateX(-4px);
-  }
-
-  .exit:hover svg:last-child {
-    transform: translateX(4px);
-  }
-}
-
 }
 
 
-
-
-/* FOOTER */
 .app-footer {
   background: var(--footer-bg);
   padding: 1rem 1rem;

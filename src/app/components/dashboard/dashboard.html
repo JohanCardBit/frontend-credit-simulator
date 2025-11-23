@@ -35,27 +35,7 @@
 </nav>
 
   <main class="app-main">
-    <div class="btn-prev-exit">
-      <div class="prev" (click)="volver()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <title>Atrás</title>
-          <path d="M19 12H5" />
-          <path d="M11 18l-6-6 6-6" />
-        </svg>
-        Atrás
-      </div>
-      <div routerLink="/home" class="exit">Salir
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
-          fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <title>Salir</title>
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-          <path d="M16 17l5-5-5-5" />
-          <path d="M21 12H9" />
-        </svg>
-      </div>
-    </div>
-    <router-outlet (activate)="onChildEventFromChild($event)"></router-outlet>
+    <router-outlet></router-outlet>
   </main>
 
   <footer class="app-footer">

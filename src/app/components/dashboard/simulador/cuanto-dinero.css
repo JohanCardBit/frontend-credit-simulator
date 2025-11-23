@@ -322,3 +322,262 @@
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.detalle-pagos-contenedor {
+  padding: 2rem 0 5rem;
+  color: var(--text-main);
+  max-width: 980px;
+  margin: auto;
+
+  /* -------- TITULO -------- */
+  .titulo-detalle {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+
+  /* LAYOUT DOS COLUMNAS */
+  .layout-dos-columnas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    /* -------- COLUMNA IZQUIERDA -------- */
+    .grafico-vacio {
+      width: 50%;
+      background: #000;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      min-height: 420px;
+    }
+
+    /* -------- COLUMNA DERECHA -------- */
+    .contenido-derecha {
+      display: flex;
+      gap: 20px;
+      width: 45%;
+
+      /* TABS AÑOS */
+      .tabs-anios {
+        display: flex;
+        width: 100px;
+        /* border: 1px solid red; */
+        flex-direction: column;
+        gap: 0.6rem;
+        /* margin-bottom: 2rem; */
+        height: 420px;
+        overflow-y: scroll;
+        padding: 10px;
+
+        .tab-anio {
+          padding: 0.8rem 0;
+          border-radius: var(--radius);
+          border: 1px solid var(--border-color);
+          background: var(--background-card);
+          color: var(--text-secondary);
+          cursor: pointer;
+          transition: var(--transition-fast);
+          font-size: 12px;
+          border: 1px solid blue;
+
+          &:hover {
+            color: var(--primary-300);
+            border-color: var(--primary-500);
+          }
+
+          &.activo {
+            background: var(--primary-600);
+            color: #fff;
+            border-color: var(--primary-600);
+            box-shadow: var(--shadow-soft);
+          }
+        }
+      }
+
+      /* LISTA DE MESES */
+      .lista-meses {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.6rem;
+        /* border: 1px solid green; */
+        overflow-y: scroll;
+        height: 420px;
+        width: 300px;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+
+        /* TARJETA MES */
+        .tarjeta-mes {
+          width: 280px;
+          background: var(--background-card);
+          border-radius: var(--radius);
+          border: 1px solid var(--border-color);
+          padding: 1.3rem 1.4rem;
+          box-shadow: var(--shadow-soft);
+          transition: var(--transition-fast);
+
+          &:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-strong);
+          }
+
+          /* ---- HEADER ---- */
+          .tarjeta-mes-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+
+            .tarjeta-mes-titulo {
+              font-size: 1rem;
+              margin: 0;
+            }
+
+            .tarjeta-mes-cuota {
+              font-size: 0.9rem;
+              color: var(--text-secondary);
+
+              strong {
+                color: var(--primary-500);
+                font-weight: 700;
+              }
+            }
+          }
+
+          /* ---- DETALLES ---- */
+          .tarjeta-mes-detalles {
+            list-style: none;
+            margin: 0 0 1rem;
+            padding: 0;
+            font-size: 0.9rem;
+            line-height: 1.35rem;
+            color: var(--text-secondary);
+          }
+
+          /* ---- SALDO ---- */
+          .tarjeta-mes-saldo {
+            text-align: right;
+
+            strong {
+              color: var(--success-500);
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+}
+
+@media (max-width: 900px) {
+  .detalle-pagos-contenedor {
+    .layout-dos-columnas {
+      flex-direction: column;
+
+      .grafico-vacio {
+        width: 100%;
+        min-height: 300px;
+      }
+
+      .contenido-derecha {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+
+        .tabs-anios {
+          flex-direction: row;
+          width: 100%;
+          height: auto;
+          overflow-y: hidden;
+          overflow-x: auto;
+          padding: 10px 0;
+
+          .tab-anio {
+            min-width: 80px;
+            text-align: center;
+          }
+        }
+
+        .lista-meses {
+          width: 100%;
+          height: auto;
+          overflow-y: visible;
+          justify-content: center;
+
+          .tarjeta-mes {
+            width: 100%;
+            max-width: 320px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+  .prev,
+  .exit {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+
+    background: var(--background-soft);
+    padding: 0.55rem 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: clamp(0.85rem, 1.4vw, 1rem);
+
+    cursor: pointer;
+    user-select: none;
+    transition: all var(--transition-normal);
+
+    svg {
+      width: 20px;
+      height: 20px;
+      transition: transform var(--transition-fast), color var(--transition-fast);
+    }
+
+    /* --- HOVER general --- */
+    &:hover {
+      background: var(--primary-700);
+      color: #fff;
+      border-color: var(--primary-500);
+      box-shadow: 0 0 12px var(--glow-200);
+
+      svg {
+        color: #5258f6;
+      }
+    }
+  }
+
+  .prev:hover svg {
+    transform: translateX(-4px);
+  }
+
+  .exit:hover svg:last-child {
+    transform: translateX(4px);
+  }
