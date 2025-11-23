@@ -1,18 +1,38 @@
 <div class="body">
-  <nav class="navbar">
-    <div class="nav-left">
-      <div class="logo"><img class="w" src="logo.png" alt=""></div>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand logo" href="#">
+      <img src="logo.png" alt="Logo" width="150" height="30">
+    </a>
+
+    <!-- Botón hamburguesa -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapse con links y botón -->
+    <div class="collapse navbar-collapse ms-sm-0 ms-md-5" id="navbarNav">
+      <ul class="navbar-nav mx-auto nav-links">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard/simulador" routerLinkActive="active">Simulación</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLinkActive="active">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLinkActive="active">Ayuda</a>
+        </li>
+      </ul>
+
+      <!-- Botón al final a la derecha en pantallas grandes -->
+      <a routerLink="/login" class="btn nav-btn ms-lg-auto mt-2 mt-lg-0">Iniciar Sesión</a>
     </div>
-
-    <ul class="nav-links">
-      <li><a routerLink="/home" routerLinkActive="active">Inicio</a></li>
-      <li><a routerLink="/dashboard/simulador" routerLinkActive="active">Simulación</a></li>
-      <li><a href="#" routerLinkActive="active">Nosotros</a></li>
-      <li><a href="#" routerLinkActive="active">Ayuda</a></li>
-    </ul>
-
-    <button class="nav-btn">Iniciar Sesión</button>
-  </nav>
+  </div>
+</nav>
 
   <main class="app-main">
     <div class="btn-prev-exit">
