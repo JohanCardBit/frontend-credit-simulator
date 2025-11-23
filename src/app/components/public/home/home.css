@@ -141,74 +141,83 @@
   }
 
   /* HERO GRAPHICS */
-  .hero-graphics {
-    width: 350px;
-    height: 300px;
-    position: relative;
+.hero-graphics {
+  width: 350px;
+  height: 300px;
+  position: relative;
+}
+
+
+/* BRILLO */
+.glow {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  background: radial-gradient(circle, var(--primary-700), transparent 75%);
+  filter: blur(60px);
+}
+
+/* TARJETAS */
+.floating-card {
+  position: absolute;
+  background: rgba(255,255,255,0.12);
+  padding: 1.3rem 1.6rem;
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2),
+              inset 0 0 30px rgba(255,255,255,0.05);
+  animation: float 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-6px) scale(1.06);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.28),
+                inset 0 0 40px rgba(255,255,255,0.08);
   }
 
-  .glow {
-    width: 260px;
-    height: 260px;
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    background: radial-gradient(circle, var(--primary-700), transparent 70%);
-    filter: blur(55px);
+  h3 {
+    font-size: 1.4rem;
+    margin: 0.4rem 0 0;
+    font-weight: 700;
   }
 
-  .floating-card {
-    position: absolute;
-    background: var(--background-card);
-    padding: 1rem 1.4rem;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    animation: float 4s ease-in-out infinite;
-    transition: var(--transition-fast);
-
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: var(--shadow-strong);
-    }
-
-    h3 {
-      margin-bottom: 0.2rem;
-    }
-
-    p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
+  p {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    opacity: 0.8;
   }
+}
 
-  .card-1 {
-    top: 10%;
-    right: 0;
-    animation-delay: 0.3s;
-  }
 
-  .card-2 {
-    bottom: 5%;
-    left: 5%;
-    animation-delay: 1s;
-  }
+
+/* UBICACIÓN */
+.card-1 {
+  top: 8%;
+  right: -10px;
+  animation-delay: 0.2s;
+}
+
+.card-2 {
+  bottom: 8%;
+  left: 0;
+  animation-delay: 1s;
+}
+
+
 
 
 }
 
+/* ANIMACIÓN */
 @keyframes float {
-  0% {
-    transform: translateY(0);
+  0%, 100% {
+    transform: translateY(0px);
   }
-
   50% {
-    transform: translateY(-16px);
-  }
-
-  100% {
-    transform: translateY(0);
+    transform: translateY(-10px);
   }
 }
 
