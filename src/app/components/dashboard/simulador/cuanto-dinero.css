@@ -325,18 +325,51 @@
 
 
 
+.prev,
+.exit {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
 
+  background: var(--background-soft);
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
 
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: clamp(0.85rem, 1.4vw, 1rem);
 
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-normal);
 
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: transform var(--transition-fast), color var(--transition-fast);
+  }
 
+  /* --- HOVER general --- */
+  &:hover {
+    background: var(--primary-700);
+    color: #fff;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 12px var(--glow-200);
 
+    svg {
+      color: #5258f6;
+    }
+  }
+}
 
+.prev:hover svg {
+  transform: translateX(-4px);
+}
 
-
-
-
-
+.exit:hover svg:last-child {
+  transform: translateX(4px);
+}
 
 
 
@@ -345,7 +378,7 @@
   padding: 2rem 0 5rem;
   color: var(--text-main);
   max-width: 980px;
-  margin: auto;
+  margin: 0  auto;
 
   /* -------- TITULO -------- */
   .titulo-detalle {
@@ -375,7 +408,7 @@
       justify-content: center;
       gap: 20px;
       width: 45%;
-      border: 0.5px solid black;
+      border: 0.5px solid rgba(0, 0, 0, 0.13);
       border-radius: 20px;
 
       /* TABS AÑOS */
@@ -385,7 +418,6 @@
         /* border: 1px solid red; */
         flex-direction: column;
         gap: 0.6rem;
-        /* margin-bottom: 2rem; */
         height: 420px;
         overflow-y: scroll;
         padding: 10px;
@@ -423,7 +455,7 @@
         /* border: 1px solid green; */
         overflow-y: scroll;
         height: 420px;
-        width: 300px;
+        width: 320px;
         justify-content: center;
         align-items: center;
         padding: 10px 0;
@@ -522,8 +554,8 @@
 
         .lista-meses {
           width: 100%;
-          height: auto;
-          overflow-y: visible;
+          height: 430px;
+          overflow-y: scroll;
           justify-content: center;
 
           .tarjeta-mes {
@@ -535,52 +567,3 @@
     }
   }
 }
-
-
-
-
-  .prev,
-  .exit {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-
-    background: var(--background-soft);
-    padding: 0.55rem 1rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--border-color);
-
-    color: var(--text-main);
-    font-weight: 600;
-    font-size: clamp(0.85rem, 1.4vw, 1rem);
-
-    cursor: pointer;
-    user-select: none;
-    transition: all var(--transition-normal);
-
-    svg {
-      width: 20px;
-      height: 20px;
-      transition: transform var(--transition-fast), color var(--transition-fast);
-    }
-
-    /* --- HOVER general --- */
-    &:hover {
-      background: var(--primary-700);
-      color: #fff;
-      border-color: var(--primary-500);
-      box-shadow: 0 0 12px var(--glow-200);
-
-      svg {
-        color: #5258f6;
-      }
-    }
-  }
-
-  .prev:hover svg {
-    transform: translateX(-4px);
-  }
-
-  .exit:hover svg:last-child {
-    transform: translateX(4px);
-  }
