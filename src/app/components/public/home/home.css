@@ -80,10 +80,12 @@
   }
 
   @media (min-width: 1280px) {
-    .ms-md-5 {
-      margin-left: 200px !important;
+    .ms {
+      margin-left: 200px ;
     }
   }
+
+
 }
 
 
