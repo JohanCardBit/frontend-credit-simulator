@@ -98,7 +98,6 @@
     }
 
     .error {
-      color: var(--primary-500);
       font-size: 0.8rem;
       margin-top: 0.25rem;
     }
@@ -254,6 +253,7 @@
 
 
 .error {
+  font-size: 0.8rem;
   color: rgb(250, 113, 113);
 }
 
