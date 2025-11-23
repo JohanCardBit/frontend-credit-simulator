@@ -394,7 +394,7 @@
     gap: 1rem;
 
     /* -------- COLUMNA IZQUIERDA -------- */
-    .grafico-vacio {
+    .grafico {
       width: 50%;
       background: #000;
       border-radius: var(--radius);
