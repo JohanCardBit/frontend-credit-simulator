@@ -81,7 +81,7 @@
 
   @media (min-width: 1280px) {
     .ms {
-      margin-left: 200px ;
+      margin-left: 200px;
     }
   }
 
@@ -195,20 +195,21 @@
     animation-delay: 1s;
   }
 
-  @keyframes float {
-    0% {
-      transform: translateY(0);
-    }
 
-    50% {
-      transform: translateY(-16px);
-    }
+}
 
-    100% {
-      transform: translateY(0);
-    }
+@keyframes float {
+  0% {
+    transform: translateY(0);
   }
 
+  50% {
+    transform: translateY(-16px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 
