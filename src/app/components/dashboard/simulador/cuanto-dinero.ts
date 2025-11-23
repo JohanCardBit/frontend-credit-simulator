@@ -158,7 +158,7 @@ export class CuantoDinero {
     this.mostrarResultados = true;
   }
 
-  // Volver a opciones de tarjetas de crédito desde plan de pagos
+  // Volver a opciones de crédito desde plan de pagos
   volverAOpcionesDesdePlan() {
     this.mostrarPlanPagos = false;
     this.mostrarResultados = true;
