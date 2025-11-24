@@ -164,7 +164,6 @@ export class CuantoDinero {
   }
 
 
-
   // Volver al simulador desde  opciones de  crédito
   volverAlSimulador() {
     this.mostrarResultados = false;
