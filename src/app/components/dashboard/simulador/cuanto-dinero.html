@@ -332,9 +332,18 @@
   <div class="layout-dos-columnas">
 
     <!-- COLUMNA IZQUIERDA -->
-    <div class="grafico">
-
-    </div>
+  <div class="grafico">
+  @if (planActivo && planActivo.length > 0) {
+    <canvas baseChart
+            [data]="chartData"
+            [options]="chartOptions"
+            [type]="$any(chartType)"
+            #chart>
+    </canvas>
+  } @else {
+    <p>No hay datos para mostrar el gráfico.</p>
+  }
+</div>
 
     <!-- COLUMNA DERECHA -->
     <div class="contenido-derecha">

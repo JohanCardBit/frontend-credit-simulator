@@ -1,3 +1,50 @@
+.prev,
+.exit {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+
+  background: var(--background-soft);
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: clamp(0.85rem, 1.4vw, 1rem);
+
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-normal);
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: transform var(--transition-fast), color var(--transition-fast);
+  }
+
+  /* --- HOVER general --- */
+  &:hover {
+    background: var(--primary-700);
+    color: #fff;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 12px var(--glow-200);
+
+    svg {
+      color: #5258f6;
+    }
+  }
+}
+
+.prev:hover svg {
+  transform: translateX(-4px);
+}
+
+.exit:hover svg:last-child {
+  transform: translateX(4px);
+}
+
+
 .container-simulador {
   .simulador-container {
     max-width: 700px;
@@ -323,62 +370,11 @@
   }
 }
 
-
-
-.prev,
-.exit {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-
-  background: var(--background-soft);
-  padding: 0.55rem 1rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--border-color);
-
-  color: var(--text-main);
-  font-weight: 600;
-  font-size: clamp(0.85rem, 1.4vw, 1rem);
-
-  cursor: pointer;
-  user-select: none;
-  transition: all var(--transition-normal);
-
-  svg {
-    width: 20px;
-    height: 20px;
-    transition: transform var(--transition-fast), color var(--transition-fast);
-  }
-
-  /* --- HOVER general --- */
-  &:hover {
-    background: var(--primary-700);
-    color: #fff;
-    border-color: var(--primary-500);
-    box-shadow: 0 0 12px var(--glow-200);
-
-    svg {
-      color: #5258f6;
-    }
-  }
-}
-
-.prev:hover svg {
-  transform: translateX(-4px);
-}
-
-.exit:hover svg:last-child {
-  transform: translateX(4px);
-}
-
-
-
-
 .detalle-pagos-contenedor {
   padding: 2rem 0 5rem;
   color: var(--text-main);
   max-width: 980px;
-  margin: 0  auto;
+  margin: 0 auto;
 
   /* -------- TITULO -------- */
   .titulo-detalle {
@@ -392,13 +388,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    border-top: 0.8px solid rgb(0, 0, 0);
+    border-radius: 10px;
 
     /* -------- COLUMNA IZQUIERDA -------- */
     .grafico {
       width: 50%;
-      background: #000;
-      border-radius: var(--radius);
-      border: 1px solid var(--border-color);
+      border-right: 0.8px solid rgb(0, 0, 0);
+      border-radius: 6px;
       min-height: 420px;
     }
 
@@ -408,8 +405,8 @@
       justify-content: center;
       gap: 20px;
       width: 45%;
-      border: 0.5px solid rgba(0, 0, 0, 0.13);
-      border-radius: 20px;
+      border-left: 0.8px solid rgb(0, 0, 0);
+      border-radius: 6px;
 
       /* TABS AÑOS */
       .tabs-anios {
@@ -528,9 +525,9 @@
     .layout-dos-columnas {
       flex-direction: column;
 
-      .grafico-vacio {
+      .grafico {
         width: 100%;
-        min-height: 300px;
+
       }
 
       .contenido-derecha {
