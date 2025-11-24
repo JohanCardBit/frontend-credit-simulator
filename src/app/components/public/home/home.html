@@ -17,13 +17,13 @@
       <div class="collapse navbar-collapse ms" id="navbarNav">
         <ul class="navbar-nav mx-auto nav-links">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
+            <a class="nav-link" [routerLink]="[{ outlets: { home: ['inicio'] } }]" routerLinkActive="active">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/dashboard/simulador" routerLinkActive="active">Simulación</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" routerLinkActive="active">Nosotros</a>
+            <a class="nav-link" [routerLink]="[{ outlets: { home: ['nosotros'] } }]" routerLinkActive="active">Nosotros</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" routerLinkActive="active">Ayuda</a>
@@ -36,7 +36,8 @@
     </div>
   </nav>
 
-  <app-inicio></app-inicio>
+  <router-outlet name="home"></router-outlet>
+
 
   <!-- FOOTER -->
   <footer class="footer">

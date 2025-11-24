@@ -8,10 +8,13 @@ import { Tasas } from './components/dashboard/administracion/tasas/tasas';
 import { PerfilesDeRiesgo } from './components/dashboard/administracion/perfiles-de-riesgo/perfiles-de-riesgo';
 import { Reglas } from './components/dashboard/administracion/reglas/reglas';
 import { Home } from './components/public/home/home';
+import { Inicio } from './components/public/home/inicio/inicio';
+import { Nosotros } from './components/public/home/nosotros/nosotros';
 
 
 const titulosRutas = {
-  home: 'CrediTest',
+  inicio: 'CrediTest | Inicio',
+  nosotros: 'CrediTest | Nosotros',
   login: 'CrediTest | Login',
   simulador: 'CrediTest | Simula tu credito',
   cuantoDineroNecesitas: 'CrediTest | ¿Cuánto dinero necesitas?',
@@ -23,8 +26,16 @@ const titulosRutas = {
 }
 
 const rutasPubilcas: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: Home, title: titulosRutas.home },
+  { path: '', redirectTo: '/home/(home:inicio)', pathMatch: 'full' },
+
+  {
+    path: 'home', component: Home, children: [
+      { path: 'inicio', component: Inicio, title: titulosRutas.inicio, outlet: 'home' },
+      { path: 'nosotros', component: Nosotros, title: titulosRutas.nosotros, outlet: 'home' }
+    ]
+  },
+
+
 
 
   { path: 'login', component: Login, title: titulosRutas.login },
@@ -32,11 +43,12 @@ const rutasPubilcas: Routes = [
     path: 'dashboard', component: PasosSimulador, title: titulosRutas.simulador, children: [
       { path: 'simulador', component: CuantoDinero, title: titulosRutas.cuantoDineroNecesitas },
 
-      { path: 'admin', component: Administracion, title: titulosRutas.administacion, children: [
+      {
+        path: 'admin', component: Administracion, title: titulosRutas.administacion, children: [
           { path: 'perfil', component: Perfil, title: titulosRutas.PerfilAdmin },
           { path: 'tasas', component: Tasas, title: titulosRutas.tasas },
           { path: 'perfil-riesgo', component: PerfilesDeRiesgo, title: titulosRutas.perfilRiesgo },
-          { path: 'reglas', component: Reglas, title: titulosRutas.reglas}
+          { path: 'reglas', component: Reglas, title: titulosRutas.reglas }
         ]
       }
     ]
