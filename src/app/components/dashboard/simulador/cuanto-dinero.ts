@@ -262,7 +262,7 @@ export class CuantoDinero {
     }
   };
 
-  // Método opcional para agregar degradado dinámico
+  // Método para agregar degradado dinámico
   ngAfterViewInit() {
     const ctx = this.chart.chart?.ctx;
     if (!ctx) return;
