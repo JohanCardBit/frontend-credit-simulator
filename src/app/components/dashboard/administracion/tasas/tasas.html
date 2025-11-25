@@ -3,50 +3,130 @@
   <!-- Encabezado -->
   <div class="header-tasas">
     <h2>Tasas de interés</h2>
-    <button class="btn-crear">+ Crear nueva tasa</button>
+    <button class="btn-crear" data-bs-toggle="modal" data-bs-target="#modal-crear-tasa">+ Crear nueva tasa</button>
   </div>
 
   <!-- Contenedor de tarjetas -->
   <div class="cards-tasas">
 
-    <!-- Tasa fija -->
+    @for (item of tasasObtenidas; track $index) {
     <div class="card-tasa glass">
       <div class="card-header">
-        <span class="tipo">Fija</span>
+        <span class="tipo">{{item.type == 'fixed' ? 'Fija' : 'Variable'}}</span>
         <div class="acciones">
-          <button class="icon-btn">✏️</button>
+          <button class="icon-btn" data-bs-toggle="modal" data-bs-target="#modal-editar-tasa">✏️</button>
           <button class="icon-btn eliminar">🗑️</button>
         </div>
       </div>
 
       <div class="card-body">
-        <p><strong>Base Rate:</strong> 12% anual</p>
-        <p><strong>Spread:</strong> 1.5%</p>
-        <p><strong>Rango:</strong> 0% - 100%</p>
-        <p><strong>Desde:</strong> 2025-11-01</p>
-        <p><strong>Hasta:</strong> 2026-11-01</p>
+        <p><strong>Tasa Base:</strong> {{item.baseRate}} % anual</p>
+        <p><strong>Margen:</strong> {{item.spread}} %</p>
+        @if (item.type == 'variable') {
+          <p><strong>Rango:</strong> {{item.minRate}} % - {{item.maxRate}} %</p>
+          <p><strong>Volatilidad:</strong> {{item.volatility}} %</p>
+        }
+        <p><strong>Desde:</strong> {{item.startDate | date : 'dd/MM/yyyy'}}</p>
+        <p><strong>Hasta:</strong> {{item.endDate | date : 'dd/MM/yyyy'}}</p>
       </div>
     </div>
-
-    <!-- Tasa variable -->
-    <div class="card-tasa glass">
-      <div class="card-header">
-        <span class="tipo">Variable</span>
-        <div class="acciones">
-          <button class="icon-btn">✏️</button>
-          <button class="icon-btn eliminar">🗑️</button>
-        </div>
-      </div>
-
-      <div class="card-body">
-        <p><strong>Base Rate:</strong> 10%</p>
-        <p><strong>Spread:</strong> 1%</p>
-        <p><strong>Volatilidad:</strong> 0.5%</p>
-        <p><strong>Rango:</strong> 8% - 15%</p>
-        <p><strong>Desde:</strong> 2025-11-01</p>
-        <p><strong>Hasta:</strong> 2026-11-01</p>
-      </div>
-    </div>
-
+    }
   </div>
 </div>
+
+
+
+<!-- MODAL CREAR NUEVA TASA -->
+<div class="modal fade" id="modal-crear-tasa" data-bs-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content glass">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Crear nueva tasa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <label class="form-label">Tipo de tasa</label>
+        <select class="form-control">
+          <option value="fija">Fija</option>
+          <option value="variable">Variable</option>
+        </select>
+
+        <label class="form-label mt-3">Base Rate (%)</label>
+        <input type="number" class="form-control" placeholder="Ej: 12">
+
+        <label class="form-label mt-3">Volatilidad (%) (solo si es variable)</label>
+        <input type="number" class="form-control" placeholder="Ej: 0.5">
+
+        <label class="form-label mt-3">Rango (%)</label>
+        <input type="text" class="form-control" placeholder="Ej: 0% - 100%">
+
+        <label class="form-label mt-3">Desde</label>
+        <input type="date" class="form-control">
+
+        <label class="form-label mt-3">Hasta</label>
+        <input type="date" class="form-control">
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary">Crear</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- MODAL EDITAR TASA -->
+<div class="modal fade" id="modal-editar-tasa" data-bs-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content glass">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar tasa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <label class="form-label">Tipo de tasa</label>
+        <select class="form-control">
+          <option value="fija">Fija</option>
+          <option value="variable">Variable</option>
+        </select>
+
+        <label class="form-label mt-3">Base Rate (%)</label>
+        <input type="number" class="form-control">
+
+        <label class="form-label mt-3">Spread (%)</label>
+        <input type="number" class="form-control">
+
+        <label class="form-label mt-3">Volatilidad (%) (solo variable)</label>
+        <input type="number" class="form-control">
+
+        <label class="form-label mt-3">Rango (%)</label>
+        <input type="text" class="form-control">
+
+        <label class="form-label mt-3">Desde</label>
+        <input type="date" class="form-control">
+
+        <label class="form-label mt-3">Hasta</label>
+        <input type="date" class="form-control">
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary">Guardar</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

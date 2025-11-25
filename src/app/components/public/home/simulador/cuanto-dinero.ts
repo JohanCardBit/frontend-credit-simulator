@@ -161,6 +161,7 @@ export class CuantoDinero {
     this.mostrarPlanPagos = true;
     this.mostrarResultados = false;
     this.mostrarWelcome = false;
+
   }
 
 
@@ -255,7 +256,7 @@ export class CuantoDinero {
       y: {
         title: { display: true, text: 'Monto ($)', font: { size: 14, weight: 'bold' } },
         ticks: {
-          callback: (value) => `$${value.toLocaleString()}`
+          callback: (value: any) => `$${value.toLocaleString()}`
         },
         grid: { color: 'rgba(0,0,0,0.05)' }
       }

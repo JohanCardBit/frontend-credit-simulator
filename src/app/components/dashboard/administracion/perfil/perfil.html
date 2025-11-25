@@ -1,90 +1,124 @@
 <div class="perfil-container">
 
   <!-- TARJETA 1 — Nombre / Apellido / Rol -->
-  <div class="card glass">
+  <div class="card glass p-4">
     <h3>Información Personal</h3>
 
-    <p><strong>Nombre:</strong> Andres</p>
-    <p><strong>Apellido:</strong> Cardenas</p>
-    <p><strong>Rol:</strong> Administrador</p>
+    <p><strong>Nombre:</strong> {{user?.name}}</p>
+    <p><strong>Apellido:</strong> {{user?.lastName}}</p>
+    <p><strong>Rol:</strong> {{user?.role}}</p>
 
-    <button class="btn" onclick="openModal('modal-personal')">Modificar</button>
+    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-personal">
+      Modificar
+    </button>
   </div>
 
   <!-- TARJETA 2 — Email -->
-  <div class="card glass">
+  <div class="card glass p-4">
     <h3>Email</h3>
 
-    <p><strong>Email:</strong> andres@gmail.com</p>
+    <p><strong>Email:</strong> {{user?.email}}</p>
 
-    <button class="btn" onclick="openModal('modal-email')">Modificar</button>
+    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-email">
+      Modificar
+    </button>
   </div>
 
   <!-- TARJETA 3 — Password -->
-  <div class="card glass">
+  <div class="card glass p-4">
     <h3>Contraseña</h3>
 
     <p>Cambia tu contraseña de forma segura.</p>
 
-    <button class="btn" onclick="openModal('modal-password')">Modificar</button>
+    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-password">
+      Modificar
+    </button>
   </div>
 
 </div>
 
 
 
-<!-- ========== MODAL 1: Datos personales ========== -->
-<div id="modal-personal" class="modal">
-  <div class="modal-content glass">
-    <h3>Modificar Información Personal</h3>
+<div class="modal fade" id="modal-personal" data-bs-backdrop="false">
 
-    <label>Nombre</label>
-    <input type="text" placeholder="Nuevo nombre">
+  <div class="modal-dialog">
+    <div class="modal-content glass">
 
-    <label>Apellido</label>
-    <input type="text" placeholder="Nuevo apellido">
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar Información Personal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
 
-    <label>Rol</label>
-    <input type="text" placeholder="Nuevo rol">
+      <div class="modal-body">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" placeholder="Nuevo nombre">
 
-    <button class="btn full">Guardar Cambios</button>
-    <button class="close-btn" onclick="closeModal('modal-personal')">Cerrar</button>
+        <label class="form-label mt-3">Apellido</label>
+        <input type="text" class="form-control" placeholder="Nuevo apellido">
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary">Guardar Cambios</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
   </div>
 </div>
 
 
 
-<!-- ========== MODAL 2: Email ========== -->
-<div id="modal-email" class="modal">
-  <div class="modal-content glass">
-    <h3>Modificar Email</h3>
+<div class="modal fade" id="modal-email" data-bs-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content glass">
 
-    <label>Email</label>
-    <input type="email" placeholder="Nuevo email">
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar Email</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
 
-    <button class="btn full">Guardar Cambios</button>
-    <button class="close-btn" onclick="closeModal('modal-email')">Cerrar</button>
+      <div class="modal-body">
+        <label class="form-label">Nuevo Email</label>
+        <input type="email" class="form-control" placeholder="Nuevo email">
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary">Guardar Cambios</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
   </div>
 </div>
 
 
+<div class="modal fade" id="modal-password" data-bs-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content glass">
 
-<!-- ========== MODAL 3: Password ========== -->
-<div id="modal-password" class="modal">
-  <div class="modal-content glass">
-    <h3>Cambiar Contraseña</h3>
+      <div class="modal-header">
+        <h5 class="modal-title">Cambiar Contraseña</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
 
-    <label>Contraseña Actual</label>
-    <input type="password" placeholder="Contraseña actual">
+      <div class="modal-body">
 
-    <label>Nueva Contraseña</label>
-    <input type="password" placeholder="Nueva contraseña">
+        <label class="form-label">Contraseña Actual</label>
+        <input type="password" class="form-control" placeholder="Contraseña actual">
 
-    <label>Confirmar Contraseña</label>
-    <input type="password" placeholder="Confirmar nueva contraseña">
+        <label class="form-label mt-3">Nueva Contraseña</label>
+        <input type="password" class="form-control" placeholder="Nueva contraseña">
 
-    <button class="btn full">Guardar Cambios</button>
-    <button class="close-btn" onclick="closeModal('modal-password')">Cerrar</button>
+        <label class="form-label mt-3">Confirmar Contraseña</label>
+        <input type="password" class="form-control" placeholder="Confirmar nueva contraseña">
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary">Guardar Cambios</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
   </div>
 </div>
-

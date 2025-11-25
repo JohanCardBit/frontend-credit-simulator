@@ -61,7 +61,8 @@
   display: none;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(20px);
+
 }
 
 .modal.show {
@@ -72,9 +73,9 @@
   width: 420px;
   padding: 30px;
   border-radius: 18px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(1, 23, 60, 0.66);
   border: 1px solid rgba(255,255,255,0.25);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(50px);
   box-shadow: 0 8px 40px rgba(0,0,0,0.3);
   color: #fff;
 }
@@ -109,3 +110,5 @@
   cursor: pointer;
   display: block;
 }
+
+

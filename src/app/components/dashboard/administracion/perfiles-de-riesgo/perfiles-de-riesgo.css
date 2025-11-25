@@ -72,15 +72,15 @@ body {
   font-weight: bold;
 }
 
-.categoria-a {
+.categoria-A {
   color: #99ffcc;
 }
 
-.categoria-b {
+.categoria-B {
   color: #ffe680;
 }
 
-.categoria-c {
+.categoria-C {
   color: #ff8080;
 }
 
@@ -114,4 +114,111 @@ body {
   margin-top: 10px;
   opacity: 0.9;
   line-height: 1.4;
+}
+
+
+
+
+
+
+
+
+
+/* Oculta modales por defecto */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Cuando el checkbox está marcato -> mostrar modal */
+.modal-toggle:checked + .modal {
+  display: flex;
+}
+
+/* Overlay clickeable */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+/* Contenedor del modal */
+.modal-content.glass {
+  position: relative;
+  padding: 30px;
+  border-radius: 18px;
+  background: rgba(1, 23, 60, 0.66);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(50px);
+  color: #fff;
+  z-index: 2;
+  width: 650px;
+}
+
+/* FORM 2 COLUMNAS */
+.form-riesgo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.form-riesgo label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-riesgo input,
+.form-riesgo textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: none;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+/* Botones */
+.acciones-modal {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-guardar {
+  background: #00c853;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-cerrar {
+  background: rgba(255,255,255,0.2);
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Botones externos de prueba */
+.btn-crear,
+.btn-editar {
+  padding: 10px 18px;
+  background: #005ff9;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 20px;
 }
