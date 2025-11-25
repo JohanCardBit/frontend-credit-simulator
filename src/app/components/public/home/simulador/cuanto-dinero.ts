@@ -262,21 +262,6 @@ export class CuantoDinero {
     }
   };
 
-  // Método para agregar degradado dinámico
-  ngAfterViewInit() {
-    const ctx = this.chart.chart?.ctx;
-    if (!ctx) return;
-
-    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(0,123,255,0.5)');
-    gradient.addColorStop(1, 'rgba(0,123,255,0)');
-
-    if (this.chartData.datasets[0]) {
-      this.chartData.datasets[0].backgroundColor = gradient;
-      this.chart.update();
-    }
-  }
-
   // Tipo de gráfico
   chartType: ChartType = 'line';
 
