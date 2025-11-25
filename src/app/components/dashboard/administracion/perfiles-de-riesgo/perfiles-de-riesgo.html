@@ -3,7 +3,7 @@
   <!-- Encabezado -->
   <div class="header-riesgo">
     <h2>Perfiles de riesgo</h2>
-    <label class="btn-crear" for="modalCrear">+ Crear perfil</label>
+    <label (click)="limpiarModal()" class="btn-crear" for="modalCrear">+ Crear perfil</label>
   </div>
 
   <!-- Contenedor de tarjetas -->
@@ -14,8 +14,8 @@
       <div class="card-header">
         <span class="categoria categoria-{{item.category}}">Categoría {{item.category}}</span>
         <div class="acciones">
-          <button class="icon-btn" for="modalEditar">✏️</button>
-          <button class="icon-btn eliminar">🗑️</button>
+          <label (click)="verCategoria(item._id)" class="icon-btn" for="modalEditar">✏️</label>
+          <button (click)="eliminarPerfil(item._id)" class="icon-btn eliminar">🗑️</button>
         </div>
       </div>
 
@@ -40,34 +40,39 @@
 <div class="modal">
   <label for="modalCrear" class="modal-overlay"></label>
 
-  <div class="modal-content glass modal-riesgo">
+  <div [formGroup]="perfilForm" class="modal-content glass modal-riesgo">
     <h3>Crear perfil de riesgo</h3>
 
     <div class="form-riesgo">
 
       <div class="col">
         <label>Categoría</label>
-        <input type="text" placeholder="Ej: A">
+        <select formControlName="category" class="form-control">
+          <option value="">Seleccione...</option>
+          <option value="A">A - Riesgo Bajo</option>
+          <option value="B">B - Riesgo Medio</option>
+          <option value="C">C - Riesgo Alto</option>
+        </select>
 
         <label>Puntaje mínimo</label>
-        <input type="number" placeholder="Ej: 600">
+        <input formControlName="minScore" type="number" placeholder="Ej: 600">
 
         <label>Puntaje máximo</label>
-        <input type="number" placeholder="Ej: 749">
+        <input formControlName="maxScore" type="number" placeholder="Ej: 749">
       </div>
 
       <div class="col">
         <label>Tasa de interés (%)</label>
-        <input type="number" placeholder="Ej: 10">
+        <input formControlName="interestRate" type="number" placeholder="Ej: 10">
 
         <label>Descripción</label>
-        <textarea rows="5" placeholder="Descripción del perfil..."></textarea>
+        <textarea formControlName="description" rows="5" placeholder="Descripción del perfil..."></textarea>
       </div>
 
     </div>
 
     <div class="acciones-modal">
-      <button class="btn-guardar">Guardar</button>
+      <button (click)="crearPerfilDeRiesgo()" class="btn-guardar">Guardar</button>
       <label for="modalCrear" class="btn-cerrar">Cerrar</label>
     </div>
   </div>
@@ -82,38 +87,35 @@
 <div class="modal">
   <label for="modalEditar" class="modal-overlay"></label>
 
-  <div class="modal-content glass modal-riesgo">
-    <h3>Editar perfil de riesgo</h3>
+  <div [formGroup]="perfilForm" class="modal-content glass modal-riesgo">
+    <h3>Editar perfil de riesgo {{perfilForm.get('category')?.value}}</h3>
 
     <div class="form-riesgo">
 
       <div class="col">
-        <label>Categoría</label>
-        <input type="text" value="A">
 
         <label>Puntaje mínimo</label>
-        <input type="number" value="750">
+        <input formControlName="minScore" type="number" value="750">
 
         <label>Puntaje máximo</label>
-        <input type="number" value="900">
+        <input formControlName="maxScore" type="number" value="900">
+
+          <label>Tasa de interés (%)</label>
+        <input formControlName="interestRate" type="number" value="5">
       </div>
 
       <div class="col">
-        <label>Tasa de interés (%)</label>
-        <input type="number" value="5">
+
 
         <label>Descripción</label>
-        <textarea rows="5">Riesgo bajo, excelente historial crediticio.</textarea>
+        <textarea formControlName="description" rows="5">Riesgo bajo, excelente historial crediticio.</textarea>
       </div>
 
     </div>
 
     <div class="acciones-modal">
-      <button class="btn-guardar">Guardar cambios</button>
+      <button (click)="actualizarPerfil()" class="btn-guardar">Guardar cambios</button>
       <label for="modalEditar" class="btn-cerrar">Cerrar</label>
     </div>
   </div>
 </div>
-
-
-

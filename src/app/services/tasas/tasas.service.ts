@@ -29,4 +29,24 @@ export class TasasService {
     const headers = this.header();
     return this.http.get(`${this.apiUrl}/interest_rates`, { headers });
   }
+
+  createRates(data: any){
+    const headers = this.header();
+    return this.http.post(`${this.apiUrl}/interest_rates/create`, data, { headers });
+  }
+
+  getOneRate(idRate: any){
+    const headers = this.header();
+    return this.http.get(`${this.apiUrl}/interest_rates/${idRate}`, { headers });
+  }
+
+  updateRate(idRate: any, data: any){
+    const headers = this.header();
+    return this.http.put(`${this.apiUrl}/interest_rates/update/${idRate}`, data, { headers });
+  }
+
+  deleteRate(idRate: any){
+    const headers = this.header();
+    return this.http.delete(`${this.apiUrl}/interest_rates/delete/${idRate}`, { headers });
+  }
 }

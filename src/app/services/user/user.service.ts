@@ -30,5 +30,14 @@ export class UserService {
     return this.http.get(`${this.apiUrl}/users/${idUser}`, { headers });
   }
 
+  getUserOne(idUser: any) {
+    const headers = this.header();
+    return this.http.get(`${this.apiUrl}/users/${idUser}`, { headers });
+  }
+
+  updateUser(idUser: any, data: any) {
+    const headers = this.header();
+    return this.http.put(`${this.apiUrl}/users/update/${idUser}`, data, { headers });
+  }
 
 }

@@ -8,7 +8,7 @@
     <p><strong>Apellido:</strong> {{user?.lastName}}</p>
     <p><strong>Rol:</strong> {{user?.role}}</p>
 
-    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-personal">
+    <button (click)="infoForm()" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-personal">
       Modificar
     </button>
   </div>
@@ -19,7 +19,7 @@
 
     <p><strong>Email:</strong> {{user?.email}}</p>
 
-    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-email">
+    <button (click)="infoForm()" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-email">
       Modificar
     </button>
   </div>
@@ -42,7 +42,7 @@
 <div class="modal fade" id="modal-personal" data-bs-backdrop="false">
 
   <div class="modal-dialog">
-    <div class="modal-content glass">
+    <div [formGroup]="formUser" class="modal-content glass">
 
       <div class="modal-header">
         <h5 class="modal-title">Modificar Información Personal</h5>
@@ -51,14 +51,14 @@
 
       <div class="modal-body">
         <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" placeholder="Nuevo nombre">
+        <input formControlName="name" type="text" class="form-control" placeholder="Nuevo nombre">
 
         <label class="form-label mt-3">Apellido</label>
-        <input type="text" class="form-control" placeholder="Nuevo apellido">
+        <input formControlName="lastName" type="text" class="form-control" placeholder="Nuevo apellido">
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-primary">Guardar Cambios</button>
+        <button (click)="actualizarUser()" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
 
@@ -70,7 +70,7 @@
 
 <div class="modal fade" id="modal-email" data-bs-backdrop="false">
   <div class="modal-dialog">
-    <div class="modal-content glass">
+    <div [formGroup]="formUser"  class="modal-content glass">
 
       <div class="modal-header">
         <h5 class="modal-title">Modificar Email</h5>
@@ -79,11 +79,11 @@
 
       <div class="modal-body">
         <label class="form-label">Nuevo Email</label>
-        <input type="email" class="form-control" placeholder="Nuevo email">
+        <input formControlName = "email" type="email" class="form-control" placeholder="Nuevo email">
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-primary">Guardar Cambios</button>
+        <button (click)="actualizarUser()" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
 
@@ -94,7 +94,7 @@
 
 <div class="modal fade" id="modal-password" data-bs-backdrop="false">
   <div class="modal-dialog">
-    <div class="modal-content glass">
+    <div [formGroup]="formPassword" class="modal-content glass">
 
       <div class="modal-header">
         <h5 class="modal-title">Cambiar Contraseña</h5>
@@ -104,18 +104,18 @@
       <div class="modal-body">
 
         <label class="form-label">Contraseña Actual</label>
-        <input type="password" class="form-control" placeholder="Contraseña actual">
+        <input formControlName="passwordActual" type="password" class="form-control" placeholder="Contraseña actual">
 
         <label class="form-label mt-3">Nueva Contraseña</label>
-        <input type="password" class="form-control" placeholder="Nueva contraseña">
+        <input formControlName="passwordNueva" type="password" class="form-control" placeholder="Nueva contraseña">
 
         <label class="form-label mt-3">Confirmar Contraseña</label>
-        <input type="password" class="form-control" placeholder="Confirmar nueva contraseña">
+        <input formControlName="passwordConfirmar" type="password" class="form-control" placeholder="Confirmar nueva contraseña">
 
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-primary">Guardar Cambios</button>
+        <button (click)="updatePassword()" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
 
