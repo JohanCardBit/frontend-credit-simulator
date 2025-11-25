@@ -5,7 +5,7 @@ import { SimuladorService } from '../../../../services/simulador/simulador.servi
 import { DecimalPipe } from '@angular/common';
 import { FlashyService } from '../../../../services/flashy/flashy.service';
 import { RouterLink } from "@angular/router";
-import { BaseChartDirective, } from 'ng2-charts';
+import { BaseChartDirective, NgChartsModule, } from 'ng2-charts';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, Filler } from 'chart.js';
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, Filler);
 
@@ -13,7 +13,7 @@ Chart.register(LineController, LineElement, PointElement, LinearScale, Title, Ca
 @Component({
   selector: 'app-cuanto-dinero',
   standalone: true,
-  imports: [ReactiveFormsModule, DecimalPipe, RouterLink, BaseChartDirective],
+  imports: [ReactiveFormsModule, DecimalPipe, RouterLink, NgChartsModule],
   templateUrl: './cuanto-dinero.html',
   styleUrl: './cuanto-dinero.css',
 })
