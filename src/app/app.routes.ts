@@ -10,14 +10,16 @@ import { Reglas } from './components/dashboard/administracion/reglas/reglas';
 import { Home } from './components/public/home/home';
 import { Inicio } from './components/public/home/inicio/inicio';
 import { Nosotros } from './components/public/home/nosotros/nosotros';
+import { Register } from './components/public/register/register';
 
 
 const titulosRutas = {
   inicio: 'CrediTest | Inicio',
   nosotros: 'CrediTest | Nosotros',
   login: 'CrediTest | Login',
+  register: 'CrediTest | Registrarse',
   simulador: 'CrediTest | Simula tu credito',
-  cuantoDineroNecesitas: 'CrediTest | ¿Cuánto dinero necesitas?',
+  cuantoDineroNecesitas: 'CrediTest | Simulador',
   administacion: 'CrediTest | Administración',
   PerfilAdmin: 'CrediTest | Perfil Administracion',
   tasas: 'CrediTest | Tasas de interés',
@@ -30,9 +32,9 @@ const rutasPubilcas: Routes = [
 
   {
     path: 'home', component: Home, children: [
-      { path: 'inicio', component: Inicio, title: titulosRutas.inicio, outlet: 'home' },
-      { path: 'simulador', component: CuantoDinero, title: titulosRutas.cuantoDineroNecesitas, outlet: 'home' },
-      { path: 'nosotros', component: Nosotros, title: titulosRutas.nosotros, outlet: 'home' }
+      { path: 'inicio', component: Inicio, data: { title: titulosRutas.inicio }, outlet: 'home' },
+      { path: 'simulador', component: CuantoDinero, data: { title: titulosRutas.cuantoDineroNecesitas }, outlet: 'home' },
+      { path: 'nosotros', component: Nosotros, data: { title: titulosRutas.nosotros }, outlet: 'home' }
     ]
   },
 
@@ -40,6 +42,7 @@ const rutasPubilcas: Routes = [
 
 
   { path: 'login', component: Login, title: titulosRutas.login },
+  { path: 'register', component: Register, title: titulosRutas.register },
   {
     path: 'dashboard', component: PasosSimulador, title: titulosRutas.simulador, children: [
 
