@@ -1,14 +1,13 @@
-.body {
-  margin: 0;
+.layout {
+  background: var(--background-main);
+  color: var(--text-main);
+
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* ocupa toda la pantalla */
 }
 
-.nav-link{
-  cursor: pointer;
-}
+/* -------------------- NAVBAR -------------------- */
 .navbar {
   width: 100%;
   padding: 1rem 2.5rem;
@@ -94,53 +93,48 @@
 }
 
 
-.w {
-  width: 150px;
-}
-
-
-.app-main {
+router-outlet[name="home"] {
   flex: 1;
-  width: 100%;
-  /* max-width: 1300px; */
-  margin: 0 auto;
-  padding: clamp(1.5rem, 3vw, 3rem) 1rem;
-  background: var(--background-main);
-  /* border: 5px solid rgb(75, 91, 238); */
+  display: block;
 }
 
-
-.app-footer {
+/* -------------------- FOOTER -------------------- */
+.footer {
+  margin-top: 0;
   background: var(--footer-bg);
-  padding: 1rem 1rem;
-  text-align: center;
-  border-top: 1px solid var(--border-color);
+  padding: 3rem 2rem 1rem;
   box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
 
-  p {
-    color: var(--text-secondary);
-    font-size: clamp(0.85rem, 1.6vw, 1rem);
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
   }
-}
 
-/* RESPONSIVE */
-@media (max-width: 480px) {
-  .app-header {
-    padding: 1.3rem 1rem;
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
 
-    .header-content {
-      .logo {
-        width: 90px;
-      }
+    a {
+      color: var(--text-main);
+      text-decoration: none;
+      transition: var(--transition-fast);
 
-      .subtitle {
-        font-size: 0.9rem;
+      &:hover {
+        color: var(--primary-300);
       }
     }
   }
 
-  .app-footer p {
-    font-size: 0.85rem;
+  .footer-bottom {
+    text-align: center;
+
+    font-size: 0.9rem;
+    color: var(--text-secondary);
   }
 }
+
+
 

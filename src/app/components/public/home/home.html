@@ -1,0 +1,50 @@
+<div class="layout">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand logo" href="#">
+        <img src="logo.png" alt="Logo" width="150" height="30">
+      </a>
+
+      <!-- Botón hamburguesa -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapse con links y botón -->
+      <div class="collapse navbar-collapse ms" id="navbarNav">
+        <ul class="navbar-nav mx-auto nav-links">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="[{ outlets: { home: ['inicio'] } }]" routerLinkActive="active">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="[{ outlets: { home: ['simulador'] } }]" routerLinkActive="active">Simulación</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="[{ outlets: { home: ['nosotros'] } }]" routerLinkActive="active">Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" routerLinkActive="active">Ayuda</a>
+          </li>
+        </ul>
+
+        <!-- Botón al final a la derecha en pantallas grandes -->
+        <a routerLink="/login" class="btn nav-btn ms-lg-auto mt-2 mt-lg-0">Iniciar Sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <router-outlet name="home"></router-outlet>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <div class="footer-bottom">
+      CrediTest © 2025 — Todos los derechos reservados
+    </div>
+  </footer>
+
+</div>

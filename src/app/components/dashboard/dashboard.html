@@ -1,36 +1,44 @@
 <div class="body">
-<header class="app-header">
-  <div class="header-content">
-    <img src="logo.png" alt="CrediTest Logo" class="logo" />
-    <span class="subtitle">CrediTest — Simula tu crédito</span>
-  </div>
-</header>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand logo" href="#">
+      <img src="logo.png" alt="Logo" width="150" height="30">
+    </a>
 
-<main class="app-main">
-  <div class="btn-prev-exit">
-    <div class="prev">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <title>Atrás</title>
-        <path d="M19 12H5" />
-        <path d="M11 18l-6-6 6-6" />
-      </svg>
-      Atrás
-    </div>
-    <div class="exit">Salir
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
-        fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <title>Salir</title>
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-        <path d="M16 17l5-5-5-5" />
-        <path d="M21 12H9" />
-      </svg>
+    <!-- Botón hamburguesa -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapse con links y botón -->
+    <div class="collapse navbar-collapse ms" id="navbarNav">
+      <ul class="navbar-nav mx-auto nav-links">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/', 'home', { outlets: { home: ['inicio'] } }]" routerLinkActive="active">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard/simulador" routerLinkActive="active">Simulación</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/', 'home', { outlets: { home: ['nosotros'] } }]" routerLinkActive="active">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLinkActive="active">Ayuda</a>
+        </li>
+      </ul>
+
+      <!-- Botón al final a la derecha en pantallas grandes -->
+      <a routerLink="/login" class="btn nav-btn ms-lg-auto mt-2 mt-lg-0">Iniciar Sesión</a>
     </div>
   </div>
-  <router-outlet></router-outlet>
-</main>
+</nav>
 
-<footer class="app-footer">
-  <p>CrediTest © {{ currentYear }} — Todos los derechos reservados</p>
-</footer>
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="app-footer">
+    <p>CrediTest © {{ currentYear }} — Todos los derechos reservados</p>
+  </footer>
 </div>

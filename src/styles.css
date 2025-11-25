@@ -2,7 +2,9 @@
   font-family: "Play", sans-serif;
   margin: 0;
   box-sizing: border-box;
+  /* overflow: hidden; */
 }
+
 
 :root {
   /* PALETA PRINCIPAL (AZULES) */
