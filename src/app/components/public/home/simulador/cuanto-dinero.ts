@@ -1,9 +1,9 @@
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { Component, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { SimuladorService } from '../../../services/simulador/simulador.service';
+import { SimuladorService } from '../../../../services/simulador/simulador.service';
 import { DecimalPipe } from '@angular/common';
-import { FlashyService } from '../../../services/flashy/flashy.service';
+import { FlashyService } from '../../../../services/flashy/flashy.service';
 import { RouterLink } from "@angular/router";
 import { BaseChartDirective, } from 'ng2-charts';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, Filler } from 'chart.js';

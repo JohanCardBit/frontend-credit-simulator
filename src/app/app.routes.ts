@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CuantoDinero } from './components/dashboard/simulador/cuanto-dinero';
+import { CuantoDinero } from './components/public/home/simulador/cuanto-dinero';
 import { PasosSimulador } from './components/dashboard/dashboard';
 import { Login } from './components/public/login/login';
 import { Administracion } from './components/dashboard/administracion/administracion';
@@ -31,6 +31,7 @@ const rutasPubilcas: Routes = [
   {
     path: 'home', component: Home, children: [
       { path: 'inicio', component: Inicio, title: titulosRutas.inicio, outlet: 'home' },
+      { path: 'simulador', component: CuantoDinero, title: titulosRutas.cuantoDineroNecesitas, outlet: 'home' },
       { path: 'nosotros', component: Nosotros, title: titulosRutas.nosotros, outlet: 'home' }
     ]
   },
@@ -41,7 +42,6 @@ const rutasPubilcas: Routes = [
   { path: 'login', component: Login, title: titulosRutas.login },
   {
     path: 'dashboard', component: PasosSimulador, title: titulosRutas.simulador, children: [
-      { path: 'simulador', component: CuantoDinero, title: titulosRutas.cuantoDineroNecesitas },
 
       {
         path: 'admin', component: Administracion, title: titulosRutas.administacion, children: [
