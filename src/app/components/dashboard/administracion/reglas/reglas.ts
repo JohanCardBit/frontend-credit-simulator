@@ -104,6 +104,7 @@ export class Reglas {
           next: (data: any) => {
             this.getReglas();
             this.flashyService.success('Regla creada con éxito', { duration: 5000 });
+            document.getElementById('cerrarModalCrear')?.click();
           },
           error: (error: any) => {
             console.log(error)
@@ -121,7 +122,7 @@ export class Reglas {
     const field = this.ruleFields.find(f => f.key === key);
     return field ? field.label : key;
   }
-
+  idRegla!: any
   verRegla(idRegla: any) {
     this.conditions.clear();
     this.reglasService.getOneBusinessRule(idRegla).subscribe({
@@ -132,6 +133,7 @@ export class Reglas {
         this.rulesForm.patchValue(data)
         this.rulesForm.get('conditions')?.patchValue(data.condition)
         console.log(data)
+        this.idRegla = idRegla
 
       },
       error: (error: any) => {
@@ -197,6 +199,39 @@ export class Reglas {
       },
       onCancel: () => {
         this.flashyService.info('Recuperación cancelada.', { duration: 5000 });
+      }
+    });
+  }
+
+  actualizarRegla() {
+    const payload = {
+      name: this.rulesForm.value.name,
+      type: this.rulesForm.value.type,
+      condition: this.conditions.value,
+      description: this.rulesForm.value.description,
+      riskCategory: this.rulesForm.value.riskCategory,
+      interestRateAdjustment: this.rulesForm.value.interestRateAdjustment
+    };
+
+    this.flashyService.confirm('¿Estas seguro de actualizar esta regla?', {
+      position: 'top-center',
+      animation: 'bounce',
+      onConfirm: () => {
+        this.reglasService.updateBusinessRule(this.idRegla, payload).subscribe({
+          next: (data: any) => {
+            this.getReglas();
+            console.log(data);
+            this.flashyService.success(`${data.msj}`, { duration: 5000 });
+            document.getElementById('cerrarModalEditar')?.click();
+          },
+          error: (error: any) => {
+            console.log(error)
+            this.flashyService.error(`${error.error.msj}`, { duration: 5000 });
+          }
+        });
+      },
+      onCancel: () => {
+        this.flashyService.info('Actualización cancelada.', { duration: 5000 });
       }
     });
   }

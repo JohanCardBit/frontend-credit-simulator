@@ -93,6 +93,7 @@ export class Tasas {
         duration: 5000
       });
       console.log(res);
+      document.getElementById('cerrarModalCrearTasa')?.click();
     },
     error: (error: any) => {
       console.log(error);
@@ -157,6 +158,7 @@ export class Tasas {
         duration: 5000
       });
       console.log(res);
+      document.getElementById('cerrarModalEditarTasa')?.click();
     },
     error: (error: any) => {
       console.log(error);

@@ -58,6 +58,7 @@ export class PerfilesDeRiesgo {
                 duration: 5000
               })
             console.log(res);
+            document.getElementById('modalCerrar')?.click()
           },
           error: (error: any) => {
             this.flashyService.error(`${error.error.msj}`, {
@@ -108,6 +109,7 @@ export class PerfilesDeRiesgo {
               }
             )
             console.log(res);
+            document.getElementById('modalEditarCerrar')?.click()
           },
           error: (error: any) => {
             this.flashyService.error(`${error.error.msj}`, {

@@ -91,7 +91,7 @@
 
 
 
-<div class="modal">
+<!-- <div class="modal">
   <label for="modalCrearRegla" class="modal-overlay"></label>
 
   <div class="modal-content glass modal-regla">
@@ -139,7 +139,7 @@
       <label for="modalCrearRegla" class="btn-cerrar">Cerrar</label>
     </div>
   </div>
-</div>
+</div> -->
 <!-- ========== MODAL CREAR REGLA ========== -->
 <input type="checkbox" id="modalCrearRegla" class="modal-toggle" hidden>
 
@@ -246,7 +246,7 @@
 
     <div class="acciones-modal">
       <button (click)="crearRegla()" class="btn-guardar">Crear regla</button>
-      <label for="modalCrearRegla" class="btn-cerrar">Cerrar</label>
+      <label id="cerrarModalCrear" for="modalCrearRegla" class="btn-cerrar">Cerrar</label>
     </div>
   </div>
 </div>
@@ -358,8 +358,8 @@
     </div>
 
     <div class="acciones-modal">
-      <button class="btn-guardar">Modificar regla</button>
-      <label for="modalEditarRegla" class="btn-cerrar">Cerrar</label>
+      <button (click)="actualizarRegla()" class="btn-guardar">Modificar regla</button>
+      <label id="cerrarModalEditar" for="modalEditarRegla" class="btn-cerrar">Cerrar</label>
     </div>
   </div>
 </div>

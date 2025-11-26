@@ -5,7 +5,6 @@ import { SimuladorService } from '../../../../services/simulador/simulador.servi
 import { DecimalPipe } from '@angular/common';
 import { FlashyService } from '../../../../services/flashy/flashy.service';
 import { RouterLink } from "@angular/router";
-import { BaseChartDirective, } from 'ng2-charts';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, Filler } from 'chart.js';
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, Filler);
 
@@ -13,7 +12,7 @@ Chart.register(LineController, LineElement, PointElement, LinearScale, Title, Ca
 @Component({
   selector: 'app-cuanto-dinero',
   standalone: true,
-  imports: [ReactiveFormsModule, DecimalPipe, RouterLink, BaseChartDirective],
+  imports: [ReactiveFormsModule, DecimalPipe, RouterLink],
   templateUrl: './cuanto-dinero.html',
   styleUrl: './cuanto-dinero.css',
 })
@@ -161,6 +160,8 @@ export class CuantoDinero {
     this.mostrarPlanPagos = true;
     this.mostrarResultados = false;
     this.mostrarWelcome = false;
+    setTimeout(() => this.renderChart(), 50);
+
 
   }
 
@@ -191,7 +192,24 @@ export class CuantoDinero {
 
 
 
-  @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
+  @ViewChild('chartCanvas') chartRef: any;
+  chart!: Chart;
+
+
+  private renderChart() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
+    const ctx = this.chartRef.nativeElement.getContext('2d');
+
+    this.chart = new Chart(ctx, {
+      type: 'line',
+      data: this.chartData,
+      options: this.chartOptions
+    });
+  }
+
 
   // Datos del gráfico
   chartData: ChartConfiguration<'line'>['data'] = {
@@ -262,6 +280,7 @@ export class CuantoDinero {
       }
     }
   };
+
 
 
   // Tipo de gráfico

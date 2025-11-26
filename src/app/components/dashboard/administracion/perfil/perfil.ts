@@ -82,8 +82,8 @@ export class Perfil {
             this.flashyService.success('Perfil modificado con exito',
               {
                 duration: 5000
-            })
-
+              })
+            document.getElementById('cerrarModalEmail')?.click();
           },
           error: (error: any) => {
             console.log(error);
@@ -106,25 +106,42 @@ export class Perfil {
       return;
     }
 
-    const body = {
-      password: this.formPassword.value.passwordNueva,
-      oldPassword: this.formPassword.value.passwordActual
-    }
+    this.flashyService.confirm('¿Estas seguro de modificar tu contraseña?', {
+      position: 'top-center',
+      animation: 'bounce',
+      onConfirm: () => {
+        const body = {
+          password: this.formPassword.value.passwordNueva,
+          oldPassword: this.formPassword.value.passwordActual
+        }
 
-    this.userService.updateUser(this.idUser, body).subscribe({
-      next: (dataApi: any) => {
-        this.flashyService.success('Contraseña actualizada con exito',
-          {
-            duration: 5000
-        });
-        this.formPassword.reset();
+        this.userService.updateUser(this.idUser, body).subscribe({
+          next: (dataApi: any) => {
+            this.flashyService.success('Contraseña actualizada con exito',
+              {
+                duration: 5000
+              });
+            this.formPassword.reset();
+            document.getElementById('cerrarModalPassword')?.click();
+          },
+          error: (error: any) => {
+            console.log('Error al actualizar contraseña', error)
+            this.flashyService.error('Error al actualizar la contraseña. Por favor, verifique su contraseña actual e intente nuevamente.', {
+              duration: 5000
+            });
+          }
+        })
       },
-      error: (error: any) => {
-        console.log('Error al actualizar contraseña', error)
-        this.flashyService.error('Error al actualizar la contraseña. Por favor, verifique su contraseña actual e intente nuevamente.', {
+      onCancel: () => {
+        this.flashyService.info('Modificación cancelada.', {
           duration: 5000
         });
       }
     })
+
+  }
+
+  limpiarFormPassword() {
+    this.formPassword.reset();
   }
 }

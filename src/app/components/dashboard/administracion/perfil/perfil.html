@@ -30,7 +30,7 @@
 
     <p>Cambia tu contraseña de forma segura.</p>
 
-    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-password">
+    <button (click)="limpiarFormPassword()" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-password">
       Modificar
     </button>
   </div>
@@ -46,7 +46,7 @@
 
       <div class="modal-header">
         <h5 class="modal-title">Modificar Información Personal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button id="cerrarModalPersonal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body">
@@ -58,7 +58,7 @@
       </div>
 
       <div class="modal-footer">
-        <button (click)="actualizarUser()" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
+        <button (click)="actualizarUser()" class="btn btn-primary">Guardar Cambios</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
 
@@ -74,7 +74,7 @@
 
       <div class="modal-header">
         <h5 class="modal-title">Modificar Email</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button id="cerrarModalEmail" type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body">
@@ -83,7 +83,7 @@
       </div>
 
       <div class="modal-footer">
-        <button (click)="actualizarUser()" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
+        <button (click)="actualizarUser()" class="btn btn-primary">Guardar Cambios</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
 
@@ -98,7 +98,7 @@
 
       <div class="modal-header">
         <h5 class="modal-title">Cambiar Contraseña</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button id="cerrarModalPassword" type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body">
@@ -115,7 +115,7 @@
       </div>
 
       <div class="modal-footer">
-        <button (click)="updatePassword()" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
+        <button (click)="updatePassword()" class="btn btn-primary">Guardar Cambios</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
 

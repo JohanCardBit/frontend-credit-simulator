@@ -59,7 +59,7 @@
 
       <div class="modal-header">
         <h5 class="modal-title">Crear nueva tasa</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button id="cerrarModalCrearTasa" type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body" [formGroup]="tasasForm">
@@ -102,7 +102,7 @@
 
 
       <div class="modal-footer">
-        <button (click)="createRates()" class="btn btn-primary" data-bs-dismiss="modal">Crear</button>
+        <button (click)="createRates()" class="btn btn-primary">Crear</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
 
@@ -119,7 +119,7 @@
 
       <div class="modal-header">
         <h5 class="modal-title">Modificar tasa {{isVariable == true ? 'Variable' : 'Fija'}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button id="cerrarModalEditarTasa" type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body" [formGroup]="tasasForm">
@@ -154,7 +154,7 @@
       </div>
 
       <div class="modal-footer">
-        <button (click)="actualizarTasa()" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+        <button (click)="actualizarTasa()" class="btn btn-primary">Guardar</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
 
