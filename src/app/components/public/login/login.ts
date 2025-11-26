@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { LoginService } from '../../../services/auth/login/login.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { TokenService } from '../../../services/auth/token/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +14,12 @@ import { CookieService } from 'ngx-cookie-service';
 export class Login {
 
   seviceLogin = inject(LoginService)
+  serviceToken = inject(TokenService)
 
   formLogin!: FormGroup;
+  role!: any
 
-  constructor(private fb: FormBuilder, private cookie: CookieService) {
+  constructor(private fb: FormBuilder, private cookie: CookieService, private router: Router) {
      this.formLogin = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(5)]],
@@ -36,6 +40,12 @@ export class Login {
         });
 
         console.log('Token guardado en cookie:', res.token);
+
+        this.role =this.serviceToken.getFromToken('role')
+        if (this.role == 'owner') {
+          this.router.navigate(['/dashboard/admin/perfil'])
+        }
+
       },
       error: (error: any) => {
         console.log(error);

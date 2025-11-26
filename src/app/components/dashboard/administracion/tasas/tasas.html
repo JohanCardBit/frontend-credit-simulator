@@ -16,8 +16,20 @@
         <span class="tipo">{{item.type == 'fixed' ? 'Fija' : 'Variable'}}</span>
         <div class="acciones">
           <button (click)="verTasa(item._id)" class="icon-btn" data-bs-toggle="modal"
-            data-bs-target="#modal-editar-tasa">✏️</button>
-          <button (click)="eliminarTasa(item._id)" class="icon-btn eliminar">🗑️</button>
+            data-bs-target="#modal-editar-tasa">
+           <svg width="20" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12.8452 3.51265L16.4873 7.15476L6.84524 16.7968L3.33333 17.5L4.03651 13.9878L12.8452 3.51265ZM18.006 5.6369C18.3909 5.25208 18.3909 4.62451 18.006 4.2397L15.7603 1.99398C15.3755 1.60917 14.7479 1.60917 14.3631 1.99398L12.6131 3.74398L16.256 7.3869L18.006 5.6369Z"
+                fill="#0084ff" />
+            </svg>
+          </button>
+          <button (click)="eliminarTasa(item._id)" class="icon-btn eliminar">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7.5 3.33333L8.33333 2.5H11.6667L12.5 3.33333H16.6667V5H3.33333V3.33333H7.5ZM4.16667 6.66667H15.8333L15 16.25C15 17.4167 14.1667 18.3333 13.3333 18.3333H6.66667C5.83333 18.3333 5 17.4167 5 16.25L4.16667 6.66667Z"
+                fill="#0084ff" />
+            </svg>
+          </button>
         </div>
       </div>
 

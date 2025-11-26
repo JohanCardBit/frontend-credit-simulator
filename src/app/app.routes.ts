@@ -30,6 +30,7 @@ const rutasPubilcas: Routes = [
 
   {
     path: 'home', component: Home, children: [
+      { path: '', redirectTo: 'inicio', pathMatch: 'full' },
       { path: 'inicio', component: Inicio, title: titulosRutas.inicio, outlet: 'home' },
       { path: 'simulador', component: CuantoDinero, title: titulosRutas.cuantoDineroNecesitas, outlet: 'home' },
       { path: 'nosotros', component: Nosotros, title: titulosRutas.nosotros, outlet: 'home' }

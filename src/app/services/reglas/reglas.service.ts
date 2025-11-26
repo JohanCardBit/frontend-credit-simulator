@@ -28,4 +28,24 @@ export class ReglasService {
   getBusinessRules() {
     return this.http.get(`${this.apiUrl}/businessrules`, );
   }
+
+  getOneBusinessRule(idRule: any) {
+    const headers = this.header();
+    return this.http.get(`${this.apiUrl}/businessrules/${idRule}`, { headers });
+  }
+
+  createBusinessRule(data: any) {
+    const headers = this.header();
+    return this.http.post(`${this.apiUrl}/businessrules/create`, data, { headers });
+  }
+
+  updateBusinessRule(idRule: any, data: any) {
+    const headers = this.header();
+    return this.http.put(`${this.apiUrl}/businessrules/update/${idRule}`, data, { headers });
+  }
+
+  deleteBusinessRule(idRule: any) {
+    const headers = this.header();
+    return this.http.delete(`${this.apiUrl}/businessrules/delete/${idRule}`, { headers });
+  }
 }

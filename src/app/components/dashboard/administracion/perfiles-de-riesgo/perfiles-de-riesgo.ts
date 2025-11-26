@@ -95,21 +95,32 @@ export class PerfilesDeRiesgo {
   }
 
   actualizarPerfil() {
-    this.perfilRiesgoService.updateRiskProfile(this.idperfil, this.perfilForm.value).subscribe({
-      next: (res: any) => {
-        this.getPerfilesRiesgo()
-        this.flashyService.success('Perfil de riesgo actualizado con exito',
-          {
-            duration: 5000
+    this.flashyService.confirm('¿Estas seguro de modificar este perfil de riesgo?', {
+      position: 'top-center',
+      animation: 'bounce',
+      onConfirm: () => {
+        this.perfilRiesgoService.updateRiskProfile(this.idperfil, this.perfilForm.value).subscribe({
+          next: (res: any) => {
+            this.getPerfilesRiesgo()
+            this.flashyService.success('Perfil de riesgo actualizado con exito',
+              {
+                duration: 5000
+              }
+            )
+            console.log(res);
+          },
+          error: (error: any) => {
+            this.flashyService.error(`${error.error.msj}`, {
+              duration: 5000
+            })
+            console.log(error);
           }
-        )
-        console.log(res);
-      },
-      error: (error: any) => {
-        this.flashyService.error(`${error.error.msj}`, {
-          duration: 5000
         })
-        console.log(error);
+      },
+      onCancel: () => {
+        this.flashyService.info('Modificación cancelada.', {
+          duration: 5000
+        });
       }
     })
   }

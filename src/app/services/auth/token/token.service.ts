@@ -31,6 +31,11 @@ export class TokenService {
     }
   }
 
+
+  logOut() {
+    this.cookieService.delete('token', '/');
+  }
+
   // linkRecoverPassword(email: string) {
   //   return this.http.post(`${this.apiUrl}/reset-password/email`, { email });
   // }

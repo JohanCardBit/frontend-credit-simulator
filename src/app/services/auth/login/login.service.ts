@@ -13,4 +13,5 @@ export class LoginService {
   postLogin(data: any) {
     return this.http.post(`${this.apiUrl}/login`, data);
   }
+
 }

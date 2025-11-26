@@ -2,21 +2,56 @@
 
   <!-- Encabezado -->
   <div class="rules-header">
-    <h2>Reglas de negocio ( {{reglas.length}} )</h2>
-    <label class="btn-crear-regla" for="modalCrearRegla">+ Crear regla</label>
+    <h2>Reglas de negocio ({{ activeRulesCount }})</h2>
+    <!-- <label (click)="limpiarForm()" class="btn-crear-regla" for="modalCrearRegla">+ Crear regla</label> -->
+  </div>
+
+  <div class="rules-header">
+    <!-- <h2>Reglas de negocio ({{ activeRulesCount }})</h2> -->
+    <div class="toggle-buttons">
+      <button (click)="drop = true" [class.active]="drop">Activos</button>
+      <button (click)="drop = false" [class.active]="!drop">Inactivos</button>
+    </div>
+
+    <label (click)="limpiarForm()" class="btn-crear-regla" for="modalCrearRegla">+ Crear regla</label>
   </div>
 
   <!-- Listado de tarjetas -->
   <div class="rules-grid">
     @for (item of reglas; track $index) {
-
+    @if (drop == true && item.isActive || drop == false && !item.isActive) {
     <div class="rule-card glass">
       <div class="rule-header">
         <h3 class="rule-name">{{item.name}}</h3>
 
         <div class="rule-actions">
-          <button class="icon-btn"  for="modalEditarRegla">✏️</button>
-          <button class="icon-btn eliminar">🗑️</button>
+          @if (drop == true) {
+          <label (click)="verRegla(item._id)" class="icon-btn" for="modalEditarRegla">
+            <svg width="20" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12.8452 3.51265L16.4873 7.15476L6.84524 16.7968L3.33333 17.5L4.03651 13.9878L12.8452 3.51265ZM18.006 5.6369C18.3909 5.25208 18.3909 4.62451 18.006 4.2397L15.7603 1.99398C15.3755 1.60917 14.7479 1.60917 14.3631 1.99398L12.6131 3.74398L16.256 7.3869L18.006 5.6369Z"
+                fill="#0084ff" />
+            </svg>
+
+          </label>
+          }@else {
+          <label (click)="recuperarRegla(item._id)" class="icon-btn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10 3.33333C12.9456 3.33333 15.3333 5.72111 15.3333 8.66667C15.3333 11.6122 12.9456 14 10 14C8.31911 14 6.81911 13.2789 5.75 12.0833L7.16667 10.8333H3.33333V14.6667L4.75 13.4167C6.21378 15.0474 8.48211 16 10.8333 16C14.4951 16 17.3333 13.1618 17.3333 9.5C17.3333 5.83822 14.4951 3 10.8333 3C8.74822 3 6.88078 3.90145 5.58333 5.33333L6.66667 6.66667C7.61111 5.55556 8.75 4.66667 10 4.66667Z"
+                fill="#0084ff" />
+            </svg>
+
+          </label>
+          }
+          <button (click)="eliminarRegla(item._id)" class="icon-btn eliminar">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7.5 3.33333L8.33333 2.5H11.6667L12.5 3.33333H16.6667V5H3.33333V3.33333H7.5ZM4.16667 6.66667H15.8333L15 16.25C15 17.4167 14.1667 18.3333 13.3333 18.3333H6.66667C5.83333 18.3333 5 17.4167 5 16.25L4.16667 6.66667Z"
+                fill="#0084ff" />
+            </svg>
+
+          </button>
         </div>
       </div>
 
@@ -26,20 +61,35 @@
 
       <div class="rule-info">
         <p><strong>Tipo:</strong> {{item.type}}</p>
-        <p><strong>Condición:</strong> {{item.condition}}</p>
-        <p><strong>Categoría riesgo:</strong>{{item.riskCategory}}</p>
+        <p><strong>Condición:</strong></p>
+
+        @for (c of item.condition; let i = $index ; track $index) {
+
+        @if (i === 0) {
+        <div>
+          SI {{ getFieldLabel(c.field) }} {{ c.operator }} {{ c.value }}
+        </div>
+        } @else {
+        <div>
+          {{ c.logic == 'AND' ? 'Y' : 'O' }}
+          {{ getFieldLabel(c.field) }} {{ c.operator }} {{ c.value }}
+        </div>
+        }
+
+        }
+
+        <p><strong>Categoría riesgo:</strong> {{item.riskCategory}}</p>
         <p><strong>Ajuste tasa:</strong> {{item.interestRateAdjustment}} %</p>
-        <p><strong>Estado: </strong> <span class="estado {{item.isActive ? 'activo' : 'inactivo'}}">{{item.isActive ? 'Activo' : 'Inactivo'}}</span></p>
+        <p><strong>Estado: </strong> <span class="estado {{item.isActive ? 'activo' : 'inactivo'}}">{{item.isActive ?
+            'Activo' : 'Inactivo'}}</span></p>
       </div>
     </div>
-  }
+    }
+    }
   </div>
 </div>
 
 
-
-<!-- ========== MODAL CREAR REGLA ========== -->
-<!-- <input type="checkbox" id="modalCrearRegla" class="modal-toggle" hidden>
 
 <div class="modal">
   <label for="modalCrearRegla" class="modal-overlay"></label>
@@ -89,7 +139,7 @@
       <label for="modalCrearRegla" class="btn-cerrar">Cerrar</label>
     </div>
   </div>
-</div> -->
+</div>
 <!-- ========== MODAL CREAR REGLA ========== -->
 <input type="checkbox" id="modalCrearRegla" class="modal-toggle" hidden>
 
@@ -99,102 +149,91 @@
   <div class="modal-content glass modal-regla">
     <h3>Crear regla de negocio</h3>
 
-    <div class="form-regla">
+    <div [formGroup]="rulesForm" class="form-regla">
 
       <!-- Nombre -->
       <label>Nombre de la regla</label>
-      <input type="text" placeholder="Ej: EMPLEO_DESEMPLEADO">
+      <input formControlName="name" type="text" placeholder="Ej: EMPLEO-DESEMPLEADO">
 
       <!-- Descripción -->
       <label>Descripción</label>
-      <textarea class="textarea"></textarea>
+      <textarea formControlName="description" class="textarea"></textarea>
 
       <!-- Tipo -->
       <label>Tipo de regla</label>
-      <select>
-        <option value="approval">approval</option>
-        <option value="creditScore">creditScore</option>
-        <option value="income">income</option>
-        <option value="custom">custom</option>
+      <select formControlName="type">
+        <option value="approval">Aprobacion</option>
+        <option value="creditScore">Score</option>
+        <option value="income">Ingresos</option>
+        <option value="custom">Otros</option>
       </select>
-
-      <!-- ========== CONDICIONES ========== -->
       <h4 class="subtitulo">Condiciones</h4>
+      <div class="d-flex flex-column">
 
-      <!-- Condición 1 -->
-      <div class="condicion-box glass-mini">
-        <select>
-          <option value="employmentType">employmentType</option>
-          <option value="creditScore">creditScore</option>
-          <option value="age">age</option>
-          <option value="income">income</option>
-        </select>
 
-        <select>
-          <option value="==">==</option>
-          <option value="!=">!=</option>
-          <option value=">">></option>
-          <option value=">=">>=</option>
-          <option value="<"><</option>
-          <option value="<="><=</option>
-        </select>
+        <!-- Condición 1 -->
+        <div formArrayName="conditions">
 
-        <input type="text" placeholder="Valor">
+          @for (condition of conditions.controls; track $index; let i = $index) {
+
+          <div [formGroupName]="i" class="condicion-box glass-mini">
+
+            @if (i > 0) { <div class="logic-wrapper">
+              <select formControlName="logic" class="logic-select">
+                <option value="">Selecciona Logica...</option>
+                <option value="AND">Y (AND)</option>
+                <option value="OR">O (OR)</option>
+              </select>
+            </div>
+            <button class="removeCondicion" type="button" (click)="removeCondition(i)">❌</button>
+            }
+
+            <select formControlName="field">
+              <option value="">Regla...</option>
+              @for (f of ruleFields; track f.key) {
+              <option [value]="f.key">{{ f.label }}</option>
+              }
+            </select>
+
+            <select formControlName="operator">
+              <option value="">Operador...</option>
+              <option value="==">Igual que</option>
+              <option value="!=">Diferente que</option>
+              <option value=">">Mayor que</option>
+              <option value=">=">Mayor o igual que</option>
+              <option value="&lt;">Menor que</option>
+              <option value="&lt;=">Menor o igual que</option>
+            </select>
+
+            <input formControlName="value" type="text" placeholder="Valor">
+
+
+
+
+          </div>
+
+          }
+
+        </div>
+
+        <!-- ========== CONDICIONES ========== -->
+
+        <button type="button" (click)="addCondition()">➕ Agregar condición</button>
       </div>
 
-      <!-- Condición 2 -->
-      <div class="condicion-box glass-mini">
-        <select>
-          <option value="employmentType">employmentType</option>
-          <option value="creditScore">creditScore</option>
-          <option value="age">age</option>
-          <option value="income">income</option>
-        </select>
 
-        <select>
-          <option value="==">==</option>
-          <option value="!=">!=</option>
-          <option value=">">></option>
-          <option value=">=">>=</option>
-          <option value="<"><</option>
-          <option value="<="><=</option>
-        </select>
-
-        <input type="text" placeholder="Valor">
-      </div>
-
-      <!-- Condición 3 -->
-      <div class="condicion-box glass-mini">
-        <select>
-          <option value="employmentType">employmentType</option>
-          <option value="creditScore">creditScore</option>
-          <option value="age">age</option>
-          <option value="income">income</option>
-        </select>
-
-        <select>
-          <option value="==">==</option>
-          <option value="!=">!=</option>
-          <option value=">">></option>
-          <option value=">=">>=</option>
-          <option value="<"><</option>
-          <option value="<="><=</option>
-        </select>
-
-        <input type="text" placeholder="Valor">
-      </div>
 
       <!-- Categoría riesgo -->
       <label>Categoría riesgo</label>
-      <select>
-        <option>A</option>
-        <option>B</option>
-        <option>C</option>
+      <select formControlName="riskCategory">
+        <option value="A">A - Riesgo Bajo</option>
+        <option value="B">B - Riesgo Medio</option>
+        <option value="C">C - Riesgo Alto</option>
       </select>
 
       <!-- Ajuste tasa -->
       <label>Ajuste tasa (%)</label>
-      <input type="number" placeholder="Ej: -2">
+      <input formControlName="interestRateAdjustment" type="number" placeholder="Ej: -2">
 
       <!-- Estado -->
       <label>Estado</label>
@@ -206,7 +245,7 @@
     </div>
 
     <div class="acciones-modal">
-      <button class="btn-guardar">Crear regla</button>
+      <button (click)="crearRegla()" class="btn-guardar">Crear regla</button>
       <label for="modalCrearRegla" class="btn-cerrar">Cerrar</label>
     </div>
   </div>
@@ -218,58 +257,109 @@
 <input type="checkbox" id="modalEditarRegla" class="modal-toggle" hidden>
 
 <div class="modal">
-  <label for="modalEditarRegla" class="modal-overlay"></label>
+  <label for="modalCrearRegla" class="modal-overlay"></label>
 
   <div class="modal-content glass modal-regla">
     <h3>Editar regla de negocio</h3>
 
-    <div class="form-regla">
+    <div [formGroup]="rulesForm" class="form-regla">
 
+      <!-- Nombre -->
       <label>Nombre de la regla</label>
-      <input type="text" value="EMPLEO_DESEMPLEADO">
+      <input formControlName="name" type="text" placeholder="Ej: EMPLEO-DESEMPLEADO">
 
+      <!-- Descripción -->
       <label>Descripción</label>
-      <textarea class="textarea">Cliente desempleado se rechaza automáticamente.</textarea>
+      <textarea formControlName="description" class="textarea"></textarea>
 
+      <!-- Tipo -->
       <label>Tipo de regla</label>
-      <select>
-        <option value="approval" selected>approval</option>
-        <option value="creditScore">creditScore</option>
-        <option value="income">income</option>
-        <option value="custom">custom</option>
+      <select formControlName="type">
+        <option value="approval">Aprobacion</option>
+        <option value="creditScore">Score</option>
+        <option value="income">Ingresos</option>
+        <option value="custom">Otros</option>
       </select>
+      <h4 class="subtitulo">Condiciones</h4>
+      <div class="d-flex flex-column">
 
-      <label>Condición</label>
-      <input type="text" value="employmentType != 'desempleado'">
 
+        <!-- Condición 1 -->
+        <div formArrayName="conditions">
+
+          @for (condition of conditions.controls; track $index; let i = $index) {
+
+          <div [formGroupName]="i" class="condicion-box glass-mini">
+
+            @if (i > 0) { <div class="logic-wrapper">
+              <select formControlName="logic" class="logic-select">
+                <option value="">Selecciona Logica...</option>
+                <option value="AND">Y (AND)</option>
+                <option value="OR">O (OR)</option>
+              </select>
+            </div>
+            <button class="removeCondicion" type="button" (click)="removeCondition(i)">❌</button>
+            }
+
+            <select formControlName="field">
+              <option value="">Regla...</option>
+              @for (f of ruleFields; track f.key) {
+              <option [value]="f.key">{{ f.label }}</option>
+              }
+            </select>
+
+            <select formControlName="operator">
+              <option value="">Operador...</option>
+              <option value="==">Igual que</option>
+              <option value="!=">Diferente que</option>
+              <option value=">">Mayor que</option>
+              <option value=">=">Mayor o igual que</option>
+              <option value="&lt;">Menor que</option>
+              <option value="&lt;=">Menor o igual que</option>
+            </select>
+
+            <input formControlName="value" type="text" placeholder="Valor">
+
+
+
+
+          </div>
+
+          }
+
+        </div>
+
+        <!-- ========== CONDICIONES ========== -->
+
+        <button type="button" (click)="addCondition()">➕ Agregar condición</button>
+      </div>
+
+
+
+      <!-- Categoría riesgo -->
       <label>Categoría riesgo</label>
-      <select>
-        <option>A</option>
-        <option>B</option>
-        <option selected>C</option>
+      <select formControlName="riskCategory">
+        <option value="A">A - Riesgo Bajo</option>
+        <option value="B">B - Riesgo Medio</option>
+        <option value="C">C - Riesgo Alto</option>
       </select>
 
+      <!-- Ajuste tasa -->
       <label>Ajuste tasa (%)</label>
-      <input type="number" value="0">
+      <input formControlName="interestRateAdjustment" type="number" placeholder="Ej: -2">
 
+      <!-- Estado -->
       <label>Estado</label>
       <select>
-        <option selected>Activa</option>
-        <option>Inactiva</option>
+        <option value="Activa">Activa</option>
+        <option value="Inactiva">Inactiva</option>
       </select>
 
     </div>
 
     <div class="acciones-modal">
-      <button class="btn-guardar">Guardar</button>
+      <button class="btn-guardar">Modificar regla</button>
       <label for="modalEditarRegla" class="btn-cerrar">Cerrar</label>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
