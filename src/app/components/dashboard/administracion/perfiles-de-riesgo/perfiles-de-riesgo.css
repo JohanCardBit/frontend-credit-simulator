@@ -1,8 +1,8 @@
 body {
-  background: linear-gradient(135deg, #0a0f24, #1d2a48);
+  background: linear-gradient(135deg, var(--primary-900), var(--primary-700));
   font-family: Arial, sans-serif;
   padding: 20px;
-  color: white;
+  color: var(--text-main);
 }
 
 .riesgo-container {
@@ -20,23 +20,25 @@ body {
 .header-riesgo h2 {
   font-size: 28px;
   font-weight: 700;
+  color: var(--text-main);
 }
 
 /* Botón crear */
 .btn-crear {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-color);
   padding: 10px 18px;
   border-radius: 10px;
-  color: white;
+  color: var(--text-main);
   font-weight: 600;
   cursor: pointer;
   backdrop-filter: blur(10px);
-  transition: 0.3s;
+  transition: var(--transition-normal);
 }
 
 .btn-crear:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.22);
+  color: black;
 }
 
 /* Tarjetas */
@@ -47,12 +49,12 @@ body {
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--background-card);
   border-radius: 18px;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--border-color);
   backdrop-filter: blur(12px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-soft);
 }
 
 .card-riesgo {
@@ -64,6 +66,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 /* Categorías con colores */
@@ -73,15 +76,15 @@ body {
 }
 
 .categoria-A {
-  color: #99ffcc;
+  color: var(--success-500);
 }
 
 .categoria-B {
-  color: #ffe680;
+  color: var(--primary-300);
 }
 
 .categoria-C {
-  color: #ff8080;
+  color: rgb(185, 3, 3);
 }
 
 /* Iconos */
@@ -95,10 +98,10 @@ body {
   border: none;
   padding: 6px 10px;
   border-radius: 8px;
-  color: white;
+  color: var(--text-main);
   cursor: pointer;
   font-size: 16px;
-  transition: 0.3s;
+  transition: var(--transition-fast);
 }
 
 .icon-btn:hover {
@@ -114,15 +117,8 @@ body {
   margin-top: 10px;
   opacity: 0.9;
   line-height: 1.4;
+  color: var(--text-secondary);
 }
-
-
-
-
-
-
-
-
 
 /* Oculta modales por defecto */
 .modal {
@@ -134,7 +130,7 @@ body {
   z-index: 9999;
 }
 
-/* Cuando el checkbox está marcato -> mostrar modal */
+/* Cuando el checkbox está marcado */
 .modal-toggle:checked + .modal {
   display: flex;
 }
@@ -153,10 +149,10 @@ body {
   position: relative;
   padding: 30px;
   border-radius: 18px;
-  background: rgba(1, 23, 60, 0.66);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: var(--background-soft);
+  border: 1px solid var(--border-color);
   backdrop-filter: blur(50px);
-  color: #fff;
+  color: var(--text-main);
   z-index: 2;
   width: 650px;
 }
@@ -173,6 +169,7 @@ body {
   font-size: 14px;
   margin-bottom: 5px;
   display: block;
+  color: var(--text-secondary);
 }
 
 .form-riesgo input,
@@ -180,8 +177,8 @@ body {
   width: 100%;
   padding: 10px;
   border-radius: 8px;
-  background: rgba(255,255,255,0.15);
-  color: white;
+  background: rgba(255,255,255,0.12);
+  color: var(--text-main);
   border: none;
   margin-bottom: 15px;
   outline: none;
@@ -196,16 +193,16 @@ body {
 }
 
 .btn-guardar {
-  background: #00c853;
+  background: var(--success-500);
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
-  color: white;
+  color: var(--btn-primary-text);
   cursor: pointer;
 }
 
 .btn-cerrar {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.15);
   padding: 10px 18px;
   border-radius: 8px;
   cursor: pointer;
@@ -215,10 +212,39 @@ body {
 .btn-crear,
 .btn-editar {
   padding: 10px 18px;
-  background: #005ff9;
-  color: #fff;
+  background: var(--primary-600);
+  color: var(--btn-primary-text);
   border-radius: 8px;
   cursor: pointer;
   display: inline-block;
   margin-top: 20px;
+}
+
+
+
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.06); /* sutil contraste dentro del vidrio */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-body p {
+  margin: 0;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05); /* bloque individual */
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid var(--border-color);
+}
+
+.card-body p strong {
+  color: var(--primary-300); /* resalta los labels */
 }

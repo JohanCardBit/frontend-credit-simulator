@@ -1,24 +1,33 @@
 <div class="container-administracion">
-
   <!-- Sidebar -->
+
+
+  <input type="checkbox" id="toggle-menu" class="toggle-menu">
+  <label for="toggle-menu" class="hamburger-btn">☰</label>
+
+
   <aside class="sidebar glass">
 
     <!-- Perfil -->
-    <div class="admin-box">
-      <img src="{{user?.photo}}" alt="Admin Avatar" class="avatar" />
-      <h3 class="admin-name">{{user?.name + ' ' + user?.lastName}}</h3>
-      <p class="admin-role">Panel de control</p>
+    <div>
+      <div class="admin-box">
+        <img src="{{user?.photo}}" alt="Admin Avatar" class="avatar" />
+        <h3 class="admin-name">{{user?.name + ' ' + user?.lastName}}</h3>
+      </div>
+      <p class="admin-role text-center">Panel de control</p>
     </div>
-
     <!-- <h2 class="logo">CrediTest</h2> -->
 
     <nav class="menu">
-      <a routerLink="/dashboard/admin/perfil" routerLinkActive="active">Perfil</a>
-      <a routerLink="/dashboard/admin/tasas" routerLinkActive="active">Tasas de interés</a>
-      <a routerLink="/dashboard/admin/perfil-riesgo" routerLinkActive="active">Perfiles de riesgo</a>
-      <a routerLink="/dashboard/admin/reglas" routerLinkActive="active">Reglas de negocio</a>
+      <label for="toggle-menu" routerLink="/dashboard/admin/perfil" routerLinkActive="active">Perfil</label>
+      <label for="toggle-menu" routerLink="/dashboard/admin/tasas" routerLinkActive="active">Tasas de interés</label>
+      <label for="toggle-menu" routerLink="/dashboard/admin/perfil-riesgo" routerLinkActive="active">Perfiles de riesgo</label>
+      <label for="toggle-menu" routerLink="/dashboard/admin/reglas" routerLinkActive="active">Reglas de negocio</label>
     </nav>
   </aside>
+
+  <label for="toggle-menu" class="menu-overlay"></label>
+
 
   <!-- Contenido principal -->
   <main class="main-content glass">
@@ -26,4 +35,3 @@
   </main>
 
 </div>
-

@@ -61,22 +61,22 @@
 
       <div class="rule-info">
         <p><strong>Tipo:</strong> {{item.type}}</p>
-        <p><strong>Condición:</strong></p>
+        <p class="d-flex flex-column text-end"><strong class="text-start">Condición:</strong>
 
-        @for (c of item.condition; let i = $index ; track $index) {
+          @for (c of item.condition; let i = $index ; track $index) {
 
-        @if (i === 0) {
-        <div>
-          SI {{ getFieldLabel(c.field) }} {{ c.operator }} {{ c.value }}
-        </div>
-        } @else {
-        <div>
-          {{ c.logic == 'AND' ? 'Y' : 'O' }}
-          {{ getFieldLabel(c.field) }} {{ c.operator }} {{ c.value }}
-        </div>
-        }
-
-        }
+            @if (i === 0) {
+              <div>
+                SI {{ getFieldLabel(c.field) }} {{ c.operator }} {{ c.value }}
+              </div>
+            } @else {
+              <div>
+                {{ c.logic == 'AND' ? 'Y' : 'O' }}
+                {{ getFieldLabel(c.field) }} {{ c.operator }} {{ c.value }}
+              </div>
+            }
+          }
+        </p>
 
         <p><strong>Categoría riesgo:</strong> {{item.riskCategory}}</p>
         <p><strong>Ajuste tasa:</strong> {{item.interestRateAdjustment}} %</p>
@@ -257,7 +257,7 @@
 <input type="checkbox" id="modalEditarRegla" class="modal-toggle" hidden>
 
 <div class="modal">
-  <label for="modalCrearRegla" class="modal-overlay"></label>
+  <label for="modalEditarRegla" class="modal-overlay"></label>
 
   <div class="modal-content glass modal-regla">
     <h3>Editar regla de negocio</h3>

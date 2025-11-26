@@ -6,7 +6,7 @@
 
     <p><strong>Nombre:</strong> {{user?.name}}</p>
     <p><strong>Apellido:</strong> {{user?.lastName}}</p>
-    <p><strong>Rol:</strong> {{user?.role}}</p>
+    <p><strong>Rol:</strong> {{user?.role == 'owner' ? 'Administrador' : 'Usuario'}}</p>
 
     <button (click)="infoForm()" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-personal">
       Modificar
