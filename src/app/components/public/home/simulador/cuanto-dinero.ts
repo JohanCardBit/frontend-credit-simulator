@@ -452,9 +452,6 @@ export class CuantoDinero {
 
 
   checkTokenInCookies() {
-    // Aquí reemplaza 'tokenName' con el nombre real de tu cookie
-    console.log(`verificacion de token realizada ${this.inLogin}`);
-
     const tokenName = 'token';
     const cookies = document.cookie.split(';').map(c => c.trim());
     const tokenCookie = cookies.find(c => c.startsWith(tokenName + '='));
