@@ -4,7 +4,7 @@
   <section class="container-simulador" [formGroup]="form">
 
     <div class="btn-prev-exit d-flex justify-content-between ">
-      <div routerLink="/home" class="prev">
+      <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="prev">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <title>Atrás</title>
@@ -13,7 +13,7 @@
         </svg>
         Atrás
       </div>
-      <div routerLink="/home" class="exit">Salir
+      <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="exit">Salir
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
           fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <title>Salir</title>
@@ -124,7 +124,7 @@
       </svg>
       Atrás
     </div>
-    <div routerLink="/home" class="exit">Salir
+    <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="exit">Salir
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <title>Salir</title>
@@ -274,7 +274,7 @@
       </svg>
       Atrás
     </div>
-    <div routerLink="/home" class="exit">Salir
+    <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="exit">Salir
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <title>Salir</title>
@@ -306,7 +306,7 @@
       </svg>
       Atrás
     </div>
-    <div routerLink="/home" class="exit">Salir
+    <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="exit">Salir
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <title>Salir</title>
