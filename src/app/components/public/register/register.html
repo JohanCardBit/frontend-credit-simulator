@@ -1,0 +1,121 @@
+<div class="body">
+  <main>
+    <section class="form">
+      <div>
+        <img src="logo.png" alt="CrediTest Logo" class="logo" />
+      </div>
+
+      <form [formGroup]="registerForm">
+        @if (mostrarInformacion) {
+        <div class="informacion">
+          <h3>Bienvenido</h3>
+          <h5>Usaremos tu información para crear tu perfil de aprobación de créditos</h5>
+
+          <button routerLink="/login" type="button">Ya tengo cuenta</button>
+          <button type="button" (click)="continuar()">Continuar</button>
+        </div>
+        }
+
+        @if (mostrarGroup) {
+        <div class="group">
+          <h5>Ingresa tu nombre y apellido tal como aparecen en tu documento de identidad.</h5>
+
+          <div class="inputs">
+            <div class="grupo-input">
+              <label>Nombre</label>
+              <input formControlName="name" type="text" placeholder="Ingresa tu nombre" />
+            </div>
+
+            <div class="grupo-input">
+              <label>Apellido</label>
+              <input formControlName="lastName" type="text" placeholder="Ingresa tu apellido" />
+            </div>
+          </div>
+
+          <div class="butns">
+            <button type="button" class="atras" (click)="atras()">
+              Atrás
+            </button>
+
+            <button type="button" class="next" (click)="continuar()">
+              Siguiente
+            </button>
+          </div>
+        </div>
+        }
+
+        @if (mostrarDocumento) {
+        <div class="group">
+          <h5>Ingresa tu información de documento.</h5>
+
+          <div class="inputs">
+            <div class="grupo-input">
+              <label>Tipo de documento</label>
+              <select formControlName="documentType">
+                <option value="cc">Cédula</option>
+                <option value="ce">Cédula de extranjería</option>
+                <option value="passport">Pasaporte</option>
+                <option value="other">Otro</option>
+              </select>
+            </div>
+
+            <div class="grupo-input">
+              <label>Número de documento</label>
+              <input formControlName="documentNumber" type="text" placeholder="Número sin espacios" />
+            </div>
+          </div>
+
+          <div class="butns">
+            <button type="button" class="atras" (click)="atras()">
+              Atrás
+            </button>
+
+            <button type="button" class="next" (click)="continuar()">
+              Siguiente
+            </button>
+          </div>
+        </div>
+        }
+
+        @if (mostrarCrearCuenta) {
+        <div class="group">
+          <h5>Crea tu cuenta para continuar con el proceso.</h5>
+
+          <div class="inputs">
+            <div class="grupo-input  correo-full">
+              <label>Correo electrónico</label>
+              <input formControlName="email" type="email" placeholder="ejemplo@email.com" />
+            </div>
+
+
+            <div class="grupo-input">
+              <label>Contraseña</label>
+              <input formControlName="password" type="password" placeholder="********" />
+            </div>
+
+            <div class="grupo-input">
+              <label>Confirmar contraseña</label>
+              <input formControlName="confirmPassword" type="password" placeholder="********" />
+            </div>
+
+          </div>
+
+          <div class="butns">
+            <button type="button" class="atras" (click)="atras()">
+              Atrás
+            </button>
+
+            <button type="button" class="next" (click)="registrarse()">
+              Crear cuenta
+            </button>
+          </div>
+        </div>
+        }
+      </form>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>CrediTest © 2025 — Todos los derechos reservados</p>
+  </footer>
+</div>

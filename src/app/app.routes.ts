@@ -10,14 +10,16 @@ import { Reglas } from './components/dashboard/administracion/reglas/reglas';
 import { Home } from './components/public/home/home';
 import { Inicio } from './components/public/home/inicio/inicio';
 import { Nosotros } from './components/public/home/nosotros/nosotros';
+import { Register } from './components/public/register/register';
 
 
 const titulosRutas = {
   inicio: 'CrediTest | Inicio',
   nosotros: 'CrediTest | Nosotros',
   login: 'CrediTest | Login',
+  register: 'CrediTest | Registrarse',
   simulador: 'CrediTest | Simula tu credito',
-  cuantoDineroNecesitas: 'CrediTest | ¿Cuánto dinero necesitas?',
+  cuantoDineroNecesitas: 'CrediTest | Simulador',
   administacion: 'CrediTest | Administración',
   PerfilAdmin: 'CrediTest | Perfil Administracion',
   tasas: 'CrediTest | Tasas de interés',
@@ -41,6 +43,7 @@ const rutasPubilcas: Routes = [
 
 
   { path: 'login', component: Login, title: titulosRutas.login },
+  { path: 'register', component: Register, title: titulosRutas.register },
   {
     path: 'dashboard', component: PasosSimulador, title: titulosRutas.simulador, children: [
 
