@@ -1,33 +1,43 @@
+<div class="contenedor-login">
 
-<body>
+  <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="btn-volver-home">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9.5L12 3l9 6.5V21a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-5H10v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />
+    </svg>
+  </div>
 
-    <div class="container">
-
-        <!-- Checkbox que controla la animación -->
-        <input type="checkbox" id="toggle" hidden>
-
-        <!-- Login -->
-        <div [formGroup]="formLogin" class="form form-login">
-            <h2>Iniciar Sesión</h2>
-            <input formControlName="email" type="email" placeholder="Correo">
-            <input formControlName="password" type="password" placeholder="Contraseña">
-            <button (click)="iniciarSesion()">Entrar</button>
-            <label for="toggle" class="switch">Crear cuenta</label>
-        </div>
-
-        <!-- Register -->
-        <div class="form form-register">
-            <h2>Crear Cuenta</h2>
-            <input type="text" placeholder="Nombre">
-            <input type="email" placeholder="Correo">
-            <input type="password" placeholder="Contraseña">
-            <button>Registrar</button>
-            <label for="toggle" class="switch">Ya tengo cuenta</label>
-        </div>
-
-        <!-- Panel animado -->
-        <div class="panel"></div>
-
+  <div class="card-login">
+    <div class="logo-login">
+      <img src="logo.png" alt="Logo" class="logo" />
     </div>
 
-</body>
+    <h2 class="titulo">Iniciar sesión</h2>
+
+    <form [formGroup]="formLogin">
+      <div class="grupo-input">
+        <label for="email">Correo electrónico</label>
+        <input formControlName="email" id="email" type="email" placeholder="Ingresa tu correo" />
+      </div>
+
+      <div class="grupo-input">
+        <label for="password">Contraseña</label>
+        <input formControlName="password" id="password" type="password" placeholder="Ingresa tu contraseña" />
+      </div>
+
+      <div class="opciones">
+        <a class="olvido" >¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <button (click)="iniciarSesion()" class="btn-ingresar">Ingresar</button>
+
+      <p class="registrarse"><a routerLink="/register"> Registrarse</a></p>
+    </form>
+  </div>
+
+
+</div>
+
+  <footer class="app-footer">
+    <p>CrediTest © 2025 — Todos los derechos reservados</p>
+  </footer>

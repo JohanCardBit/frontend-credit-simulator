@@ -1,100 +1,104 @@
-body{
-  background: var(--header-bg);
-}
-
+/* Hover global suave */
 * {
   font-family: "Play", sans-serif;
   margin: 0;
   box-sizing: border-box;
-  /* overflow: hidden; */
+  transition: background var(--transition-fast), border var(--transition-fast), color var(--transition-fast);
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
+body {
+  color: var(--text-main);
+  animation: fadeBody 0.6s ease-out;
+  background:
+    var(--header-bg),
+    var(--bg-gradient);
+  background-blend-mode: soft-light;
+}
+
+/* Fade-in general */
+@keyframes fadeBody {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* VARIABLES MEJORADAS CON EFECTOS VISUALES */
 :root {
-  /* PALETA PRINCIPAL (AZULES) */
+  /* PALLETA PRINCIPAL */
   --primary-900: #020b26;
-  /* Azul casi negro (sidebar/main background) */
   --primary-800: #031840;
-  /* Azul profundo */
   --primary-700: #082b7a;
-  /* Azul corporativo */
   --primary-600: #0b3eab;
-  /* Azul saturado */
   --primary-500: #1c58e7;
-  /* Azul brillante (botones, acentos) */
   --primary-300: #4a7cff;
-  /* Azul claro para hover / highlights */
 
-  /* BRILLO / GLOW (NEÓN AZUL) */
+  /* GLOW */
   --glow-400: #5d7cff;
   --glow-200: #afc5ff;
   --glow-50: #e8efff;
 
-  /* ESTADOS (SUCCESS) */
+  /* SUCCESS */
   --success-500: #00cc66;
-  /* Verde positivo */
   --success-600: #00994d;
-  /* Verde más oscuro */
   --success-100: #ccffeb;
-  /* Fondo suave */
 
-  /* NEUTROS (UI) */
+  /* NEUTROS */
   --neutral-900: #1a1a1a;
-  /* Gris carbón */
   --neutral-700: #2e2e2e;
-  /* Gris oscuro */
   --neutral-300: #c9c9c9;
-  /* Texto tenue */
   --neutral-50: #f1f1f1;
-  /* Fondos claros */
 
-  /* OTROS */
+  /* RADIUS, TRANSITIONS, SHADOWS */
   --radius: 16px;
   --transition-fast: 0.2s ease;
   --transition-normal: 0.35s ease;
   --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.25);
   --shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.35);
+
+  /* EFECTOS VISUALES NUEVOS */
+  --card-glow: 0 0 12px rgba(76, 133, 255, 0.25);
+  --card-glow-hover: 0 0 22px rgba(76, 133, 255, 0.45);
+  --soft-blur: blur(12px);
+
+  /* BACKGROUND más elegante */
+  --bg-gradient: radial-gradient(circle at 20% 20%, rgba(76, 133, 255, 0.16), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(28, 88, 231, 0.20), transparent 70%);
 }
 
-
-
+/* DARK MODE MEJORADO */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* FONDOS */
     --background-main: var(--neutral-900);
     --background-card: #0f0f0f;
     --background-soft: #151515;
 
-    /* TEXTOS */
     --text-main: var(--neutral-50);
     --text-secondary: #cfcfcf;
 
-    /* HEADER & FOOTER */
-    --header-bg: var(--primary-900);
-    --footer-bg: var(--primary-900);
+    --header-bg: linear-gradient(135deg, #020b26, #031840, #082b7a);
 
-    /* BORDES */
+    --footer-bg: linear-gradient(135deg, #020b26, #031840);
+
     --border-color: rgba(255, 255, 255, 0.08);
 
-    /* ELEMENTOS DE INTERFAZ */
     --input-bg: #111;
     --input-border: rgba(255, 255, 255, 0.12);
     --input-text: var(--neutral-50);
     --input-placeholder: rgba(255, 255, 255, 0.35);
 
-    /* BOTONES PRINCIPALES */
     --btn-primary-bg: var(--primary-700);
     --btn-primary-text: #ffffff;
     --btn-primary-hover: var(--primary-600);
-
-    /* BOTONES SECUNDARIOS */
-    --btn-secondary-bg: #1d1d1d;
-    --btn-secondary-text: var(--neutral-50);
-    --btn-secondary-hover: #242424;
-
-    /* SOMBRAS MÁS PROFUNDAS */
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.65);
-    --shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.75);
   }
 
   .logo {
@@ -102,30 +106,18 @@ body{
   }
 }
 
-
-
+/* LIGHT MODE MEJORADO */
 @media (prefers-color-scheme: light) {
   :root {
-
     --background-main: #ffffff;
     --background-card: #ffffff;
     --background-soft: #f4f4f4;
 
-
-
     --text-main: var(--neutral-900);
     --text-secondary: var(--neutral-700);
 
-    --header-bg: radial-gradient(circle,
-        #bdbdc0,
-        #bdbdc0,
-        rgba(252, 253, 253, 0.921) 100%);
-    ;
-    --footer-bg: radial-gradient(circle,
-        #bdbdc0,
-        #bdbdc0,
-        rgba(252, 253, 253, 0.921) 100%);
-    ;
+    --header-bg: linear-gradient(135deg, #dadce7, #ffffff);
+    --footer-bg: linear-gradient(135deg, #d0d0d4, #ffffff);
 
     --border-color: rgba(0, 0, 0, 0.08);
 
@@ -137,14 +129,21 @@ body{
     --btn-primary-bg: var(--primary-500);
     --btn-primary-text: #ffffff;
     --btn-primary-hover: var(--primary-600);
+  }
+}
 
-    --btn-secondary-bg: var(--neutral-50);
-    --btn-secondary-text: var(--neutral-900);
-    --btn-secondary-hover: #e6e6e6;
 
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.25);
-    --shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.35);
+/*  ANIMACIÓN DE GLOW GLOBAL */
+@keyframes glowPulse {
+  0% {
+    box-shadow: var(--card-glow);
   }
 
+  50% {
+    box-shadow: var(--card-glow-hover);
+  }
 
+  100% {
+    box-shadow: var(--card-glow);
+  }
 }
