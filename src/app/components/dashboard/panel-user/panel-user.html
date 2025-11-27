@@ -11,10 +11,10 @@
     <!-- Perfil -->
     <div>
       <div class="admin-box">
-        <img src="{{user?.photo}}" alt="Admin Avatar" class="avatar" />
+        <img src="{{user?.photo}}" alt="Admin Avatar" class="avatar mb-3" />
         <h3 class="admin-name">{{user?.name + ' ' + user?.lastName}}</h3>
       </div>
-      <p class="admin-role text-center">Panel de control</p>
+      <p class="admin-role text-center">{{user?.role == 'owner' ? 'Administrador' : 'Usuario'}}</p>
     </div>
     <!-- <h2 class="logo">CrediTest</h2> -->
 
