@@ -27,10 +27,6 @@
   color: var(--text-main);
 }
 
-.card p {
-  margin: 6px 0;
-  color: var(--text-secondary);
-}
 
 /* BOTONES */
 .btn {

@@ -25,6 +25,7 @@ export class PasosSimulador {
       onConfirm: () => {
         this.tokenService.logOut();
         this.router.navigate(['/']);
+        window.location.href = '/';
       },
       onCancel: () => {
         this.flashyService.info('Cierre de sesion cancelada.', { duration: 5000 });

@@ -18,6 +18,7 @@ export class Login {
 
   formLogin!: FormGroup;
   role!: any
+  userId!: any
 
   constructor(private fb: FormBuilder, private cookie: CookieService, private router: Router) {
      this.formLogin = fb.group({
@@ -25,6 +26,7 @@ export class Login {
       password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
+
 
   iniciarSesion() {
   if (this.formLogin.valid) {
@@ -44,8 +46,17 @@ export class Login {
         this.role =this.serviceToken.getFromToken('role')
         if (this.role == 'owner') {
           this.router.navigate(['/dashboard/admin/perfil'])
+        }else{
+          this.router.navigate(['/dashboard/panel-user/perfilUser'])
         }
 
+        this.userId = this.serviceToken.getFromToken('id')
+        this.cookie.set('userId', this.userId, {
+          expires: 1,             // 1 dia
+          path: '/',              // disponible en toda la app
+          sameSite: 'Lax',        // esto es para proteger la cookie de CSRF (cross-site request forgery)
+          secure: false           // true si usas HTTPS
+        })
       },
       error: (error: any) => {
         console.log(error);

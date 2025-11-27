@@ -1,0 +1,32 @@
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px 20px;
+  background: var(--background-card);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  border: 2px solid rgba(0, 128, 0, 0.545);
+}
+
+.card p {
+  margin: 0;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05); /* bloque individual */
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid var(--border-color);
+}
+
+.card p strong {
+  color: var(--primary-300); /* resalta los labels */
+}

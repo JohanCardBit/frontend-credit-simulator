@@ -1,0 +1,237 @@
+/* ==================== LAYOUT PRINCIPAL ==================== */
+.container-administracion {
+  display: flex;
+  height: 80dvh;
+  width: 100%;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* EFECTO VIDRIO */
+.glass {
+  background: var(--background-soft);
+  border: 1px solid var(--border-color);
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 270px;
+  padding: 25px;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+/* BOX DEL ADMIN */
+.admin-box {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid var(--border-color);
+  box-shadow: 0 0 12px var(--glow-200);
+}
+
+.admin-name {
+  margin: 10px 0 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.admin-role {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  color: var(--text-secondary);
+}
+
+/* MENÚ LATERAL */
+.menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu label {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  transition: all var(--transition-normal);
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+.menu label:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(5px);
+}
+
+.menu label.active {
+  background: var(--primary-700);
+  color: var(--btn-primary-text);
+  font-weight: 600;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  color: var(--text-main);
+  transition: padding 0.3s ease;
+}
+
+/* SCROLL */
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.20);
+  border-radius: 6px;
+}
+
+
+.hamburger-btn {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 12px 18px;
+  color: var(--text-main);
+  position: fixed;
+  right: 15px;
+  top: 10px;
+  z-index: 1000;
+}
+
+.toggle-menu {
+  display: none;
+}
+
+
+
+
+/* ==================== MEDIA QUERIES ==================== */
+@media (max-width: 1024px) {
+  .container-administracion {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .admin-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .admin-name {
+    font-size: 1rem;
+
+  }
+
+  .menu {
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    /* border: 1px solid red; */
+    margin-left: 2rem;
+  }
+
+  .menu a {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  /* Mostrar hamburguesa */
+  .hamburger-btn {
+    display: block;
+  }
+
+  /* Sidebar oculto por defecto */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    height: 100vh;
+    width: 240px;
+    padding: 25px 20px;
+    flex-direction: column;
+    /* align-items: flex-start; */
+    border-right: 1px solid var(--border-color);
+    background: var(--background-soft);
+    transition: left 0.3s ease-in-out;
+    z-index: 900;
+
+  }
+
+  /* Cuando el checkbox está activado → mostrar menú */
+  .toggle-menu:checked + .hamburger-btn + .sidebar {
+    left: 0;
+  }
+
+  /* Contenido principal ocupa todo */
+  .main-content {
+    padding: 15px;
+
+  }
+
+  /* Menú vertical */
+  .menu {
+    margin-top: 20px;
+    width: 100%;
+    flex-direction: column;
+    /* border: 1px solid red; */
+  }
+
+  .menu a {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+
+ .toggle-menu:checked ~ .menu-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    z-index: 800;
+  }
+
+
+}
+.Active{
+  background: var(--primary-700);
+}

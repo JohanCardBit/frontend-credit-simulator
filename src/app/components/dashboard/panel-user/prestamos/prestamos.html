@@ -1,0 +1,15 @@
+<div class="d-flex flex-wrap">
+@for (item of prestamos; track $index) {
+<div class="card glass p-4">
+    <p>Prestamo No. {{item._id}}</p>
+
+
+    <p><strong>Monto del prestamo:</strong> {{item?.amount | number:'1.0-0'}}</p>
+    <p><strong>Plazo:</strong> {{item?.termMonths == 1 ? item?.termMonths + ' mes' : item?.termMonths + ' meses'}} </p>
+    <p><strong>Tasa de interes:</strong> {{item?.interestRate}} Anual</p>
+    <p><strong>amorizacion:</strong> {{item?.amortizationType == 'annuity' ? 'Anual' : 'Lineal'}}</p>
+    <p><strong>estado:</strong> {{item?.approvalStatus}}</p>
+    <p><strong>Inicio de prestamo:</strong> {{item?.startDate | date:'dd/MM/yyyy'}}</p>
+  </div>
+}
+</div>

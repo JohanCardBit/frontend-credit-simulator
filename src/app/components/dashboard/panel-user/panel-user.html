@@ -1,0 +1,37 @@
+<div class="container-administracion">
+  <!-- Sidebar -->
+
+
+  <input type="checkbox" id="toggle-menu" class="toggle-menu">
+  <label for="toggle-menu" class="hamburger-btn">☰</label>
+
+
+  <aside class="sidebar glass">
+
+    <!-- Perfil -->
+    <div>
+      <div class="admin-box">
+        <img src="{{user?.photo}}" alt="Admin Avatar" class="avatar" />
+        <h3 class="admin-name">{{user?.name + ' ' + user?.lastName}}</h3>
+      </div>
+      <p class="admin-role text-center">Panel de control</p>
+    </div>
+    <!-- <h2 class="logo">CrediTest</h2> -->
+
+    <nav class="menu">
+      <label for="toggle-menu" routerLink="/dashboard/panel-user/perfilUser" routerLinkActive="active">Perfil</label>
+      <label for="toggle-menu" routerLink="/dashboard/panel-user/simularYsolicitar" routerLinkActive="active">Simular y solicitar</label>
+      <label for="toggle-menu" routerLink="/dashboard/panel-user/preaprobados" routerLinkActive="active">Preaprobados</label>
+      <label for="toggle-menu" routerLink="/dashboard/panel-user/prestamos" routerLinkActive="active">Mis prestamos</label>
+    </nav>
+  </aside>
+
+  <label for="toggle-menu" class="menu-overlay"></label>
+
+
+  <!-- Contenido principal -->
+  <main class="main-content glass">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

@@ -1,0 +1,44 @@
+<div class="container-cards">
+@for (item of preAprobados; track $index) {
+  @if (item.approvalStatus == 'aprobado' && item.statusForUser == 'pendiente') {
+  <div class="aprobado-card">
+    <div class="aprobado-header">
+      <span class="badge-aprobado">PRE-APROBADO</span>
+      <p><strong> Simulación </strong><br> #{{item._id}}</p>
+    </div>
+
+    <div class="aprobado-body">
+      <div class="info-row">
+        <span>Monto solicitado:</span>
+        <strong>${{item.amount | number:'1.0-0'}}</strong>
+      </div>
+
+      <div class="info-row">
+        <span>Plazo:</span>
+        <strong>{{item.termMonths}} meses</strong>
+      </div>
+
+      <div class="info-row">
+        <span>Tasa anual:</span>
+        <strong>{{item.annualInterestRate}}%</strong>
+      </div>
+
+      <div class="info-row">
+        <span>Tipo de tasa:</span>
+        <strong>{{item.rateType == 'fixed' ? 'Fija' : 'Variable'}}</strong>
+      </div>
+
+      <div class="info-row">
+        <span>Amortización:</span>
+        <strong>{{item.amortizationType == 'annuity' ? 'Anual' : 'Lineal'}}</strong>
+      </div>
+    </div>
+
+    <div class="aprobado-footer">
+      <button class="btn-aceptar">Aceptar préstamo</button>
+      <button class="btn-rechazar">Rechazar</button>
+    </div>
+  </div>
+  }
+}
+</div>

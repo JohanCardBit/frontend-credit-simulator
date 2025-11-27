@@ -60,7 +60,7 @@
       </p>
 
       <div class="rule-info">
-        <p><strong>Tipo:</strong> {{item.type}}</p>
+        <p><strong>Tipo:</strong> {{item.type == 'approval' ? 'Para Aprobación' : item.type}}</p>
         <p class="d-flex flex-column text-end"><strong class="text-start">Condición:</strong>
 
           @for (c of item.condition; let i = $index ; track $index) {
@@ -162,10 +162,10 @@
       <!-- Tipo -->
       <label>Tipo de regla</label>
       <select formControlName="type">
-        <option value="approval">Aprobacion</option>
-        <option value="creditScore">Score</option>
+        <option value="approval" selected> para Aprobacion</option>
+        <!-- <option value="creditScore">Score</option>
         <option value="income">Ingresos</option>
-        <option value="custom">Otros</option>
+        <option value="custom">Otros</option> -->
       </select>
       <h4 class="subtitulo">Condiciones</h4>
       <div class="d-flex flex-column">
@@ -275,10 +275,10 @@
       <!-- Tipo -->
       <label>Tipo de regla</label>
       <select formControlName="type">
-        <option value="approval">Aprobacion</option>
-        <option value="creditScore">Score</option>
+        <option value="approval" selected> para Aprobacion</option>
+        <!-- <option value="creditScore">Score</option>
         <option value="income">Ingresos</option>
-        <option value="custom">Otros</option>
+        <option value="custom">Otros</option> -->
       </select>
       <h4 class="subtitulo">Condiciones</h4>
       <div class="d-flex flex-column">

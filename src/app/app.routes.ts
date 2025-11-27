@@ -11,6 +11,11 @@ import { Home } from './components/public/home/home';
 import { Inicio } from './components/public/home/inicio/inicio';
 import { Nosotros } from './components/public/home/nosotros/nosotros';
 import { Register } from './components/public/register/register';
+import { PanelUser } from './components/dashboard/panel-user/panel-user';
+import { PerfilUser } from './components/dashboard/panel-user/perfil-user/perfil-user';
+import { SimularYsolicitar } from './components/dashboard/panel-user/simular-ysolicitar/simular-ysolicitar';
+import { PreAprobados } from './components/dashboard/panel-user/pre-aprobados/pre-aprobados';
+import { Prestamos } from './components/dashboard/panel-user/prestamos/prestamos';
 
 
 const titulosRutas = {
@@ -24,7 +29,12 @@ const titulosRutas = {
   PerfilAdmin: 'CrediTest | Perfil Administracion',
   tasas: 'CrediTest | Tasas de interés',
   perfilRiesgo: 'CrediTest | Perfiles de riesgo',
-  reglas: 'CrediTest | Reglas de negocio'
+  reglas: 'CrediTest | Reglas de negocio',
+  panelUser: 'CrediTest | Panel de usuario',
+  PerfilUser: 'CrediTest | Perfil de usuario',
+  simularYsolicitar: 'CrediTest | Simular y solicitar',
+  preaprobados: 'CrediTest | Pre-aprobados',
+  prestamos: 'CrediTest | Mis prestamos'
 }
 
 const rutasPubilcas: Routes = [
@@ -53,6 +63,16 @@ const rutasPubilcas: Routes = [
           { path: 'tasas', component: Tasas, title: titulosRutas.tasas },
           { path: 'perfil-riesgo', component: PerfilesDeRiesgo, title: titulosRutas.perfilRiesgo },
           { path: 'reglas', component: Reglas, title: titulosRutas.reglas }
+        ]
+      },
+
+      {
+        path: 'panel-user', component: PanelUser, title: titulosRutas.panelUser, children:[
+          { path: 'perfilUser', component: PerfilUser, title: titulosRutas.PerfilUser },
+          { path: 'simularYsolicitar', component: SimularYsolicitar, title: titulosRutas.simularYsolicitar},
+          { path: 'preaprobados', component: PreAprobados, title: titulosRutas.preaprobados},
+          { path: 'prestamos', component: Prestamos, title: titulosRutas.prestamos}
+
         ]
       }
     ]

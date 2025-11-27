@@ -2,8 +2,9 @@
 
   @if (!mostrarResultados && !mostrarWelcome && !mostrarPlanPagos) {
   <section class="container-simulador" [formGroup]="form">
+    <div class="btn-prev-exit d-flex justify-content-between">
 
-    <div class="btn-prev-exit d-flex justify-content-between ">
+      @if(inLogin == false) {
       <div routerLink="/home" class="prev">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -13,6 +14,7 @@
         </svg>
         Atrás
       </div>
+
       <div routerLink="/home" class="exit">Salir
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
           fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -22,6 +24,8 @@
           <path d="M21 12H9" />
         </svg>
       </div>
+
+      }
     </div>
 
 
@@ -104,7 +108,7 @@
       </div>
 
       <!-- Botón -->
-      <button class="btn-simular" (click)="simular()">
+      <button class="btn-simular" (click)="simular()" (click)="checkTokenInCookies()">
         SIMULAR
       </button>
     </div>
@@ -124,6 +128,8 @@
       </svg>
       Atrás
     </div>
+
+    @if(inLogin == false) {
     <div routerLink="/home" class="exit">Salir
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -133,6 +139,8 @@
         <path d="M21 12H9" />
       </svg>
     </div>
+    }
+
   </div>
   <section class="container-opciones">
 
@@ -173,8 +181,11 @@
           </div>
           <a class="enlace-plan" (click)="verPlanPagos('fija')">Conocer el plan de pagos</a>
         </details>
-
+        @if (inLogin == true) {
+        <button class="boton-solicitar" (click)="guardarSimulacion('fija')" (click)="verPlanPagos('fija')"> Solicitar crédito </button>
+        }@else{
         <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
+        }
       </div>
 
       <!-- TARJETA 2 -->
@@ -213,9 +224,11 @@
           <a class="enlace-plan" (click)="verPlanPagos('variableFija')">Conocer el plan de pagos</a>
         </details>
 
+        @if (inLogin == true) {
+        <button class="boton-solicitar" (click)="guardarSimulacion('variableFija')" (click)="verPlanPagos('variableFija')"> Solicitar crédito </button>
+        }@else{
         <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
-
-
+        }
 
       </div>
 
@@ -254,8 +267,11 @@
           <a class="enlace-plan" (click)="verPlanPagos('fullVariable')">Conocer el plan de pagos</a>
         </details>
 
+        @if (inLogin == true) {
+        <button class="boton-solicitar" (click)="guardarSimulacion('fullVariable')" (click)="verPlanPagos('fullVariable')"> Solicitar crédito </button>
+        }@else{
         <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
-
+        }
 
 
       </div>
@@ -274,6 +290,7 @@
       </svg>
       Atrás
     </div>
+
     <div routerLink="/home" class="exit">Salir
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -306,6 +323,8 @@
       </svg>
       Atrás
     </div>
+
+    @if(inLogin == false) {
     <div routerLink="/home" class="exit">Salir
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -315,6 +334,8 @@
         <path d="M21 12H9" />
       </svg>
     </div>
+    }
+
   </div>
 
 
@@ -337,7 +358,7 @@
       <!-- COLUMNA IZQUIERDA -->
       <div class="grafico">
         @if (planActivo && planActivo.length > 0) {
-       <canvas #chartCanvas></canvas>
+        <canvas #chartCanvas></canvas>
 
         } @else {
         <p>No hay datos para mostrar el gráfico.</p>
@@ -397,4 +418,31 @@
   </section>
   }
 
+
+  <!-- Modal -->
+  <div class="modal-overlay" [class.show]="isModalOpen">
+    <div class="modal-box">
+
+      <!-- Loader -->
+      @if (isLoading) {
+      <div class="loader"></div>
+      <p>Analizando solicitud...</p>
+      }
+
+      <!-- Resultado -->
+      @if (!isLoading) {
+      <h2 class="{{resultadoAnalisis?.approvalStatus}} mb-5">¡Crédito {{resultadoAnalisis?.approvalStatus}}!</h2>
+
+      <div class="actions">
+        @if (resultadoAnalisis.approvalStatus == 'aprobado') {
+        <button class="btn-accept" (click)="acceptLoan()" (click)="aceptadoPorUsuario('aprobado')">Aceptar préstamo</button>
+        <button class="btn-reject" (click)="rejectLoan()" (click)="aceptadoPorUsuario('rechazado')">Rechazar</button>
+        }@else {
+          <button class="btn-reject" (click)="rejectLoan()">Finalizar</button>
+        }
+      </div>
+      }
+
+    </div>
+  </div>
 </div>

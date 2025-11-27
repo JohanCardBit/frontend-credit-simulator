@@ -1,0 +1,268 @@
+<div class="perfil-container">
+
+  <!-- TARJETA 1 — INFORMACIÓN DE REGISTRO -->
+  <div class="card glass p-4">
+    <h3>Información de Registro</h3>
+
+    <p><strong>Nombres:</strong> {{user?.name}}</p>
+    <p><strong>Apellidos:</strong> {{user?.lastName}}</p>
+    <p><strong>Tipo de documento:</strong> {{user?.documentType}}</p>
+    <p><strong>Número documento:</strong> {{user?.documentNumber}}</p>
+    <p><strong>Email:</strong> {{user?.email}}</p>
+
+    <button (click)="infoForm()" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-registro">
+      Modificar
+    </button>
+  </div>
+
+  <!-- TARJETA 2 — INFORMACIÓN PERSONAL -->
+  <div class="card glass p-4">
+    <h3>Información Personal</h3>
+
+    <p><strong>Género:</strong> {{user?.gender}}</p>
+    <p><strong>Edad:</strong> {{user?.age}}</p>
+    <p><strong>Estado civil:</strong> {{user?.maritalStatus}}</p>
+    <p><strong>Nivel académico:</strong> {{user?.academicLevel}}</p>
+    <p><strong>Tipo de empleo:</strong> {{user?.employmentType}}</p>
+    <p><strong>Ocupación:</strong> {{user?.ocupacion}}</p>
+
+    <button (click)="infoForm()" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-personal">
+      Modificar
+    </button>
+  </div>
+
+  <!-- TARJETA 3 — INFORMACIÓN FINANCIERA -->
+  <div class="card glass p-4">
+    <h3>Información Financiera</h3>
+
+    <p><strong>Tipo vivienda:</strong> {{user?.housingType}}</p>
+    <p><strong>Ingreso mensual:</strong> {{user?.incomeMonthly}}</p>
+    <p><strong>Otros ingresos:</strong> {{user?.otherIncomeMonthly}}</p>
+    <p><strong>Gastos mensuales:</strong> {{user?.expensesMonthly}}</p>
+    <p><strong>Valor de activos:</strong> {{user?.valueOfAssets}}</p>
+
+    <button (click)="infoForm()" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-financiera">
+      Modificar
+    </button>
+  </div>
+
+
+</div>
+<!-- TARJETA 4 — Password -->
+<div class="card glass p-4 mt-5">
+  <h3>Contraseña</h3>
+
+  <p>Cambia tu contraseña de forma segura.</p>
+
+  <button (click)="limpiarFormPassword()" class="btn btn-primary mt-3" data-bs-toggle="modal"
+    data-bs-target="#modal-password">
+    Modificar
+  </button>
+</div>
+
+
+
+
+<div class="modal fade" id="modal-registro" data-bs-backdrop="false">
+  <div class="modal-dialog">
+    <div [formGroup]="formRegistro" class="modal-content glass">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar Información de Registro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <label class="form-label">Nombre</label>
+        <input formControlName="name" type="text" class="form-control">
+
+        <label class="form-label mt-3">Apellido</label>
+        <input formControlName="lastName" type="text" class="form-control">
+
+         <label class="form-label">Tipo de documento</label>
+        <select formControlName="documentType" class="form-control">
+          <option value="cc">Cedula de ciudadania</option>
+          <option value="ce">Cedula de Extranjeria</option>
+          <option value="passport">Pasaporte</option>
+          <option value="other">Otro</option>
+        </select>
+
+        <label class="form-label mt-3">Numero de documento</label>
+        <input formControlName="documentNumber" type="text" class="form-control">
+
+        <label class="form-label mt-3">Email</label>
+        <input formControlName="email" type="email" class="form-control">
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="actualizarUser('registro')">
+          Guardar Cambios
+        </button>
+
+        <button id="cerrarModalRegistro" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="modal-personal" data-bs-backdrop="false">
+  <div class="modal-dialog">
+    <div [formGroup]="formPersonal" class="modal-content glass">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar Información Personal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <label class="form-label">Género</label>
+        <select formControlName="gender" class="form-control">
+          <option>masculino</option>
+          <option>femenino</option>
+          <option>otro</option>
+        </select>
+
+        <label class="form-label mt-3">Edad</label>
+        <input formControlName="age" type="number" class="form-control">
+
+        <label class="form-label mt-3">Estado civil</label>
+        <select formControlName="maritalStatus" class="form-control">
+          <option>soltero</option>
+          <option>casado</option>
+          <option>divorciado</option>
+          <option>viudo</option>
+        </select>
+
+        <label class="form-label mt-3">Nivel Academico</label>
+        <select formControlName="academicLevel" class="form-control">
+          <option>primaria</option>
+          <option>secundaria</option>
+          <option>tecnico</option>
+          <option>pregrado</option>
+          <option>postgrado</option>
+        </select>
+
+        <label class="form-label mt-3">Tipo de empleo</label>
+        <select formControlName="employmentType" class="form-control">
+          <option>empleado</option>
+          <option>independiente</option>
+          <option>desempleado</option>
+          <option>jubilado</option>
+        </select>
+
+        <label class="form-label mt-3">Ocupación</label>
+        <select formControlName="ocupacion" class="form-control">
+          <option>Comerciante</option>
+          <option>Rentista</option>
+          <option>profesional independiente</option>
+          <option>transportador</option>
+        </select>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="actualizarUser('personal')">
+          Guardar Cambios
+        </button>
+
+        <button id="cerrarModalPersonal" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modal-financiera" data-bs-backdrop="false">
+  <div class="modal-dialog">
+    <div [formGroup]="formFinanciera" class="modal-content glass">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar Información Financiera</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <label class="form-label">Tipo vivienda</label>
+        <select formControlName="housingType" class="form-control">
+          <option>propia</option>
+          <option>familiar</option>
+          <option>arrendada</option>
+          <option>otra</option>
+        </select>
+
+        <label class="form-label mt-3">Ingreso mensual</label>
+        <input formControlName="incomeMonthly" type="number" class="form-control">
+
+        <label class="form-label mt-3">Otros ingresos</label>
+        <input formControlName="otherIncomeMonthly" type="number" class="form-control">
+
+        <label class="form-label mt-3">Gastos mensuales</label>
+        <input formControlName="expensesMonthly" type="number" class="form-control">
+
+        <label class="form-label mt-3">Valor de activos</label>
+        <input formControlName="valueOfAssets" type="number" class="form-control">
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="actualizarUser('financiera')">
+          Guardar Cambios
+        </button>
+
+        <button id="cerrarModalFinanciera" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="modal-password" data-bs-backdrop="false">
+  <div class="modal-dialog">
+    <div [formGroup]="formPassword" class="modal-content glass">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Cambiar Contraseña</h5>
+        <button id="cerrarModalPassword" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <label class="form-label">Contraseña Actual</label>
+        <input formControlName="passwordActual" type="password" class="form-control" placeholder="Contraseña actual">
+
+        <label class="form-label mt-3">Nueva Contraseña</label>
+        <input formControlName="passwordNueva" type="password" class="form-control" placeholder="Nueva contraseña">
+
+        <label class="form-label mt-3">Confirmar Contraseña</label>
+        <input formControlName="passwordConfirmar" type="password" class="form-control"
+          placeholder="Confirmar nueva contraseña">
+
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="updatePassword()" class="btn btn-primary">Guardar Cambios</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

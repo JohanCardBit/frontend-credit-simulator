@@ -27,6 +27,7 @@ export class CuantoDinero {
 
 
   // Control de vistas
+  inLogin = false;
   mostrarResultados = false;
   mostrarWelcome = false;
   mostrarPlanPagos = false;
@@ -308,5 +309,158 @@ export class CuantoDinero {
     ];
   }
 
+  idSimulacionSeleccionada!: any
+  // En tu componente
+  guardarSimulacion(tipo: 'fija' | 'variableFija' | 'fullVariable') {
 
+    this.flashyService.confirm('¿Estas seguro de SOLICITAR ESTE PRESTAMO?', {
+      position: 'top-center',
+      animation: 'bounce',
+      onConfirm: () => {
+
+        let simulacionSeleccionada;
+
+        switch (tipo) {
+          case 'fija':
+            simulacionSeleccionada = this.resultados?.fija;
+            break;
+          case 'variableFija':
+            simulacionSeleccionada = this.resultados?.variableFija;
+            break;
+          case 'fullVariable':
+            simulacionSeleccionada = this.resultados?.fullVariable;
+            break;
+          default:
+            console.error('Tipo de simulación no válido');
+            return;
+        }
+
+        if (!simulacionSeleccionada) {
+          console.error('No hay simulación para este tipo');
+          return;
+        }
+
+        console.log(simulacionSeleccionada);
+        const baseStart = new Date().toISOString().split('T')[0];
+        let body = {
+          amount: simulacionSeleccionada.requested.amount,
+          termMonths: simulacionSeleccionada.requested.termMonths,
+          amortizationType: simulacionSeleccionada.requested.amortizationType,
+          rateType: simulacionSeleccionada.requested.rateType,
+          startDate: baseStart,
+        }
+
+        console.log(body);
+
+        // Llamada al servicio
+        this.simuladorService.saveSimulation(body).subscribe({
+          next: (response: any) => {
+            this.idSimulacionSeleccionada = response.simulationId._id;
+            console.log('Simulación guardada:', response);
+            this.flashyService.success('Simulación seleccionada con éxito', { duration: 5000 });
+            this.openModal()
+            this.analizar()
+          },
+          error: (error: any) => {
+            console.error('Error al seleccionar la simulación:', error);
+            this.flashyService.error('No se pudo seleccionar la simulación', { duration: 5000 });
+          }
+        });
+
+      },
+      onCancel: () => {
+        this.flashyService.info('Simulación cancelada.');
+        this.volverAOpcionesDesdePlan()
+      }
+    })
+
+  }
+
+
+  isModalOpen = false;
+  isLoading = false;
+
+ openModal() {
+  this.isModalOpen = true;
+  this.isLoading = true;
+
+  // Simulación de análisis por 5 segundos
+  setTimeout(() => {
+    this.isLoading = false;
+    this.flashyService.success('Simulación analizada con éxito', { duration: 5000 });
+  }, 5000);
+}
+
+
+  acceptLoan() {
+    console.log('Préstamo aceptado');
+    this.closeModal();
+  }
+
+  rejectLoan() {
+    console.log('Préstamo rechazado');
+    this.closeModal();
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.isLoading = false;
+  }
+
+  resultadoAnalisis: any
+  analizar() {
+    this.simuladorService.analizarSimulacion(this.idSimulacionSeleccionada).subscribe({
+      next: (response: any) => {
+        console.log('Simulación analizada:', response);
+        this.resultadoAnalisis = response
+      },
+      error: (error: any) => {
+        console.error('Error al analizar la simulación:', error);
+        this.flashyService.error('No se pudo analizar la simulación', { duration: 5000 });
+      }
+    })
+  }
+
+  aceptadoPorUsuario(estado: 'aprobado' | 'rechazado') {
+    const mensajes = {
+      aprobado: {
+        log: 'Simulación aceptada por el usuario:',
+        ok: 'Simulación aceptada con éxito',
+        error: 'No se pudo aceptar la simulación',
+      },
+      rechazado: {
+        log: 'Simulación rechazada por el usuario:',
+        ok: 'Simulación rechazada',
+        error: 'No se pudo rechazar la simulación',
+      }
+    };
+
+    const body = {statusForUser: estado}
+
+    this.simuladorService.statusPorUsuario(this.idSimulacionSeleccionada, body)
+      .subscribe({
+        next: (response: any) => {
+          console.log(mensajes[estado].log, response);
+          this.flashyService.success(mensajes[estado].ok, { duration: 5000 });
+        },
+        error: (error: any) => {
+          console.error(mensajes[estado].error, error);
+          this.flashyService.error(mensajes[estado].error, { duration: 5000 });
+        }
+      });
+  }
+
+
+  checkTokenInCookies() {
+    // Aquí reemplaza 'tokenName' con el nombre real de tu cookie
+    const tokenName = 'token';
+    const cookies = document.cookie.split(';').map(c => c.trim());
+    const tokenCookie = cookies.find(c => c.startsWith(tokenName + '='));
+
+    this.inLogin = !!tokenCookie; // true si existe, false si no
+  }
+
+  ngOnInit() {
+    this.checkTokenInCookies();
+  }
 }
