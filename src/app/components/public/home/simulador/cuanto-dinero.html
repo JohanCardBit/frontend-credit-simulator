@@ -434,7 +434,7 @@
       <h2 class="{{resultadoAnalisis?.approvalStatus}} mb-5">¡Crédito {{resultadoAnalisis?.approvalStatus}}!</h2>
 
       <div class="actions">
-        @if (resultadoAnalisis.approvalStatus == 'aprobado') {
+        @if (resultadoAnalisis?.approvalStatus == 'aprobado') {
         <button class="btn-accept" (click)="acceptLoan()" (click)="aceptadoPorUsuario('aprobado')">Aceptar préstamo</button>
         <button class="btn-reject" (click)="rejectLoan()" (click)="aceptadoPorUsuario('rechazado')">Rechazar</button>
         }@else {
