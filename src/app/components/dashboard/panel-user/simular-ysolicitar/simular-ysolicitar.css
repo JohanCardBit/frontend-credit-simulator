@@ -1,0 +1,24 @@
+
+/* CONTENEDOR GENERAL */
+.dashboard {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* HEADER */
+.dashboard-header {
+  margin-bottom: 30px;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.dashboard-subtitle {
+  font-size: 16px;
+  color: #7f8c8d;
+}

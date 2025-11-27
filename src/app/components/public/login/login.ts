@@ -47,7 +47,7 @@ export class Login {
         if (this.role == 'owner') {
           this.router.navigate(['/dashboard/admin/perfil'])
         }else{
-          this.router.navigate(['/dashboard/panel-user/perfilUser'])
+          this.router.navigate(['/dashboard/panel-user/simularYsolicitar'])
         }
 
         this.userId = this.serviceToken.getFromToken('id')
