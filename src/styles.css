@@ -1,3 +1,7 @@
+body{
+  background: var(--header-bg);
+}
+
 * {
   font-family: "Play", sans-serif;
   margin: 0;
