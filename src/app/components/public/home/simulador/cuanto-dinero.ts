@@ -73,7 +73,7 @@ export class CuantoDinero {
 
   // Ejecutar la simulación de crédito
   simular() {
-    if (this.form.invalid) {
+    if (this.form.invalid && this.inLogin == false) {
       this.form.markAllAsTouched();
       this.flashyService.warning('Por favor completa todos los campos correctamente.');
       return;
@@ -453,6 +453,8 @@ export class CuantoDinero {
 
   checkTokenInCookies() {
     // Aquí reemplaza 'tokenName' con el nombre real de tu cookie
+    console.log(`verificacion de token realizada ${this.inLogin}`);
+
     const tokenName = 'token';
     const cookies = document.cookie.split(';').map(c => c.trim());
     const tokenCookie = cookies.find(c => c.startsWith(tokenName + '='));
