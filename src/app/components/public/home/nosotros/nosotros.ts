@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './nosotros.css',
 })
 export class Nosotros {
+  showDropdown = false;
 
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
 }
