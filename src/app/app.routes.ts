@@ -17,6 +17,8 @@ import { SimularYsolicitar } from './components/dashboard/panel-user/simular-yso
 import { PreAprobados } from './components/dashboard/panel-user/pre-aprobados/pre-aprobados';
 import { Prestamos } from './components/dashboard/panel-user/prestamos/prestamos';
 import { Forms } from './components/private/forms/forms';
+import { blockGuard } from './guards/block/block-guard';
+import { authGuard } from './guards/auth/auth-guard';
 
 
 const titulosRutas = {
@@ -43,7 +45,7 @@ const rutasPubilcas: Routes = [
   { path: '', redirectTo: '/home/(home:inicio)', pathMatch: 'full' },
 
   {
-    path: 'home', component: Home, children: [
+    path: 'home', component: Home, canActivate: [blockGuard], children: [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
       { path: 'inicio', component: Inicio, title: titulosRutas.inicio, outlet: 'home' },
       { path: 'simulador', component: CuantoDinero, title: titulosRutas.cuantoDineroNecesitas, outlet: 'home' },
@@ -51,16 +53,19 @@ const rutasPubilcas: Routes = [
     ]
   },
 
+  { path: 'login', component: Login, canActivate: [blockGuard], title: titulosRutas.login },
+  { path: 'register', component: Register, canActivate: [blockGuard], title: titulosRutas.register },
+]
 
 
+const rutasPrivadas: Routes = [
+  { path: 'formulario', component: Forms, canActivate: [authGuard], title: titulosRutas.forms },
 
-  { path: 'login', component: Login, title: titulosRutas.login },
-  { path: 'register', component: Register, title: titulosRutas.register },
   {
-    path: 'dashboard', component: PasosSimulador, title: titulosRutas.simulador, children: [
+    path: 'dashboard', component: PasosSimulador, canActivate: [authGuard], canActivateChild: [authGuard], title: titulosRutas.simulador, children: [
 
       {
-        path: 'admin', component: Administracion, title: titulosRutas.administacion, children: [
+        path: 'admin', component: Administracion, children: [
           { path: 'perfil', component: Perfil, title: titulosRutas.PerfilAdmin },
           { path: 'tasas', component: Tasas, title: titulosRutas.tasas },
           { path: 'perfil-riesgo', component: PerfilesDeRiesgo, title: titulosRutas.perfilRiesgo },
@@ -69,24 +74,17 @@ const rutasPubilcas: Routes = [
       },
 
       {
-        path: 'panel-user', component: PanelUser, title: titulosRutas.panelUser, children:[
+        path: 'panel-user', component: PanelUser, canActivateChild: [authGuard], children: [
           { path: 'perfilUser', component: PerfilUser, title: titulosRutas.PerfilUser },
-          { path: 'simularYsolicitar', component: SimularYsolicitar, title: titulosRutas.simularYsolicitar},
-          { path: 'preaprobados', component: PreAprobados, title: titulosRutas.preaprobados},
-          { path: 'prestamos', component: Prestamos, title: titulosRutas.prestamos}
-
+          { path: 'simularYsolicitar', component: SimularYsolicitar, title: titulosRutas.simularYsolicitar },
+          { path: 'preaprobados', component: PreAprobados, title: titulosRutas.preaprobados },
+          { path: 'prestamos', component: Prestamos, title: titulosRutas.prestamos }
         ]
       }
+
     ]
   },
-
 ]
-
-
-const rutasPrivadas: Routes = [
-  { path: 'formulario', component: Forms, title: titulosRutas.forms },
-]
-
 
 
 export const routes: Routes = [
