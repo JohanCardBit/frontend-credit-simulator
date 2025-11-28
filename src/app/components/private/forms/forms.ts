@@ -69,13 +69,9 @@ export class Forms {
 
   // Inicialización del componente
   ngOnInit() {
-    // Recuperar el ID del usuario desde el token
     const tokenId = this.tokenService.getFromToken('id');
-
-    // Normalizamos el valor a string o vacío
     const id = tokenId?.toString().trim() || '';
 
-    // Validación de sesión activa
     if (['', 'undefined', 'null', 'no hay token valido'].includes(id)) {
       this.flashyService.error(
         'No se encontró sesión activa. Inicia sesión nuevamente.'
@@ -83,18 +79,43 @@ export class Forms {
       return;
     }
 
-    // Guardamos el ID ya validado
     this.userId = id;
 
-    // Suscribirse a cambios en el perfil laboral
-    this.form
-      .get('employmentType')
-      ?.valueChanges.subscribe((val) => (this.employmentType = val));
+    // MÉTODO QUE LIMPIA TODOS LOS CAMPOS LABORALES
+    const resetEmploymentFields = () => {
+      this.form.patchValue({
+        contractType: '',
+        employmentYears: '',
+        incomeMonthly: '',
+        ocupacion: '',
+        profesion: '',
+        nit: '',
+        hasRUT: '',
+      });
+    };
 
-    // Suscribirse a cambios en la ocupación
-    this.form
-      .get('ocupacion')
-      ?.valueChanges.subscribe((val) => (this.ocupacion = val));
+    // MÉTODO QUE LIMPIA CAMPOS DEPENDIENTES DE OCUPACIÓN
+    const resetOccupationFields = () => {
+      this.form.patchValue({
+        profesion: '',
+        nit: '',
+        hasRUT: '',
+      });
+    };
+
+    // LIMPIAR CUANDO CAMBIA EL PERFIL LABORAl
+    this.form.get('employmentType')?.valueChanges.subscribe((val) => {
+      this.employmentType = val;
+
+      resetEmploymentFields();
+    });
+
+    // LIMPIAR CUANDO CAMBIA LA OCUPACIÓN
+    this.form.get('ocupacion')?.valueChanges.subscribe((val) => {
+      this.ocupacion = val;
+
+      resetOccupationFields();
+    });
   }
 
   // Cambiar al paso indicado
