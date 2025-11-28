@@ -23,8 +23,19 @@
     <p><strong>Edad:</strong> {{user?.age}}</p>
     <p><strong>Estado civil:</strong> {{user?.maritalStatus}}</p>
     <p><strong>Nivel académico:</strong> {{user?.academicLevel}}</p>
-    <p><strong>Tipo de empleo:</strong> {{user?.employmentType}}</p>
-    <p><strong>Ocupación:</strong> {{user?.ocupacion}}</p>
+    <p><strong>Actividad economica:</strong> {{user?.employmentType}}</p>
+    <p><strong>Tiempo:</strong> {{user?.employmentYears}} años</p>
+    @if (user.employmentType == 'empleado') {
+      <p><strong>Tipo de contrato:</strong> {{user?.contractType}}</p>
+    }@else if(user.employmentType == 'independiente'){
+      <p><strong>Ocupación:</strong> {{user?.ocupacion}}</p>
+      @if (user.ocupacion == 'comerciante') {
+        <p><strong>Nit:</strong> {{user?.nit}}</p>
+      }@else if(user.ocupacion == 'profesional independiente'){
+        <p><strong>Profesion:</strong> {{user?.profession}}</p>
+      }
+      <p><strong>Rut:</strong> {{user?.hasRUT}}</p>
+    }
 
     <button (click)="infoForm()" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modal-personal">
       Modificar
@@ -49,7 +60,7 @@
 
 </div>
 <!-- TARJETA 4 — Password -->
-<div class="card glass p-4 mt-5">
+<div class="card glass p-4 mt-5 text-center">
   <h3>Contraseña</h3>
 
   <p>Cambia tu contraseña de forma segura.</p>
@@ -125,6 +136,7 @@
 
       <div class="modal-body">
 
+        <!-- GENERO -->
         <label class="form-label">Género</label>
         <select formControlName="gender" class="form-control">
           <option>masculino</option>
@@ -132,9 +144,11 @@
           <option>otro</option>
         </select>
 
+        <!-- EDAD -->
         <label class="form-label mt-3">Edad</label>
         <input formControlName="age" type="number" class="form-control">
 
+        <!-- ESTADO CIVIL -->
         <label class="form-label mt-3">Estado civil</label>
         <select formControlName="maritalStatus" class="form-control">
           <option>soltero</option>
@@ -143,16 +157,19 @@
           <option>viudo</option>
         </select>
 
-        <label class="form-label mt-3">Nivel Academico</label>
+        <!-- NIVEL ACADEMICO -->
+        <label class="form-label mt-3">Nivel académico</label>
         <select formControlName="academicLevel" class="form-control">
+          <option value="">ninguno</option>
           <option>primaria</option>
           <option>secundaria</option>
-          <option>tecnico</option>
+          <option>técnico</option>
           <option>pregrado</option>
           <option>postgrado</option>
         </select>
 
-        <label class="form-label mt-3">Tipo de empleo</label>
+        <!-- TIPO DE EMPLEO -->
+        <label class="form-label mt-3">Actividad economica</label>
         <select formControlName="employmentType" class="form-control">
           <option>empleado</option>
           <option>independiente</option>
@@ -160,13 +177,54 @@
           <option>jubilado</option>
         </select>
 
-        <label class="form-label mt-3">Ocupación</label>
-        <select formControlName="ocupacion" class="form-control">
-          <option>Comerciante</option>
-          <option>Rentista</option>
-          <option>profesional independiente</option>
-          <option>transportador</option>
-        </select>
+        <!-- TIEMPO LABORAL -->
+        <label class="form-label mt-3">Tiempo (años)</label>
+        <input formControlName="employmentYears" type="number" class="form-control">
+
+        <!-- SOLO SI ES EMPLEADO -->
+        @if (formPersonal.get('employmentType')?.value == 'empleado') {
+
+          <label class="form-label mt-3">Tipo de contrato</label>
+          <select formControlName="contractType" class="form-control">
+            <option>término fijo</option>
+            <option>término indefinido</option>
+            <option>prestación de servicios</option>
+            <option>obra o labor</option>
+          </select>
+        }
+
+        <!-- SI ES INDEPENDIENTE -->
+        @if (formPersonal.get('employmentType')?.value == 'independiente') {
+
+          <!-- OCUPACION -->
+          <label class="form-label mt-3">Ocupación</label>
+          <select formControlName="ocupacion" class="form-control">
+            <option value="">Ninguno</option>
+            <option>comerciante</option>
+            <option>rentista</option>
+            <option>profesional independiente</option>
+            <option>transportador</option>
+          </select>
+
+          <!-- NIT si es comerciante -->
+          @if (formPersonal.get('ocupacion')?.value == 'comerciante') {
+            <label class="form-label mt-3">NIT</label>
+            <input formControlName="nit" type="text" class="form-control">
+          }
+
+          <!-- PROFESION si es profesional independiente -->
+          @if (formPersonal.get('ocupacion')?.value == 'profesional independiente') {
+            <label class="form-label mt-3">Profesión</label>
+            <input formControlName="profession" type="text" class="form-control">
+          }
+
+          <!-- RUT -->
+          <label class="form-label mt-3">¿Tiene RUT?</label>
+          <select formControlName="hasRUT" class="form-control">
+            <option value="sí">sí</option>
+            <option value="no">no</option>
+          </select>
+        }
 
       </div>
 
@@ -183,6 +241,7 @@
     </div>
   </div>
 </div>
+
 
 
 <div class="modal fade" id="modal-financiera" data-bs-backdrop="false">

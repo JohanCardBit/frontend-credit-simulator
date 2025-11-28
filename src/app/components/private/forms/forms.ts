@@ -47,7 +47,7 @@ export class Forms {
       academicLevel: ['', Validators.required],
 
       // Step 2: Perfil laboral
-      workProfile: ['', Validators.required],
+      employmentType: ['', Validators.required],
       contractType: [''],
       employmentYears: [''],
       incomeMonthly: [''],
@@ -88,7 +88,7 @@ export class Forms {
 
     // Suscribirse a cambios en el perfil laboral
     this.form
-      .get('workProfile')
+      .get('employmentType')
       ?.valueChanges.subscribe((val) => (this.employmentType = val));
 
     // Suscribirse a cambios en la ocupación
@@ -123,7 +123,7 @@ export class Forms {
 
     // Validación Step 2
     if (stepNumber === 3) {
-      if (!this.form.get('workProfile')?.valid) {
+      if (!this.form.get('employmentType')?.valid) {
         this.flashyService.error(
           'Selecciona un tipo de empleo antes de continuar.'
         );
@@ -198,7 +198,7 @@ export class Forms {
     };
 
     // Validaciones específicas según perfil laboral
-    if (payload.workProfile === 'empleado') {
+    if (payload.employmentType === 'empleado') {
       if (
         !payload.contractType ||
         !payload.employmentYears ||
@@ -211,7 +211,7 @@ export class Forms {
       }
     }
 
-    if (payload.workProfile === 'independiente') {
+    if (payload.employmentType === 'independiente') {
       if (!payload.ocupacion || !payload.incomeMonthly) {
         this.flashyService.error(
           'Faltan datos: ocupación o ingresos mensuales.'
