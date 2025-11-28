@@ -183,7 +183,7 @@
         </details>
         @if (inLogin == true) {
         <!-- <button class="boton-solicitar" (click)="guardarSimulacion('fija')" (click)="verPlanPagos('fija')"> Solicitar crédito </button> -->
-        <button class="boton-solicitar" (click)="mostrarResultados = false ; mostrarForms = true " > Solicitar crédito </button>
+        <button class="boton-solicitar" (click)="mostrarResultados = false ; mostrarForms = true ; simulacionElegida = 'fija' " > Solicitar crédito </button>
 
         }@else{
         <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
@@ -227,7 +227,7 @@
         </details>
 
         @if (inLogin == true) {
-        <button class="boton-solicitar" (click)="guardarSimulacion('variableFija')" (click)="verPlanPagos('variableFija')"> Solicitar crédito </button>
+        <button class="boton-solicitar" (click)="mostrarResultados = false ; mostrarForms = true ; simulacionElegida = 'variableFija' " > Solicitar crédito </button>
         }@else{
         <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
         }
@@ -270,7 +270,7 @@
         </details>
 
         @if (inLogin == true) {
-        <button class="boton-solicitar" (click)="guardarSimulacion('fullVariable')" (click)="verPlanPagos('fullVariable')"> Solicitar crédito </button>
+        <button class="boton-solicitar" (click)="mostrarResultados = false ; mostrarForms = true; simulacionElegida = 'fullVariable'" > Solicitar crédito </button>
         }@else{
         <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
         }
@@ -284,6 +284,7 @@
   @if (mostrarForms && !mostrarResultados && !mostrarWelcome && !mostrarPlanPagos) {
     <app-forms
     (ejecutarFunciones) = "funciones()"
+    (regresar)="posponer()"
     >
       <!-- (click)="guardarSimulacion('fija')" (click)="verPlanPagos('fija')" -->
     </app-forms>

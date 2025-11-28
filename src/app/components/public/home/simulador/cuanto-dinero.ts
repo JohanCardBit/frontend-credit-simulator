@@ -478,10 +478,16 @@ export class CuantoDinero {
 // });
   }
 
+  simulacionElegida!: any
+
   funciones(){
-    console.log("hola Andres");
-    this.guardarSimulacion('fija');
-    this.verPlanPagos('fija');
+    this.guardarSimulacion(this.simulacionElegida);
+    this.verPlanPagos(this.simulacionElegida);
+    this.mostrarForms = false
+  }
+
+  posponer(){
+    this.mostrarResultados = true
     this.mostrarForms = false
   }
 }

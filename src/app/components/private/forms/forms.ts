@@ -280,8 +280,13 @@ export class Forms {
   }
 
   @Output() ejecutarFunciones = new EventEmitter;
+  @Output() regresar = new EventEmitter;
 
   ejecutar() {
     this.ejecutarFunciones.emit();
+  }
+
+  volver(){
+    this.regresar.emit();
   }
 }
