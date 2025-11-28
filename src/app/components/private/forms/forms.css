@@ -3,11 +3,6 @@ section {
   min-height: 100dvb;
   grid-template-rows: 1fr auto;
 
-  header {
-    border: 1px solid red;
-    padding: 20px;
-  }
-
   main {
     display: flex;
     flex-direction: column;
