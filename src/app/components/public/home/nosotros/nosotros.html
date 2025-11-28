@@ -126,10 +126,19 @@
           <p><strong>Diseño:</strong> Responsivo, accesible y orientado a conversión</p>
         </div>
 
+
+
         <div class="nw-cta-row">
-          <button class="nw-cta">Ver demo</button>
-          <button class="nw-cta nw-ghost">Contacto</button>
+          <button class="nw-cta nw-ghost" (click)="toggleDropdown()">Contacto</button>
+
+          @if (showDropdown) {
+          <div class="dropdown-links">
+            <a target="_blank" href="https://wa.me/573042377337">Opcion 1</a>
+            <a target="_blank" href='https://wa.me/573102937206'>Opcion 2</a>
+          </div>
+          }
         </div>
+
       </div>
     </aside>
 

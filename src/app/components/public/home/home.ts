@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { Inicio } from "./inicio/inicio";
+import { CuantoDinero } from './simulador/cuanto-dinero';
 
 @Component({
   selector: 'app-home',
@@ -10,4 +11,10 @@ import { Inicio } from "./inicio/inicio";
 })
 export class Home {
 
+
+  //  @ViewChild(CuantoDinero) hijo!: CuantoDinero;
+
+  //  llamarHijo() {
+  //   this.hijo.simular();
+  //   }
 }
