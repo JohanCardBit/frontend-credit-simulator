@@ -101,8 +101,8 @@ export class CuantoDinero {
             console.log('3 simulaciones:', data);
           },
           error: (err) => {
-            console.error('Error al realizar la simulación:', err);
-            this.flashyService.error('Ocurrió un error al realizar la simulación.');
+            console.error(`Error al realizar la simulación: ${err.error.error}`);
+            this.flashyService.error(`Error al realizar la simulación: ${err.error.error}`);
           }
         });
       },
@@ -408,6 +408,7 @@ export class CuantoDinero {
   }
 
   resultadoAnalisis: any
+  errorAnalisis: any
   analizar() {
     this.simuladorService.analizarSimulacion(this.idSimulacionSeleccionada).subscribe({
       next: (response: any) => {
@@ -416,7 +417,7 @@ export class CuantoDinero {
       },
       error: (error: any) => {
         console.error('Error al analizar la simulación:', error);
-        this.flashyService.error('No se pudo analizar la simulación', { duration: 5000 });
+        this.errorAnalisis = error.error.msj
       }
     })
   }

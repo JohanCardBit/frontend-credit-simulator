@@ -431,7 +431,10 @@
 
       <!-- Resultado -->
       @if (!isLoading) {
-      <h2 class="{{resultadoAnalisis?.approvalStatus}} mb-5">¡Crédito {{resultadoAnalisis?.approvalStatus}}!</h2>
+      <h2 class="{{resultadoAnalisis?.approvalStatus}} mb-5">¡Crédito {{resultadoAnalisis?.approvalStatus || 'imposible'}}!</h2>
+      @if (resultadoAnalisis == '' || resultadoAnalisis == null) {
+        <p>{{errorAnalisis}}</p>
+      }
 
       <div class="actions">
         @if (resultadoAnalisis?.approvalStatus == 'aprobado') {
