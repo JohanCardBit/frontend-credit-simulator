@@ -90,7 +90,64 @@ export class Forms implements OnInit {
       .subscribe(val => this.ocupacion = val);
   }
 
+  // Cambiar al paso indicado
+  goToStep(stepNumber: number) {
+    // Paso 0 → 1 siempre permitido
+    if (this.step === 0 && stepNumber === 1) {
+      this.step = 1;
+      return;
+    }
 
+    // Validación Step 1
+    if (stepNumber === 2) {
+      if (!this.form.get('gender')?.valid ||
+        !this.form.get('maritalStatus')?.valid ||
+        !this.form.get('age')?.valid ||
+        !this.form.get('city')?.valid ||
+        !this.form.get('academicLevel')?.valid) {
+        this.flashyService.error('Completa todos los campos de Información personal antes de continuar.');
+        return;
+      }
+    }
+
+    // Validación Step 2
+    if (stepNumber === 3) {
+      if (!this.form.get('workProfile')?.valid) {
+        this.flashyService.error('Selecciona un tipo de empleo antes de continuar.');
+        return;
+      }
+
+      if (this.employmentType === 'empleado') {
+        if (!this.form.get('contractType')?.valid ||
+          !this.form.get('employmentYears')?.valid ||
+          !this.form.get('incomeMonthly')?.valid) {
+          this.flashyService.error('Completa todos los campos de empleado antes de continuar.');
+          return;
+        }
+      }
+
+      if (this.employmentType === 'independiente') {
+        if (!this.form.get('ocupacion')?.valid || !this.form.get('incomeMonthly')?.valid) {
+          this.flashyService.error('Completa todos los campos de independiente antes de continuar.');
+          return;
+        }
+
+        if (this.ocupacion === 'profesional independiente' && !this.form.get('profesion')?.valid) {
+          this.flashyService.error('Debes ingresar la profesión.');
+          return;
+        }
+
+        if (['comerciante', 'rentista', 'transportador'].includes(this.ocupacion) &&
+          (!this.form.get('nit')?.valid || !this.form.get('hasRUT')?.value)) {
+          this.flashyService.error('Completa NIT y RUT antes de continuar.');
+          return;
+        }
+      }
+    }
+
+    // Si pasa validaciones, avanzar
+    this.step = stepNumber;
+  }
 
   // ENVIAR FORMULARIO — CREAR / ACTUALIZAR
   submitForm() {
@@ -160,63 +217,6 @@ export class Forms implements OnInit {
     });
   }
 
-  // Cambiar al paso indicado
-  goToStep(stepNumber: number) {
-  // Paso 0 → 1 siempre permitido
-  if (this.step === 0 && stepNumber === 1) {
-    this.step = 1;
-    return;
-  }
 
-  // Validación Step 1
-  if (stepNumber === 2) {
-    if (!this.form.get('gender')?.valid ||
-        !this.form.get('maritalStatus')?.valid ||
-        !this.form.get('age')?.valid ||
-        !this.form.get('city')?.valid ||
-        !this.form.get('academicLevel')?.valid) {
-      this.flashyService.error('Completa todos los campos de Información personal antes de continuar.');
-      return;
-    }
-  }
-
-  // Validación Step 2
-  if (stepNumber === 3) {
-    if (!this.form.get('workProfile')?.valid) {
-      this.flashyService.error('Selecciona un tipo de empleo antes de continuar.');
-      return;
-    }
-
-    if (this.employmentType === 'empleado') {
-      if (!this.form.get('contractType')?.valid ||
-          !this.form.get('employmentYears')?.valid ||
-          !this.form.get('incomeMonthly')?.valid) {
-        this.flashyService.error('Completa todos los campos de empleado antes de continuar.');
-        return;
-      }
-    }
-
-    if (this.employmentType === 'independiente') {
-      if (!this.form.get('ocupacion')?.valid || !this.form.get('incomeMonthly')?.valid) {
-        this.flashyService.error('Completa todos los campos de independiente antes de continuar.');
-        return;
-      }
-
-      if (this.ocupacion === 'profesional independiente' && !this.form.get('profesion')?.valid) {
-        this.flashyService.error('Debes ingresar la profesión.');
-        return;
-      }
-
-      if (['comerciante', 'rentista', 'transportador'].includes(this.ocupacion) &&
-          (!this.form.get('nit')?.valid || !this.form.get('hasRUT')?.value)) {
-        this.flashyService.error('Completa NIT y RUT antes de continuar.');
-        return;
-      }
-    }
-  }
-
-  // Si pasa validaciones, avanzar
-  this.step = stepNumber;
-}
 
 }
