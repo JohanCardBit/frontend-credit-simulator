@@ -1,119 +1,194 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
+.contenedor-login {
+  width: 100%;
+  height: 93vh;
+  background: var(--header-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 
-body {
-    height: 100vh;
+
+  /* BOTÓN HOME ARRIBA A LA IZQUIERDA */
+  .btn-volver-home {
+    position: absolute;
+    top: 1.8rem;
+    left: 1.8rem;
+    width: 44px;
+    height: 44px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #4B70E2, #8AB6F9);
-}
 
-.container {
-    position: relative;
-    width: 850px;
-    height: 500px;
-    display: flex;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(20px);
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-}
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
 
-/* Form Base */
-.form {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    padding: 60px 50px;
+    color: var(--text-main);
+    cursor: pointer;
+    z-index: 50;
+
+    transition: background var(--transition-fast),
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(28, 88, 231, 0.25);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+
+  .card-login {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.8rem 2.4rem;
+    border-radius: var(--radius);
+    backdrop-filter: blur(22px);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 15px;
-    transition: 0.8s ease;
+    gap: 1.5rem;
+
+    box-shadow: 0 0 20px rgba(76, 121, 255, 0.12),
+      0 0 60px rgba(76, 121, 255, 0.08);
+
+    animation: glassFade 1s ease forwards;
+
+    position: relative;
+    overflow: hidden;
+
+    /* LOGO */
+    .logo-login {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: -0.5rem;
+
+      img {
+        width: 220px;
+        height: auto;
+      }
+    }
+
+    .titulo {
+      color: var(--text-main);
+      text-align: center;
+      margin-top: -0.5rem;
+      font-size: 1.4rem;
+    }
+
+    /* INPUTS */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+
+      .grupo-input {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+
+        label {
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+        }
+
+        input {
+          padding: 0.9rem 1rem;
+          background: var(--input-bg);
+          border: 1px solid var(--input-border);
+          border-radius: var(--radius);
+          color: var(--input-text);
+          transition: border var(--transition-fast),
+            box-shadow var(--transition-fast);
+
+          &::placeholder {
+            color: var(--input-placeholder);
+          }
+
+          &:focus {
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px rgba(28, 88, 231, 0.25);
+            outline: none;
+          }
+        }
+      }
+
+      /* OPCIONES */
+      .opciones {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -0.4rem;
+      }
+
+      /* BOTÓN PRINCIPAL */
+      .btn-ingresar {
+        width: 100%;
+        padding: 0.9rem;
+        background: linear-gradient(45deg,
+            var(--primary-700),
+            var(--primary-500));
+        color: var(--btn-primary-text);
+        border: none;
+        border-radius: var(--radius);
+        cursor: pointer;
+        font-size: 1rem;
+        transition: var(--transition-normal);
+
+        &:hover {
+          background: var(--btn-primary-hover);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-strong);
+        }
+      }
+
+      .registrarse {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
 }
 
-.form h2 {
-    color: #fff;
-    margin-bottom: 10px;
-    font-size: 2rem;
-    letter-spacing: 1px;
+/* ANIMACIONES */
+@keyframes glassFade {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-.form input {
-    padding: 12px 15px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    background: rgba(255,255,255,0.8);
-    font-size: 15px;
+.app-footer {
+  background: var(--footer-bg);
+  padding: 1rem 1rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+
+  p {
+    color: var(--text-secondary);
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+  }
 }
 
-.form button {
-    padding: 12px 15px;
-    border: none;
-    border-radius: 10px;
-    background: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
 
-.form button:hover {
-    background: #ececec;
-}
-
-/* Switch */
-.switch {
-    margin-top: 10px;
-    text-align: center;
-    color: #fff;
-    cursor: pointer;
-    font-size: 14px;
-    text-decoration: underline;
-    transition: 0.3s;
-}
-
-.switch:hover {
-    opacity: 0.8;
-}
-
-/* Login */
-.form-login {
-    left: 0;
-}
-
-/* Register */
-.form-register {
-    right: -50%;
-}
-
-/* Panel Animado */
-.panel {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    left: 50%;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(40px);
-    transition: 0.8s ease;
-    border-left: 1px solid rgba(255,255,255,0.3);
-}
-
-/* ANIMACIÓN AL ACTIVAR EL CHECKBOX */
-#toggle:checked ~ .form-login {
-    left: -50%;
-}
-
-#toggle:checked ~ .form-register {
-    right: 0;
-}
-
-#toggle:checked ~ .panel {
-    left: 0;
-}

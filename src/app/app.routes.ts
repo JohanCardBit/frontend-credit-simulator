@@ -16,6 +16,7 @@ import { PerfilUser } from './components/dashboard/panel-user/perfil-user/perfil
 import { SimularYsolicitar } from './components/dashboard/panel-user/simular-ysolicitar/simular-ysolicitar';
 import { PreAprobados } from './components/dashboard/panel-user/pre-aprobados/pre-aprobados';
 import { Prestamos } from './components/dashboard/panel-user/prestamos/prestamos';
+import { Forms } from './components/private/forms/forms';
 
 
 const titulosRutas = {
@@ -34,7 +35,8 @@ const titulosRutas = {
   PerfilUser: 'CrediTest | Perfil de usuario',
   simularYsolicitar: 'CrediTest | Simular y solicitar',
   preaprobados: 'CrediTest | Pre-aprobados',
-  prestamos: 'CrediTest | Mis prestamos'
+  prestamos: 'CrediTest | Mis prestamos',
+  forms: 'CrediTest | Formulario de credito'
 }
 
 const rutasPubilcas: Routes = [
@@ -82,10 +84,7 @@ const rutasPubilcas: Routes = [
 
 
 const rutasPrivadas: Routes = [
-  // { path: 'Simulador', component: PasosSimulador, title: titulosRutas.simulador, children: [
-  //     { path: 'admin', component: Administracion, title: titulosRutas.administacion}
-  //   ]
-  // },
+  { path: 'formulario', component: Forms, title: titulosRutas.forms },
 ]
 
 

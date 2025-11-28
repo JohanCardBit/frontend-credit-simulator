@@ -1,0 +1,274 @@
+<section>
+  <main>
+    <div class="logo-cont">
+      <img src="logo.png" alt="logo" class="logo" />
+    </div>
+    <!-- PASO 0 (Pantalla inicial)     -->
+    @if (step === 0) {
+    <div class="paso1">
+      <h3>Cuéntanos sobre tu situación laboral y financiera</h3>
+      <p>
+        Completa los detalles sobre tu empleo, ingresos y activos para que
+        podamos ofrecerte un análisis personalizado de tu perfil financiero.
+        Toda la información será tratada con absoluta confidencialidad.
+      </p>
+
+      <div class="botns">
+        <button type="button" (click)="goToStep(1)">Avanzar</button>
+        <button type="button">Posponer</button>
+      </div>
+    </div>
+    }
+
+    <form [formGroup]="form">
+      <!-- PASO 1 (Información personal) -->
+      @if (step === 1) {
+      <div class="paso2">
+        <div class="step">
+          <h2 class="text-center">Información personal</h2>
+
+          <div class="info">
+            <div class="inputs">
+              <label for="gender">Género:</label>
+              <select id="gender" name="gender" formControlName="gender">
+                <option value="">Selecciona</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div class="inputs">
+              <label for="maritalStatus">Estado civil:</label>
+              <select id="maritalStatus" name="maritalStatus" formControlName="maritalStatus">
+                <option value="">Selecciona</option>
+                <option value="soltero">Soltero</option>
+                <option value="casado">Casado</option>
+                <option value="divorciado">Divorciado</option>
+                <option value="viudo">Viudo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="inputs">
+              <label for="age">Edad:</label>
+              <input type="number" id="age" name="age" formControlName="age" />
+            </div>
+
+            <div class="inputs">
+              <label for="city">Ciudad:</label>
+              <input type="text" id="city" name="city" formControlName="city" />
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="inputs">
+              <label for="academicLevel">Nivel académico:</label>
+              <select id="academicLevel" name="academicLevel" formControlName="academicLevel">
+                <option value="">Selecciona</option>
+                <option value="primaria">Primaria</option>
+                <option value="secundaria">Secundaria</option>
+                <option value="tecnico">Técnico</option>
+                <option value="pregrado">Pregrado</option>
+                <option value="postgrado">Postgrado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="buttons">
+            <button type="button" (click)="goToStep(0)">Atrás</button>
+            <button type="button" (click)="goToStep(2)">Siguiente</button>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- PASO 2 (Información laboral) -->
+      @if (step === 2) {
+      <div class="paso2">
+        <div class="step">
+          <h2 class="text-center">Información laboral</h2>
+
+          <!-- Tipo de empleo -->
+          <div class="info">
+            <div class="inputs">
+              <label for="employmentType">Tipo de empleo:</label>
+              <select id="employmentType" name="employmentType" formControlName="workProfile">
+                <option value="">Selecciona</option>
+                <option value="empleado">Empleado</option>
+                <option value="independiente">Independiente</option>
+                <option value="desempleado">Desempleado</option>
+                <option value="jubilado">Jubilado</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- EMPLEADO -->
+          @if (employmentType === 'empleado') {
+
+          <div class="info">
+            <div class="inputs">
+              <label for="contractType">Tipo de contrato:</label>
+              <select id="contractType" name="contractType" formControlName="contractType">
+                <option value="">Selecciona</option>
+                <option value="indefinido">Indefinido</option>
+                <option value="fijo">Fijo</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div class="inputs">
+              <label for="employmentYears">Años trabajados:</label>
+              <input type="number" id="employmentYears" name="employmentYears" formControlName="employmentYears" />
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="inputs">
+              <label for="incomeMonthly">Ingresos mensuales:</label>
+              <input type="number" id="incomeMonthly" name="incomeMonthly" formControlName="incomeMonthly" />
+            </div>
+          </div>
+
+          }
+
+          <!-- INDEPENDIENTE -->
+          @else if (employmentType === 'independiente') {
+
+          <div class="info">
+            <div class="inputs">
+              <label for="ocupacion">Ocupación:</label>
+              <select id="ocupacion" name="ocupacion" formControlName="ocupacion">
+                <option value="">Selecciona</option>
+                <option value="profesional independiente">
+                  Profesional independiente
+                </option>
+                <option value="Comerciante">Comerciante</option>
+                <option value="Rentista">Rentista</option>
+                <option value="transportador">Transportador</option>
+              </select>
+            </div>
+
+            <div class="inputs">
+              <label for="incomeMonthlyInd">Ingresos mensuales:</label>
+              <input type="number" id="incomeMonthlyInd" name="incomeMonthlyInd" formControlName="incomeMonthly" />
+            </div>
+          </div>
+
+          <!-- PROFESIONAL INDEPENDIENTE -->
+          @if (ocupacion === 'profesional independiente') {
+
+          <div class="info">
+            <div class="inputs">
+              <label for="profesion">Profesión:</label>
+              <input type="text" id="profesion" name="profesion" formControlName="profesion" />
+            </div>
+          </div>
+
+          }
+
+          <!-- COMERCIANTE / RENTISTA / TRANSPORTADOR -->
+          @else if (ocupacion === 'Comerciante' || ocupacion === 'Rentista' ||
+          ocupacion === 'transportador') {
+
+          <div class="info">
+            <div class="inputs">
+              <label for="nit">NIT:</label>
+              <input type="text" id="nit" name="nit" formControlName="nit" />
+            </div>
+
+            <div class="inputs">
+              <label for="hasRUT">¿Tiene RUT?</label>
+              <select id="hasRUT" name="hasRUT" formControlName="hasRUT">
+                <option value="null">Selecciona</option>
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
+
+          } }
+
+          <!-- DESEMPLEADO / JUBILADO -->
+          @else {
+          <p>No se requieren datos adicionales para este tipo de empleo.</p>
+          }
+
+          <div class="buttons">
+            <button type="button" (click)="goToStep(1)">Atrás</button>
+            <button type="button" (click)="goToStep(3)">Siguiente</button>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- PASO 3 (Información financiera y de vivienda) -->
+      @if (step === 3) {
+      <div class="paso2">
+        <div class="step">
+          <h2 class="text-center">Información financiera y de vivienda</h2>
+
+          <div class="info">
+            <div class="inputs">
+              <label for="housingType">Tipo de vivienda:</label>
+              <select id="housingType" name="housingType" formControlName="housingType">
+                <option value="">Selecciona</option>
+                <option value="propia">Propia</option>
+                <option value="arrendada">Arrendada</option>
+                <option value="familiar">Familiar</option>
+              </select>
+            </div>
+
+            <div class="inputs">
+              <label for="ownerProperty">Propietario de la vivienda:</label>
+              <input type="text" id="ownerProperty" name="ownerProperty" formControlName="ownerProperty" />
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="inputs">
+              <label for="otherIncomeMonthly">Otros ingresos mensuales:</label>
+              <input type="number" id="otherIncomeMonthly" name="otherIncomeMonthly"
+                formControlName="otherIncomeMonthly" />
+            </div>
+
+            <div class="inputs">
+              <label for="expensesMonthly">Gastos mensuales:</label>
+              <input type="number" id="expensesMonthly" name="expensesMonthly" formControlName="expensesMonthly" />
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="inputs">
+              <label for="valueOfAssets">Valor de los activos:</label>
+              <input type="number" id="valueOfAssets" name="valueOfAssets" formControlName="valueOfAssets" />
+            </div>
+
+            <div class="inputs">
+              <label for="totalDebt">Deuda total:</label>
+              <input type="number" id="totalDebt" name="totalDebt" formControlName="totalDebt" />
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="inputs">
+              <label for="activeLoans">Créditos o préstamos activos:</label>
+              <input type="number" id="activeLoans" name="activeLoans" formControlName="activeLoans" />
+            </div>
+          </div>
+
+          <div class="buttons">
+            <button type="button" (click)="goToStep(2)">Atrás</button>
+            <button type="button" (click)="submitForm()">Enviar</button>
+          </div>
+        </div>
+      </div>
+      }
+    </form>
+  </main>
+
+  <footer>
+    <p>CrediTest © 2025 — Todos los derechos reservados</p>
+  </footer>
+</section>

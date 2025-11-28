@@ -33,8 +33,14 @@ export class TokenService {
 
 
   logOut() {
-    this.cookieService.delete('token', '/');
+  const cookies = this.cookieService.getAll();
+
+  for (const cookieName of Object.keys(cookies)) {
+    this.cookieService.delete(cookieName, '/');       // cookies con path /
+    this.cookieService.delete(cookieName);            // cookies sin path
+    this.cookieService.delete(cookieName, '/', window.location.hostname); // cookies con dominio
   }
+}
 
   // linkRecoverPassword(email: string) {
   //   return this.http.post(`${this.apiUrl}/reset-password/email`, { email });

@@ -5,7 +5,7 @@
     <div class="btn-prev-exit d-flex justify-content-between">
 
       @if(inLogin == false) {
-      <div routerLink="/home" class="prev">
+      <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="prev">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <title>Atrás</title>
@@ -15,7 +15,7 @@
         Atrás
       </div>
 
-      <div routerLink="/home" class="exit">Salir
+      <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="exit">Salir
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
           fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <title>Salir</title>
@@ -25,7 +25,7 @@
         </svg>
       </div>
 
-      }
+    }
     </div>
 
 
@@ -115,7 +115,7 @@
 
 
   </section>
-  }
+}
 
   @if (mostrarResultados && !mostrarWelcome && !mostrarPlanPagos) {
   <div class="btn-prev-exit d-flex justify-content-between ">
@@ -130,7 +130,7 @@
     </div>
 
     @if(inLogin == false) {
-    <div routerLink="/home" class="exit">Salir
+    <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="exit">Salir
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <title>Salir</title>
@@ -291,7 +291,7 @@
       Atrás
     </div>
 
-    <div routerLink="/home" class="exit">Salir
+    <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="exit">Salir
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <title>Salir</title>
@@ -325,7 +325,7 @@
     </div>
 
     @if(inLogin == false) {
-    <div routerLink="/home" class="exit">Salir
+    <div [routerLink]="['/home', { outlets: { home: ['inicio'] } }]" class="exit">Salir
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Salir"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <title>Salir</title>

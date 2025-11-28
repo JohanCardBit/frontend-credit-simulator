@@ -126,6 +126,15 @@ export class Register {
 
   //  Método para registrar usuario
   registrarse() {
+
+    const pass = this.registerForm.get('password')!.value;
+    const conf = this.registerForm.get('confirmPassword')!.value;
+
+    if (pass !== conf) {
+      this.flashyService.error('Las contraseñas no coinciden.');
+      return;
+    }
+
     const data = {
       name: this.registerForm.value.name,
       lastName: this.registerForm.value.lastName,
@@ -150,4 +159,5 @@ export class Register {
       },
     });
   }
+
 }
