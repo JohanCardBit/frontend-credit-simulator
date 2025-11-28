@@ -87,7 +87,6 @@ const rutasPrivadas: Routes = [
 ]
 
 
-
 export const routes: Routes = [
   ...rutasPubilcas,
   ...rutasPrivadas,
