@@ -12,43 +12,48 @@ import { FlashyService } from '../../../services/flashy/flashy.service';
   templateUrl: './forms.html',
   styleUrl: './forms.css',
 })
-export class Forms {
+export class Forms implements OnInit {
 
+  // Servicios inyectados
   private userService = inject(UserService);
   private tokenService = inject(TokenService);
   private flashyService = inject(FlashyService);
 
+  // ID del usuario logueado
   userId: string = '';
+
+  // Control del paso actual del formulario por secciones
   step = 0;
 
+  // Formulario reactivo
   form!: FormGroup;
+
+  // Variables de control de cambios de ciertos campos
   employmentType: any;
   ocupacion: any;
 
+  // Constructor: inicializa el formulario con sus validaciones
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
 
-      // Step 1
+      // Step 1: Información personal
       gender: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(18), Validators.max(100)]],
       maritalStatus: ['', Validators.required],
       city: ['', Validators.required],
       academicLevel: ['', Validators.required],
 
-      // Step 2
+      // Step 2: Perfil laboral
       workProfile: ['', Validators.required],
-
       contractType: [''],
       employmentYears: [''],
       incomeMonthly: [''],
-
       ocupacion: [''],
       profesion: [''],
-
       nit: [''],
       hasRUT: [''],
 
-      // Step 3
+      // Step 3: Información financiera y de vivienda
       housingType: [''],
       ownerProperty: [''],
       otherIncomeMonthly: [''],
@@ -59,45 +64,47 @@ export class Forms {
     });
   }
 
-ngOnInit() {
-  const tokenId = this.tokenService.getFromToken('id');
+  // Inicialización del componente
+  ngOnInit() {
+    // Recuperar el ID del usuario desde el token
+    const tokenId = this.tokenService.getFromToken('id');
 
-  // Normalizamos el valor a string o vacío
-  const id = tokenId?.toString().trim() || '';
+    // Normalizamos el valor a string o vacío
+    const id = tokenId?.toString().trim() || '';
 
-  // Validamos solo los casos necesarios
-  if (['', 'undefined', 'null', 'no hay token valido'].includes(id)) {
-    this.flashyService.error('No se encontró sesión activa. Inicia sesión nuevamente.');
-    return;
+    // Validación de sesión activa
+    if (['', 'undefined', 'null', 'no hay token valido'].includes(id)) {
+      this.flashyService.error('No se encontró sesión activa. Inicia sesión nuevamente.');
+      return;
+    }
+
+    // Guardamos el ID ya validado
+    this.userId = id;
+
+    // Suscribirse a cambios en el perfil laboral
+    this.form.get('workProfile')?.valueChanges
+      .subscribe(val => this.employmentType = val);
+
+    // Suscribirse a cambios en la ocupación
+    this.form.get('ocupacion')?.valueChanges
+      .subscribe(val => this.ocupacion = val);
   }
 
-  // Guardamos el ID ya validado
-  this.userId = id;
 
-  // Suscripciones limpias
-  this.form.get('workProfile')?.valueChanges
-    .subscribe(val => this.employmentType = val);
-
-  this.form.get('ocupacion')?.valueChanges
-    .subscribe(val => this.ocupacion = val);
-}
-
-
-  goToStep(stepNumber: number) {
-    this.step = stepNumber;
-  }
 
   // ENVIAR FORMULARIO — CREAR / ACTUALIZAR
   submitForm() {
+    // Validar que todos los campos obligatorios estén completos
     if (this.form.invalid) {
       this.flashyService.error('Completa todos los campos obligatorios.');
       this.form.markAllAsTouched();
       return;
     }
 
-    // Convertir hasRUT en boolean o null
+    // Preparar payload a enviar al backend
     const raw = this.form.value;
 
+    // Convertir el valor de hasRUT a booleano o null
     const payload = {
       ...raw,
       hasRUT:
@@ -106,7 +113,7 @@ ngOnInit() {
             null
     };
 
-    // Validaciones necesarias por tu backend
+    // Validaciones específicas según perfil laboral
     if (payload.workProfile === 'empleado') {
       if (!payload.contractType || !payload.employmentYears || !payload.incomeMonthly) {
         this.flashyService.error(
@@ -124,11 +131,13 @@ ngOnInit() {
         return;
       }
 
+      // Validación adicional para profesionales independientes
       if (payload.ocupacion === 'profesional independiente' && !payload.profesion) {
         this.flashyService.error('Debes ingresar la profesión.');
         return;
       }
 
+      // Validaciones para ocupaciones que requieren NIT y RUT
       if (
         ['comerciante', 'rentista', 'transportador'].includes(payload.ocupacion) &&
         (!payload.nit || payload.hasRUT === null)
@@ -138,7 +147,7 @@ ngOnInit() {
       }
     }
 
-    // Enviar al backend
+    // Enviar datos al backend
     this.userService.updateUser(this.userId, payload).subscribe({
       next: (res: any) => {
         this.flashyService.success('Información enviada correctamente.');
@@ -150,5 +159,64 @@ ngOnInit() {
       }
     });
   }
+
+  // Cambiar al paso indicado
+  goToStep(stepNumber: number) {
+  // Paso 0 → 1 siempre permitido
+  if (this.step === 0 && stepNumber === 1) {
+    this.step = 1;
+    return;
+  }
+
+  // Validación Step 1
+  if (stepNumber === 2) {
+    if (!this.form.get('gender')?.valid ||
+        !this.form.get('maritalStatus')?.valid ||
+        !this.form.get('age')?.valid ||
+        !this.form.get('city')?.valid ||
+        !this.form.get('academicLevel')?.valid) {
+      this.flashyService.error('Completa todos los campos de Información personal antes de continuar.');
+      return;
+    }
+  }
+
+  // Validación Step 2
+  if (stepNumber === 3) {
+    if (!this.form.get('workProfile')?.valid) {
+      this.flashyService.error('Selecciona un tipo de empleo antes de continuar.');
+      return;
+    }
+
+    if (this.employmentType === 'empleado') {
+      if (!this.form.get('contractType')?.valid ||
+          !this.form.get('employmentYears')?.valid ||
+          !this.form.get('incomeMonthly')?.valid) {
+        this.flashyService.error('Completa todos los campos de empleado antes de continuar.');
+        return;
+      }
+    }
+
+    if (this.employmentType === 'independiente') {
+      if (!this.form.get('ocupacion')?.valid || !this.form.get('incomeMonthly')?.valid) {
+        this.flashyService.error('Completa todos los campos de independiente antes de continuar.');
+        return;
+      }
+
+      if (this.ocupacion === 'profesional independiente' && !this.form.get('profesion')?.valid) {
+        this.flashyService.error('Debes ingresar la profesión.');
+        return;
+      }
+
+      if (['comerciante', 'rentista', 'transportador'].includes(this.ocupacion) &&
+          (!this.form.get('nit')?.valid || !this.form.get('hasRUT')?.value)) {
+        this.flashyService.error('Completa NIT y RUT antes de continuar.');
+        return;
+      }
+    }
+  }
+
+  // Si pasa validaciones, avanzar
+  this.step = stepNumber;
+}
 
 }
