@@ -1,6 +1,7 @@
 section {
   display: grid;
-  min-height: 100dvb;
+  /* min-height: 100dvb; */
+  margin-top: 8rem;
   grid-template-rows: 1fr auto;
 
   main {

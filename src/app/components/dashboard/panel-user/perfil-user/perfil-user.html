@@ -25,9 +25,9 @@
     <p><strong>Nivel académico:</strong> {{user?.academicLevel}}</p>
     <p><strong>Actividad economica:</strong> {{user?.employmentType}}</p>
     <p><strong>Tiempo:</strong> {{user?.employmentYears}} años</p>
-    @if (user.employmentType == 'empleado') {
+    @if (user?.employmentType == 'empleado') {
       <p><strong>Tipo de contrato:</strong> {{user?.contractType}}</p>
-    }@else if(user.employmentType == 'independiente'){
+    }@else if(user?.employmentType == 'independiente'){
       <p><strong>Ocupación:</strong> {{user?.ocupacion}}</p>
       @if (user.ocupacion == 'comerciante') {
         <p><strong>Nit:</strong> {{user?.nit}}</p>

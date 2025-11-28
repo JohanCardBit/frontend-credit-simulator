@@ -161,8 +161,8 @@
 
           <div class="info">
             <div class="inputs">
-              <label for="profesion">Profesión:</label>
-              <input type="text" id="profesion" name="profesion" formControlName="profesion" />
+              <label for="profession">Profesión:</label>
+              <input type="text" id="profession" name="profession" formControlName="profession" />
             </div>
           </div>
 
@@ -260,15 +260,15 @@
 
           <div class="buttons">
             <button type="button" (click)="goToStep(2)">Atrás</button>
-            <button type="button" (click)="submitForm()">Enviar</button>
+            <button type="button" (click)="submitForm(); ejecutar()" >Enviar</button>
           </div>
         </div>
       </div>
       }
     </form>
   </main>
-
+<!--
   <footer>
     <p>CrediTest © 2025 — Todos los derechos reservados</p>
-  </footer>
+  </footer> -->
 </section>

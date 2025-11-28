@@ -1,18 +1,19 @@
 import { ChartConfiguration, ChartType } from 'chart.js';
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, viewChild, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { SimuladorService } from '../../../../services/simulador/simulador.service';
 import { DecimalPipe } from '@angular/common';
 import { FlashyService } from '../../../../services/flashy/flashy.service';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, Filler } from 'chart.js';
+import { Forms } from "../../../private/forms/forms";
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, Filler);
 
 
 @Component({
   selector: 'app-cuanto-dinero',
   standalone: true,
-  imports: [ReactiveFormsModule, DecimalPipe, RouterLink],
+  imports: [ReactiveFormsModule, DecimalPipe, RouterLink, Forms],
   templateUrl: './cuanto-dinero.html',
   styleUrl: './cuanto-dinero.css',
 })
@@ -31,6 +32,7 @@ export class CuantoDinero {
   mostrarResultados = false;
   mostrarWelcome = false;
   mostrarPlanPagos = false;
+  mostrarForms = false;
   tipoPlanSeleccionado: 'fija' | 'variableFija' | 'fullVariable' | null = null;
 
 
@@ -124,6 +126,8 @@ export class CuantoDinero {
 
   // Mostrar el plan de pagos completo
   verPlanPagos(tipo: 'fija' | 'variableFija' | 'fullVariable') {
+
+
     this.planActivo = this.resultados[tipo].schedule;
 
     const totalPeriodos = this.planActivo.length;
@@ -162,6 +166,7 @@ export class CuantoDinero {
     this.mostrarResultados = false;
     this.mostrarWelcome = false;
     setTimeout(() => this.renderChart(), 50);
+
 
 
   }
@@ -380,16 +385,16 @@ export class CuantoDinero {
   isModalOpen = false;
   isLoading = false;
 
- openModal() {
-  this.isModalOpen = true;
-  this.isLoading = true;
+  openModal() {
+    this.isModalOpen = true;
+    this.isLoading = true;
 
-  // Simulación de análisis por 5 segundos
-  setTimeout(() => {
-    this.isLoading = false;
-    this.flashyService.success('Simulación analizada con éxito', { duration: 5000 });
-  }, 5000);
-}
+    // Simulación de análisis por 5 segundos
+    setTimeout(() => {
+      this.isLoading = false;
+      this.flashyService.success('Simulación analizada con éxito', { duration: 5000 });
+    }, 5000);
+  }
 
 
   acceptLoan() {
@@ -436,7 +441,7 @@ export class CuantoDinero {
       }
     };
 
-    const body = {statusForUser: estado}
+    const body = { statusForUser: estado }
 
     this.simuladorService.statusPorUsuario(this.idSimulacionSeleccionada, body)
       .subscribe({
@@ -460,7 +465,23 @@ export class CuantoDinero {
     this.inLogin = !!tokenCookie; // true si existe, false si no
   }
 
+
+
   ngOnInit() {
     this.checkTokenInCookies();
+
+//    this.triggerService.ejecutar$.subscribe(() => {
+//   setTimeout(() => {
+//     this.guardarSimulacion('fija');
+//     this.verPlanPagos('fija');
+//   });
+// });
+  }
+
+  funciones(){
+    console.log("hola Andres");
+    this.guardarSimulacion('fija');
+    this.verPlanPagos('fija');
+    this.mostrarForms = false
   }
 }

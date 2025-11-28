@@ -1,6 +1,6 @@
 <div class="mainn">
 
-  @if (!mostrarResultados && !mostrarWelcome && !mostrarPlanPagos) {
+  @if (!mostrarResultados && !mostrarWelcome && !mostrarPlanPagos && !mostrarForms) {
   <section class="container-simulador" [formGroup]="form">
     <div class="btn-prev-exit d-flex justify-content-between">
 
@@ -182,7 +182,9 @@
           <a class="enlace-plan" (click)="verPlanPagos('fija')">Conocer el plan de pagos</a>
         </details>
         @if (inLogin == true) {
-        <button class="boton-solicitar" (click)="guardarSimulacion('fija')" (click)="verPlanPagos('fija')"> Solicitar crédito </button>
+        <!-- <button class="boton-solicitar" (click)="guardarSimulacion('fija')" (click)="verPlanPagos('fija')"> Solicitar crédito </button> -->
+        <button class="boton-solicitar" (click)="mostrarResultados = false ; mostrarForms = true " > Solicitar crédito </button>
+
         }@else{
         <button class="boton-solicitar" (click)="mostrarWelcome = true"> Solicitar crédito </button>
         }
@@ -277,6 +279,14 @@
       </div>
     </div>
   </section>
+  }
+
+  @if (mostrarForms && !mostrarResultados && !mostrarWelcome && !mostrarPlanPagos) {
+    <app-forms
+    (ejecutarFunciones) = "funciones()"
+    >
+      <!-- (click)="guardarSimulacion('fija')" (click)="verPlanPagos('fija')" -->
+    </app-forms>
   }
 
   @if (mostrarWelcome) {

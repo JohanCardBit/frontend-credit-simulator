@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -52,7 +52,7 @@ export class Forms {
       employmentYears: [''],
       incomeMonthly: [''],
       ocupacion: [''],
-      profesion: [''],
+      profession: [''],
       nit: [''],
       hasRUT: [''],
 
@@ -156,7 +156,7 @@ export class Forms {
 
         if (
           this.ocupacion === 'profesional independiente' &&
-          !this.form.get('profesion')?.valid
+          !this.form.get('profession')?.valid
         ) {
           this.flashyService.error('Debes ingresar la profesión.');
           return;
@@ -195,6 +195,8 @@ export class Forms {
       ...raw,
       hasRUT:
         raw.hasRUT === 'true' ? true : raw.hasRUT === 'false' ? false : null,
+      ocupacion:
+        raw.ocupacion === '' ? null : raw.ocupacion === 'null' ? null : raw.ocupacion
     };
 
     // Validaciones específicas según perfil laboral
@@ -222,7 +224,7 @@ export class Forms {
       // Validación adicional para profesionales independientes
       if (
         payload.ocupacion === 'profesional independiente' &&
-        !payload.profesion
+        !payload.profession
       ) {
         this.flashyService.error('Debes ingresar la profesión.');
         return;
@@ -254,5 +256,11 @@ export class Forms {
         console.error(err);
       },
     });
+  }
+
+  @Output() ejecutarFunciones = new EventEmitter;
+
+  ejecutar() {
+    this.ejecutarFunciones.emit();
   }
 }
