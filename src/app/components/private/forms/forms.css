@@ -1,0 +1,330 @@
+section {
+  display: grid;
+  min-height: 100dvb;
+  grid-template-rows: 1fr auto;
+
+  header {
+    border: 1px solid red;
+    padding: 20px;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 510px;
+    margin: 0 auto;
+    padding: 20px 0;
+    gap: 25px;
+
+
+    .logo-cont {
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 260px;
+        margin-bottom: 10px;
+
+      }
+    }
+
+    .paso1 {
+      text-align: center;
+
+      h3 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      p {
+        margin-top: 8px;
+        color: var(--text-secondary);
+        line-height: 1.35rem;
+      }
+
+      .botns {
+        margin-top: 25px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        button {
+          width: 100%;
+          padding: 12px;
+          border-radius: var(--radius);
+          background: var(--btn-primary-bg);
+          color: var(--btn-primary-text);
+          border: none;
+          font-size: 1rem;
+          cursor: pointer;
+          font-weight: 600;
+
+          &:hover {
+            background: var(--btn-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-strong);
+          }
+
+          &:last-child {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+
+            &:hover {
+              background: var(--background-soft);
+            }
+          }
+        }
+      }
+    }
+
+    /* PASOS (FORMULARIOS) */
+    .paso2 {
+      .step {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+
+        h2 {
+          font-size: 1.3rem;
+          font-weight: 700;
+          margin-bottom: 8px;
+          color: var(--text-main);
+        }
+
+        .info {
+          display: flex;
+          gap: 16px;
+          width: 100%;
+
+          .inputs {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            label {
+              margin-bottom: 5px;
+              font-size: 0.9rem;
+              font-weight: 600;
+              color: var(--text-secondary);
+            }
+
+            input,
+            select {
+              padding: 10px 12px;
+              border-radius: var(--radius);
+              background: var(--input-bg);
+              border: 1px solid var(--input-border);
+              color: var(--input-text);
+
+              &:focus {
+                outline: none;
+                border-color: var(--primary-500);
+                box-shadow: 0 0 0 3px rgba(28, 88, 231, 0.25);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /* BOTONES SIGUIENTE / ATRÁS */
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+
+      button {
+        flex: 1;
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: var(--radius);
+        cursor: pointer;
+        border: none;
+        font-weight: 600;
+        transition: var(--transition-normal);
+
+        &:first-child {
+          background: transparent;
+          border: 1px solid var(--input-border);
+          color: var(--text-main);
+
+          &:hover {
+            background: var(--background-soft);
+          }
+        }
+
+        &:last-child {
+          background: var(--btn-primary-bg);
+          color: var(--btn-primary-text);
+
+          &:hover {
+            background: var(--btn-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    background: var(--footer-bg);
+    padding: 1rem 1rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
+
+    p {
+      color: var(--text-secondary);
+      font-size: clamp(0.85rem, 1.6vw, 1rem);
+    }
+  }
+}
+
+
+
+/* ---------- RESPONSIVE (compacto y limpio) ---------- */
+
+/* Gran pantallas — ajuste suave */
+@media (max-width: 1200px) {
+  section main {
+    width: 460px;
+    padding: 18px 0;
+    gap: 22px;
+  }
+
+  section main .logo-cont img { width: 230px; }
+}
+
+/* Laptops / Tablets horizontales */
+@media (max-width: 992px) {
+  section main {
+    width: 420px;
+    padding: 16px 0;
+    gap: 20px;
+  }
+
+  section main .logo-cont img { width: 210px; }
+
+  /* más compacto en filas de inputs */
+  section main .paso2 .step .info {
+    gap: 12px;
+  }
+
+  section main .buttons { gap: 12px; }
+}
+
+/* Tablets y móviles grandes — compactar paddings y gaps */
+@media (max-width: 768px) {
+  section {
+    grid-template-rows: 1fr auto;
+  }
+
+  section main {
+    width: 92%;
+    max-width: 380px;
+    padding: 12px 8px;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  section main .logo-cont {
+    margin-bottom: 6px;
+  }
+
+  section main .logo-cont img { width: 180px; }
+
+  section main .paso1 h3 { font-size: 1.15rem; }
+  section main .paso1 p { font-size: 0.95rem; line-height: 1.25rem; }
+
+  /* Inputs: menos padding para ahorrar espacio */
+  section main input,
+  section main select {
+    padding: 8px 10px;
+  }
+
+  section main .paso2 .step .info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  section main .buttons {
+    gap: 10px;
+    margin-top: 14px;
+  }
+}
+
+/* Móviles (≤ 576px) — diseño muy compacto y botones apilados */
+@media (max-width: 576px) {
+  section main {
+    width: 96%;
+    max-width: 340px;
+    padding: 8px 6px;
+    gap: 12px;
+  }
+
+  section main .logo-cont img { width: 150px; }
+
+  section main .paso1 h3 { font-size: 1.05rem; }
+  section main .paso1 p { font-size: 0. ninerem; /* si tu linter falla, cambia por 0.9rem */ }
+
+  section main .paso2 .step h2 { font-size: 1.12rem; }
+
+  /* Inputs aún más compactos */
+  section main input,
+  section main select {
+    padding: 7px 9px;
+    font-size: 0.95rem;
+  }
+
+  /* Botones verticales y disminuye padding */
+  section main .buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  section main .buttons button {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  footer { padding: 0.6rem 0.4rem; }
+}
+
+/* Muy pequeños (≤ 400px) — máximo ahorro de espacio */
+@media (max-width: 400px) {
+  section main {
+    width: 99%;
+    max-width: 320px;
+    padding: 6px 6px;
+    gap: 10px;
+  }
+
+  section main .logo-cont img { width: 140px; margin-bottom: 6px; }
+
+  section main .paso1 h3 { font-size: 1rem; }
+  section main .paso1 p { font-size: 0.88rem; line-height: 1.15rem; }
+
+  section main input,
+  section main select {
+    padding: 6px 8px;
+    font-size: 0.9rem;
+  }
+
+  section main .buttons button {
+    padding: 9px;
+  }
+
+  /* Reduce bordes visuales si necesitas más densidad */
+  section main input,
+  section main select {
+    border-width: 1px;
+  }
+}
+

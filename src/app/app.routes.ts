@@ -11,6 +11,7 @@ import { Home } from './components/public/home/home';
 import { Inicio } from './components/public/home/inicio/inicio';
 import { Nosotros } from './components/public/home/nosotros/nosotros';
 import { Register } from './components/public/register/register';
+import { Forms } from './components/private/forms/forms';
 
 
 const titulosRutas = {
@@ -24,7 +25,8 @@ const titulosRutas = {
   PerfilAdmin: 'CrediTest | Perfil Administracion',
   tasas: 'CrediTest | Tasas de interés',
   perfilRiesgo: 'CrediTest | Perfiles de riesgo',
-  reglas: 'CrediTest | Reglas de negocio'
+  reglas: 'CrediTest | Reglas de negocio',
+  forms: 'CrediTest | Formulario de credito'
 }
 
 const rutasPubilcas: Routes = [
@@ -62,6 +64,9 @@ const rutasPubilcas: Routes = [
 
 
 const rutasPrivadas: Routes = [
+  { path: 'formulario', component: Forms, title: titulosRutas.forms },
+
+
   // { path: 'Simulador', component: PasosSimulador, title: titulosRutas.simulador, children: [
   //     { path: 'admin', component: Administracion, title: titulosRutas.administacion}
   //   ]
