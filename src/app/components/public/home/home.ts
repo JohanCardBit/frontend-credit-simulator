@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-import { Inicio } from "./inicio/inicio";
-import { CuantoDinero } from './simulador/cuanto-dinero';
+declare var bootstrap: any;
+
 
 @Component({
   selector: 'app-home',
@@ -9,12 +9,20 @@ import { CuantoDinero } from './simulador/cuanto-dinero';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
+
 export class Home {
 
 
-  //  @ViewChild(CuantoDinero) hijo!: CuantoDinero;
 
-  //  llamarHijo() {
-  //   this.hijo.simular();
-  //   }
+closeNavbar() {
+  const navbar = document.getElementById('navbarNav');
+  if (navbar) {
+    const collapse = bootstrap.Collapse.getOrCreateInstance(navbar);
+    collapse.hide();
+  }
+}
+
+
+
+
 }

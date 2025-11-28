@@ -1,6 +1,6 @@
 <div class="layout">
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand logo" href="#">
         <img src="logo.png" alt="Logo" width="150" height="30" />
@@ -16,19 +16,19 @@
       <div class="collapse navbar-collapse ms" id="navbarNav">
         <ul class="navbar-nav mx-auto nav-links">
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/home', { outlets: { home: ['inicio'] } }]"
+            <a (click)="closeNavbar()" class="nav-link" [routerLink]="['/home', { outlets: { home: ['inicio'] } }]"
               routerLinkActive="active">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/home', { outlets: { home: ['simulador'] } }]"
+            <a (click)="closeNavbar()" class="nav-link" [routerLink]="['/home', { outlets: { home: ['simulador'] } }]"
               routerLinkActive="active">Simulación</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/home', { outlets: { home: ['nosotros'] } }]"
+            <a (click)="closeNavbar()" class="nav-link" [routerLink]="['/home', { outlets: { home: ['nosotros'] } }]"
               routerLinkActive="active">Nosotros</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" routerLinkActive="active">Ayuda</a>
+            <a (click)="closeNavbar()" class="nav-link" routerLinkActive="active">Ayuda</a>
           </li>
         </ul>
 

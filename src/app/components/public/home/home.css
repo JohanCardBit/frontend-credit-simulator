@@ -74,6 +74,7 @@
   .navbar-toggler {
     border: none;
     background-color: transparent;
+    color: white !important;
 
     &:focus {
       box-shadow: none;
